@@ -1,0 +1,122 @@
+{%extends 'BRadmin_index.html'%} {% block content %} {% load static %}
+
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+<h3 class="text-muted">Trainees</h3><br><br>
+<div class="row ">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Issues</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr class="header">
+
+                                <th> Sl.No </th>
+                                <th> Name </th>
+                                <th> Date </th>
+                                <th> Status </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-href="BRadmin_ReportedissueTrainees1">
+                                <td>01</td>
+
+                                <td>
+                                    Python
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-success">Solved</div>
+                                </td>
+
+
+                            </tr>
+                            <tr data-href="BRadmin_ReportedissueTrainees1">
+                                <td>01</td>
+
+                                <td>
+
+                                    React JS
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-warning">Pending</div>
+                                </td>
+
+                            </tr>
+
+                            <tr data-href="BRadmin_ReportedissueTrainees1">
+                                <td>01</td>
+
+                                <td>
+
+                                    HTML
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-warning">Pending</div>
+                                </td>
+
+                            </tr>
+                            <tr data-href="BRadmin_ReportedissueTrainees1">
+                                <td>01</td>
+                                <td>
+
+                                    Django
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-success">Solved</div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('table tr').click(function() {
+            window.location = $(this).data('href');
+            return false;
+        });
+    });
+</script>
+{% endblock %}

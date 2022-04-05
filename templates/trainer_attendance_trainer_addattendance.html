@@ -1,0 +1,97 @@
+{%extends 'trainer_index.html'%} 
+{% load static %} 
+{% block content %}
+
+
+
+
+<div class="row" style="padding-top:50px; ">
+  <div class="col-sm-3"></div>
+  
+
+<div class="col-sm-6 grid-margin">
+  <div class="card" style="height:auto;">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-8 col-md-10 mt-3">
+          <h4 class="card-description" style="color:white">Add Attendance</h4>
+          
+        </div>
+        <div class="col-4 col-md-2">
+          <img
+            src="{% static 'assets/images/faces/face5.jpg' %}"
+            class="img-fluid rounded-circle mb-3"
+            alt="image"
+            style="margin-right: 20px"
+          />
+        </div>
+      </div>
+      <br />
+      <form class="form-sample" action="trainer_attendance_trainer">
+
+        <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-sm-4 col-form-label" style="font-size:17px;">Date</label>
+            <div class="col-sm-8">
+              <input type="Date" class="form-control" id="exampleInputStartdate" >
+            </div>
+        </div>
+          
+          <br />
+        
+
+        <div class="row " >
+          <div class="col-md-12">
+            <div class="form-group row">          
+                
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8 "  >
+                    <label for="Precent" style="font-size:17px;">Present</label>
+                    <input type="radio" name="Attendance" value="Precent" style="font-size:19px;">
+
+                    &nbsp;&nbsp;&nbsp;
+                    <label for="Absent" style="font-size:17px;">Absent</label>
+                    <input type="radio" name="Attendance"  value="Absent" style="font-size:19px;">
+                    
+                </div>
+                
+           
+            </div>
+          </div>
+        </div>
+</div>
+        
+                <div class="row mt-4 mb-5">
+                    <div class="col-md-12">
+                    <div class="form-group row">
+                        <div >
+                            <center>
+                            <button type="Submit" class="btn btn-outline-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend"></i>
+                 Submit </button>
+                            </center>
+                        <div>
+                    </div>
+                     </div>
+                </div>
+          </div>
+
+
+
+          
+      </form>
+    </div>
+    
+  </div>
+
+
+
+  
+
+</div>
+</div>
+</div>
+
+
+
+
+
+{%endblock%}

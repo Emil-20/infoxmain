@@ -1,0 +1,142 @@
+{% extends 'BRadmin_index.html' %} {% load static %} {% block content %}
+
+<style>
+    .Search {
+        width: 100px;
+        margin-top: 4%;
+        float: right;
+        margin-right: 5%;
+        padding-left: 3%;
+        padding-right: 3%;
+        line-height: 2;
+        border: 1px solid #6c7293;
+        color: #fff;
+        background: #0090e7;
+    }
+    /* #tble {
+        display: none;
+    } */
+    
+    label {
+        color: white;
+    }
+    
+    @media (max-width:767px) {
+        .Search {
+            margin-top: -2%;
+            float: right;
+            margin-right: 0%;
+            padding-left: 3%;
+            padding-right: 3%;
+            line-height: 2;
+        }
+    }
+</style>
+<form action="{% url 'BRadmin_promanattensort' id %}" method="post">
+    {% csrf_token %}
+    <div class="row ">
+        <div class="col-12 grid-margin">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h4 class="card-title">Attendance</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="text-muted">SELECT FROM DATE</label>
+                            <input type="date" name="fromdate" class="form-control text-white txtDate" id="startdate" />
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <label class="text-muted">SELECT TO DATE</label>
+                            <input type="date" name="todate" class="form-control text-white txtDate" id="enddate" />
+                        </div>
+                        <div class="col-lg-9"></div>
+                        <div class="col-lg-3 mt-3">
+                            <button id="btnSearch" type="submit" class="btn btn-primary w-100">Search</button>
+                        </div>
+                    </div>
+</form>
+<div class="col-lg-12 grid-margin stretch-card" id="tble">
+    <div class="card">
+        <div class="card-body">
+            <label>Attendance List</label><br><br>
+            <input type="text" id="search" class="form-control" placeholder="search..." onkeyup="myFunction()" style="color: white !important;">
+            <div class="table-responsive">
+                <table class="table" id="myTable">
+                    <thead>
+                        <tr>
+                            <th> Date </th>
+
+                            <!--<th> Login Time </th>-->
+                            <!--<th> Logout Time </th>-->
+                            <th> Status </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in mem1 %}
+                        <tr>
+                            <td>{{i.date|date:"d-m-Y"}}</td>
+                            <!--<td> {{i.login_time}} </td>-->
+                            <!--<td> {{i.logout_time}} </td>-->
+                            {% if i.status == 'absent' %}
+                            <td>
+                                <div class="badge badge-outline-danger">{{i.status}}</div>
+                            </td>
+                            {% else %}
+                            <td>
+                                <div class="badge badge-outline-success">{{i.status}}</div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // const targetDiv = document.getElementById("tble");
+    // const btn = document.getElementById("btnSearch");
+    // btn.onclick = function () {
+    //     if ((targetDiv.style.display = "block")) {
+    //         targetDiv.style.display = "block";
+    //     } else {
+    //         targetDiv.style.display !== "none";
+    //     }
+    // };
+
+    $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        $('.txtDate').attr('max', maxDate);
+
+    })
+
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

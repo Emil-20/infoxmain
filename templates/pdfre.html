@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Infox core</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+      
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 25px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 50px 0px 50px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+            .details .content{
+                text-align: justify;
+                font-size: 17px !important;
+                line-height: 30px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                
+                
+
+            }
+        </style>
+    </head>
+    <body>
+<div class='details'style="margin-left: 14cm; top:2cm">
+        
+        <p style="color: black; width: 200px;"><b>{{date|date:'d-m-Y'}}</b></p>
+  <br><br><br>
+    </div>
+ 
+    
+        <div class='wrapper'>
+            <div class='header'>
+               
+                <p class='title' style="color: black;"><b>TO WHOMSOEVER IT MAY CONCERN</b></p> 
+            </div>
+        <div>
+            <br>
+            <br>
+ 
+        <div class='details text-justify'>
+            <div class="content">
+                Dear {{mem.fullname}},<br><br>
+
+	We wish to inform you that you have been relieved from your position of “<strong>{{mem.designation}}</strong>”
+     at Infox Technologies with effect from {{date|date:'d-m-Y'}}.<br>
+	<p style="text-indent: 2cm;"></p>Hereafter, you will be relieved from all the duties and responsibilities from 
+    the last working day with us and there will be no commitments or liabilities 
+    with us, your final settlements already cleared. We appreciate your contributions 
+    made to the organization and wish you all the best for your future endeavors.</p><br>
+
+
+    With Regards,<br><br><br>
+
+    {{mem.hrmanager}}<br>
+    HR Manager
+
+
+    <br><br><br><br><br><br><br><br>
+
+ <hr>
+    <p style="line-height: 5px;text-align: center;font-size: 11px;">
+        <b>iNFOX Technologies</b> | Groundfloor, Carnival lnfoPark, Phase 1 Kakkanad, Kochi-3O, Kerala, | Telephone : 0484 - 4028658<br>
+    E-maiI : hr@ infoxtechnologies.com | Web : www. infoxtechnologies.com     </p>       
+               
+                                
+                </div>
+        </div>
+    </div>
+                    
+
+
+
+
+
+
+
+    
+</span>       
+</div>
+    </div>
+    <script>
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+         document.getElementById("currentDate").value = date;
+    </script>
+        
+    </body>
+</html>

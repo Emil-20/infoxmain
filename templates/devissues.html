@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{%extends 'devindex.html'%}
+{%load static%}
+{%block content%}
+<style>
+  * {
+    color: #6c7293;
+  }
+</style>
+
+
+<div class="row"> 
+  <div class="  " style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293">REPORTED
+    ISSUES</div>
+</div>
+<br>
+
+
+
+<div class="row mt-3 ">
+
+
+  <div class="col-md-12">
+
+
+    <div id="" class="container shadow mt-3  " style="border-radius:5px;background-color: #191c24; ">
+      <div class="row p-3">
+        <div class="col-12">
+          <img src="{% static 'circle.png'%}" width="30" height="25"><span class=""
+          
+            style="color: white; font-size: 20px;font-weight: 400;padding-left: 20px;">
+            {% for j in man %}
+            issue reported by {{j.reporter.fullname}}
+            
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body ">
+          
+            {{j.issue}}
+          
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 ">
+
+    <div id="" class="container shadow mt-3  " style="border-radius:5px; background-color: #191c24;">
+      <div class="row p-3">
+        
+        <div class="col-md-12">
+
+
+          <span class="" style="float:right;color: white; font-size: 20px;font-weight: 400;padding-right: 10px;"> Action
+            taken &nbsp;<img src="{% static 'circle.png'%}" width="30" height="25"></span>
+
+          <!-- <img src="{% static 'img/y.png'%}" width="70" height="50" ><span class="" style="opacity:0.8;font-size: 20px;font-weight: 600;">action taken</div> -->
+        </div>
+        <div class="card">
+          <div class="card-body ">
+            
+            {{j.reply}}
+          {% endfor %}
+          
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  </main>
+
+  </body>
+
+  </html>
+  {%endblock%}

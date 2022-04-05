@@ -1,0 +1,105 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+<style>
+  
+</style>
+
+<div class="row ">
+  <h4 class="card-title" style="font-size: 20px;color:#6C7293; font-weight: 600;">Rejected Projects</h4><br><br>
+  <div class="col-md-12 col-12 col-sm-12 col-lg-12  grid-margin">
+
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Projects</h4><br>
+        <input type="search" class="form-control rounded" placeholder="Search" id="myInput" onkeyup="myFunction()"
+        aria-label="Search" aria-describedby="search-addon" style="color: white;" />
+        <div class="table-responsive">
+          <div class="col-md-12 col-12 col-sm-12 col-lg-12 ">
+           
+          </div>
+          <table class="table" >
+            <thead>
+              <tr>
+                <th>
+                  <!-- <div class="form-check form-check-muted m-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                      </label>
+                    </div> -->
+                </th>
+                <th> Project Name </th>
+
+                <th> Start Date </th>
+                <th> End Date </th>
+                <th> Rejected Date </th>
+                <th> Status </th>
+              </tr>
+            </thead>
+            <tbody id="myTable">
+              {% for i in projects %}
+
+
+              <tr>
+                  <td></td>
+                  <td> {{i.project}}</td>
+                  <td> {{i.startdate|date:" d-m-Y"}} </td>
+                  <td> {{i.enddate|date:" d-m-Y"}}</td>
+                  <td> {{i.rejectdate|date:"d-m-Y"}}</td>
+                  <td><a style="text-decoration: none;" class="text-danger"  href="" data-toggle="modal" data-target="#reject{{i.id}}"><div class="badge badge-outline-danger">{{i.status}}</a></div></td>
+                  </td>     
+              </tr>
+
+              {% endfor %}
+
+            </tbody>
+
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% for i in projects %}
+
+<div class="rowmt-5 modal fade" id="reject{{i.id}}">
+  <div class="modal-dialog bd-example-modal-xl modal-dialog-centered" role="document" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="card ">
+        <div class="card-body">
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+            style="background-color: #191c24;border:none;float: right;font-size: 20px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="text-info" style="font-size: 20px;font-weight: 600;">Rejection reason</div>
+          <div class="form-control mt-1" style="height: 150px;">
+            {{i.user_reason}}
+          </div>
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+
+
+<script>
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+{% endblock %}

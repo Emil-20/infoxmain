@@ -1,0 +1,105 @@
+{% extends 'TLindex.html' %}
+{% load static %}
+
+
+{% block content %}
+<style>
+  #head {
+    color: #6c7293;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 0%;
+    margin-top: auto;
+    padding: 0.2% 1% 1.5% 1%;
+    width: 79%;
+  }
+
+  .card-title1 {
+    color: white;
+    margin-bottom: 1.125rem;
+    text-transform: capitalize;
+
+    margin-left: 4%;
+  }
+
+  .card-title2 {
+    color: white;
+    margin-bottom: 1.125rem;
+    float: right;
+
+    margin-right: 1%;
+  }
+
+  #exampleTextarea1 {
+    height: 15vh;
+  }
+
+  * {
+    color: #6C7293;
+  }
+</style>
+
+
+<div class="row">
+  <div class="  " style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293">Reported
+    Issues</div>
+</div>
+<br>
+
+
+
+<div class="row mt-3 ">
+
+
+  <div class="col-md-12">
+
+
+    <div id="" class="container shadow mt-3  " style="border-radius:5px;background-color: #191c24; ">
+
+      {% for i in mem1 %}
+      <div class="row p-3">
+        <div class="col-12">
+          <img src="{% static 'circle.png'%}" width="30" height="25"><span class=""
+            style="color: white; font-size: 18px;font-weight: 400;padding-left: 20px;">issue reported by {{i.reporter}}
+            
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card p-0 text-justify" style="border:none !important" >
+          <div class="card-body text-justify " style="padding-top:30px;padding-left:0%;padding-right:0%;">
+            
+             <p style="font-size:14px;text-align:justify">{{i.issue}}</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 ">
+
+    <div id="" class="container shadow mt-3  " style="border-radius:5px; background-color: #191c24;">
+      <div class="row p-3">
+        
+        <div class="col-md-12">
+
+
+          <span class="" style="float:right;color: white; font-size: 18px;font-weight: 400;padding-right: 10px;"> Action
+            taken &nbsp;<img src="{% static 'circle.png'%}" width="30" height="25"></span>
+
+          <!-- <img src="{% static 'img/y.png'%}" width="70" height="50" ><span class="" style="opacity:0.8;font-size: 20px;font-weight: 600;">action taken</div> -->
+        </div>
+        <div class="card" style="border:none !important">
+          <div class="card-body  text-justify" style="padding-top:30px;padding-left:0%;padding-right:0%;">
+             <p style="font-size:14px;text-align:justify">   {{i.reply}}</p>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </div>
+
+
+{% endblock %}

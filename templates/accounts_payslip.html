@@ -1,0 +1,113 @@
+{%extends 'index_accounts.html'%} {%load static%} {%block content%}
+<div class="row">
+    <div class="col-12 col-sm-1 col-md-1 col-lg-1"></div>
+    <div class="col-12 col-sm-10 col-md-10 col-lg-12 grid-margin">
+        <div class="card mt-3 mb-5">
+            <div class="card-body">
+                <div class="card-body" id="personForm">
+
+                    <div class="row mt-5 ">
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 ">
+                            <div class="form-group row ">
+                                <label class="col-6 col-sm-6 col-md-6 col-lg-5 col-form-label ">Department </label>
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                    <select class="badge badge-outline-primary bg-dark text-light " id="depmt" name="dep "><option style="display: none ">Department</option>
+                                        {% for i in dept %}
+                                        <option value="{{ i.id }}">{{ i.department }}</option>
+                                     {% endfor %}
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 col-sm-2 col-md-2 col-lg-2 "></div>
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 ">
+                            <div class="form-group row ">
+                                <label class="col-6 col-sm-6 col-md-6 col-lg-5 col-form-label ">Designation </label>
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                    <select class="badge badge-outline-primary bg-dark text-light " id="desi" name="desig "><option style="display: none ">Designation</option>
+                      {%for t in des%}
+
+                      <option value="{{t.id}}">{{t.designation}}</option>
+                      {%endfor%}
+                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row mt-5 ">
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 ">
+                            <div class="form-group row ">
+                                <label class="col-6 col-sm-6 col-md-6 col-lg-5 col-form-label ">FROM</label>
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                    <input type="Date" class="form-control text-light " name="start " id="txtDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 col-sm-2 col-md-2 col-lg-2 "></div>
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 ">
+                            <div class="form-group row ">
+                                <label class="col-6 col-sm-6 col-md-6 col-lg-5 col-form-label ">TO</label>
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                    <input type="Date" class="form-control text-light" name="start " id="txtDate1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-4 ">
+                            <center>
+                                <button type="button" class="btn btn-primary btn-icon-text " id="btnSearch" style="width: 100px; ">Search </button>
+                            </center>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="hiddendiv">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript ">
+    $("#btnSearch").click(function() {
+
+        const fdate = $("#txtDate").val();
+        const tdate = $("#txtDate1").val();
+        const desi = $("#desi").val();
+        const depmt = $("#depmt").val();
+        const csrf = document.getElementById('csrfmiddlewaretoken')
+        console.log("hihsd", depmt)
+        jQuery.ajax({
+            url: 'accounts_acntpay',
+            method: 'post',
+            data: {
+
+                'fdate': fdate,
+                'tdate': tdate,
+                'desi': desi,
+                'depmt': depmt,
+
+            },
+
+            success: function(data) {
+                $("#hiddendiv").html(data);
+            }
+        });
+    });
+
+
+    function showDiv() {
+        document.getElementById('hiddendiv').style.display = "block ";
+    }
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'index_accounts.html' %} {% load static %} {% block content %}
+
+
+<div>Course List</div>
+<div class="row" style="padding-top:20px;">
+    {%for i in des%}
+    <div class="col-lg-4 col-md-4 col-sm-4 col-12 grid-margin">
+      <a href="/accounts_emp_dep/{{i.id}}" style="text-decoration: none">
+        <div class="card" style="height: 180px">
+           
+                <div class="card-body">
+                    
+                    <div class="row" style="padding-top:20px;">
+                        <div class="col-8 col-sm-12 col-md-6 col-lg-8  my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                
+                                    <h3 class="mb-0" style="color:white;">{{i.name}}</h3>
+                               
+                                
+                            </div>
+                          
+                        </div>
+                        <div class="col-4 col-sm-12 col-md-6 col-lg-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-code-tags-check text-primary ms-auto"></i>
+                            
+
+                        </div>
+                    </div>
+                </div>
+          
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+</div
+    
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'TLindex.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<style>
+
+</style>
+
+
+<body>
+  <div class="row">
+    <div class="  " style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293;">REPORTED ISSUES</div>
+  </div>
+  <br>
+
+
+  <div class="row " style="padding-top:20px;">
+
+    <div class="col-md-4 col-lg-4 col-12  grid-margin">
+      <div class="card" style="max-height: 250px">
+        <a href="current" style="text-decoration: none;">
+          <div class="card-body">
+            <a href="{% url 'TLreportedissue1' %}" style="text-decoration: none">
+
+              <div class="row" style="padding-top:10px;">
+                <div class="col-12 col-sm-12 col-lg-8 my-auto">
+                  <div class="d-flex d-sm-block d-md-flex align-items-center">
+                    <h2 class="mb-0" style="color:white;">Reported issues</h2>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-4 text-center text-xl-right">
+                  <i class="icon-lg mdi mdi-archive text-primary ms-auto"></i>
+                </div>
+              </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-lg-4 col-12 grid-margin">
+      <div class="card" style="max-height: 250px">
+        <a href="{% url  'TLreport1' %}" style="text-decoration: none">
+
+          <div class="card-body">
+            <div class="row" style="padding-top:10px;">
+              <div class="col-12 col-sm-12 col-lg-8 my-auto">
+                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                  <h2 class="mb-0" style="color:white;">Report an issue</h2>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-lg-4 text-center text-xl-right">
+                <i class="icon-lg mdi mdi-arrange-send-to-back text-warning ms-auto"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-12 grid-margin">
+      <div class="card" style="max-height: 250px">
+        <a href="{% url  'devtlreported' %}" style="text-decoration: none">
+
+          <div class="card-body">
+            <div class="row" style="padding-top:10px;">
+              <div class="col-12 col-sm-12 col-lg-8 my-auto">
+                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                  <h2 class="mb-0" style="color:white;">Developer Report</h2>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-lg-4 text-center text-xl-right">
+                <i class="icon-lg mdi mdi-bitbucket text-danger ms-auto"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+  </div>
+ 
+
+
+
+
+</body>
+{% endblock content %}

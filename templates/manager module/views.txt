@@ -1,0 +1,204 @@
+def admin_intern_newreg(request):
+    return render(request, 'admin_intern_newreg.html')
+
+def admin_intern_showreg(request):
+    newdata = Internshipregistration.objects.order_by('-id')
+    return render(request, 'admin_intern_showreg.html', {'newdata': newdata})
+
+
+def admin_intern_showdetails(request):
+    id=request.GET.get('id')
+    empid=Internshipregistration.objects.filter(id=id)
+    return render(request, 'admin_intern_showdetails.html', {'mem':empid})
+
+def admin_intern_detailupdate(request):
+    id=request.GET.get('id')
+
+    if request.method == "POST":
+        mem = Internshipregistration.objects.get(id=id)
+        mem.reg_date = request.POST.get("regdate")
+        mem.fullname = request.POST.get("fullname")
+        mem.collegename = request.POST.get("college")
+        mem.reg_no = request.POST.get("regno")
+        mem.course = request.POST.get("course")
+        mem.stream = request.POST.get("stream")
+        mem.platform = request.POST.get("platform")
+        mem.start_date = request.POST.get("startdate")
+        mem.end_date = request.POST.get("enddate")
+        mem.mobile = request.POST.get("mobile")
+        mem.alternative_no = request.POST.get("altmob")
+        mem.email = request.POST.get("email")
+        # mem.profile_pic = request.POST.get("propic")
+        # mem.attach_file = request.POST.get("attach")
+        mem.rating = request.POST.get("rating")
+        mem.hrmanager = request.POST.get("hrmanager")
+        mem.guide = request.POST.get("guide")
+        mem.save()
+        return redirect('admin_intern_showreg')
+    else:
+        newdata = Internshipregistration.objects.get(id = id)
+        return render(request, 'admin_intern_showreg.html', {'mem': newdata})
+
+def admin_intern_delete(request):
+    id=request.GET.get('id')
+    mem = Internshipregistration.objects.get(id=id)
+    mem.delete()
+    newdata = Internshipregistration.objects.order_by('-id')
+    return render(request, 'admin_intern_showreg.html', {'newdata': newdata})
+
+def admin_intern_bydate(request):
+    newdata = Internshipregistration.objects.all().values('reg_date').distinct()
+    return render(request, 'admin_intern_bydate.html', {'newdata': newdata})
+
+def admin_intern_showbydate(request):
+    reg_date=request.GET.get('reg_date')
+    empid=Internshipregistration.objects.filter(reg_date=reg_date)
+    return render(request, 'admin_intern_showreg.html', {'newdata':empid})
+
+def admin_leaveform(request):
+    leave = leaveform.objects.order_by('-id')
+    return render(request, 'admin_leaveform.html', {'leave':leave})
+
+def admin_leave_delete(request):
+    id=request.GET.get('id')
+    mem = leaveform.objects.get(id=id)
+    mem.delete()
+    return redirect(admin_leaveform)
+
+
+
+
+def render_pdf_view(request):
+    id=request.GET.get('id')
+    date = datetime.now()   
+    mem = Internshipregistration.objects.get(id=id)
+    template_path = 'pdf.html'
+    context = {'mem': mem,
+    'media_url':settings.MEDIA_URL,
+    'date':date
+    }
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    #response['Content-Disposition'] = 'attachment; filename="certificate.pdf"'
+    response['Content-Disposition'] = 'filename="certificate.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    
+
+
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
+
+
+    #*************************bibin leave**********************
+
+def leave(request):
+    return render(request, 'leave.html')
+
+def admin_leave_form(request):
+    a = leaveform()
+    if request.method == "POST":
+        a.name = request.POST.get('name')
+        a.branch = request.POST.get('branch')
+        a.Designation = request.POST.get('designation')
+        a.leavefrom = request.POST.get('from')
+        a.leaveto = request.POST.get('to')
+        a.halforfull = request.POST.get('haful')
+        a.reason = request.POST.get('reason')
+        a.save()
+        return redirect('leave')
+    else:
+        return render(request, 'leave.html')  
+
+
+#*****************************Amal internship*************
+
+
+def internshipregister1(request):
+    return render(request,'internshipregister.html')
+
+def internshipregister(request):
+    a=Internshipregistration()
+    
+    if request.method=="POST":
+        a.fullname = request.POST.get('name')
+        a.collegename = request.POST.get('college_name')
+        a.reg_no = request.POST.get('reg_no')
+        a.course = request.POST.get('course')
+        a.stream = request.POST.get('stream')
+        a.platform = request.POST.get('platform')
+        a.start_date = request.POST.get('start_date')
+        a.end_date = request.POST.get('end_date')
+        a.mobile = request.POST.get('mobile')
+        a.alternative_no = request.POST.get('alternative_no')
+        a.email = request.POST.get('email')
+        a.profile_pic = request.FILES['profile_pic']
+        a.attach_file = request.FILES['attach_file']
+        a.reg_date=datetime.now()
+        if (a.end_date<a.start_date):
+            
+            return render(request,'internshipregister.html',{'a':a})
+               
+            
+        else:
+
+            a.save()
+            qr = make("https://managezone.in/app/admin_code?id=" + str(a.id))
+            qr.save(settings.MEDIA_ROOT + "\\" +str(a.id) + ".png")
+            with open(settings.MEDIA_ROOT + "\\" + str(a.id) + ".png", "rb") as reopen:
+                    djangofile = File(reopen)
+                    a.qr = djangofile
+                    #college1.image = request.FILES['image']
+                    #college1.idproof = request.FILES['idproof']
+                    a.save()
+            return render(request,'internshipregister.html',{'a':a})
+        
+        
+
+    else:
+        return render(request,'internshipregister.html')
+
+
+
+
+#*****************************qrcode**********************
+def qr(request):
+    context = {}
+    if request.method == "POST":
+        factory = qrcode.image.svg.SvgImage
+        img = qrcode.make(request.POST.get("name"), image_factory=factory, box_size=10)
+        #img = regdetails.objects.get(id=request.POST.get('name'))
+        stream = BytesIO()
+        img.save(stream)
+        context["svg"] = stream.getvalue().decode()
+    return render(request,'qr.html',context)
+
+
+
+def admin_code(request):
+    id=request.GET.get('id')
+
+    empid=Internshipregistration.objects.filter(id=id)
+    context = {
+        'mem':empid,
+        'media_url':settings.MEDIA_URL
+        }
+    return render(request, 'admin_code.html', context)
+
+def qrcodenew(request):
+    img = make(settings.LOCALROOT + name)
+    img.save(settings.MEDIA_ROOT + "\\" + name + ".png")
+    return redirect('admin_code')
+
+
+
+

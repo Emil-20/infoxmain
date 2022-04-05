@@ -1,0 +1,129 @@
+{% extends 'index_trainingmanager.html' %} {% load static %} {% block content %}
+
+<!-- Trainees Unsolved Issue Table -->
+
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top: -16px">
+                    <div><br></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>TRAINEES</h4>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+
+                            <tr>
+                                <th> Name </th>
+                                <th> Department </th>
+                                <th> Problem </th>
+                                <th> Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if cut %} {%for t in cut%}
+                            <tr>
+                                <td>
+
+                                    {% comment %} <img src="{{t.user.photo}}" alt="image" /> {% endcomment %}
+                                    <img src="{{media_url}}{{ t.reporter.photo.url }}"> {% comment %} {{t.user.photo}} {% endcomment %}
+                                    <span class="ps-2">{{t.reporter.fullname}}</span></a>
+                                </td>
+                                <td> {{t.reporter.department.department}}</td>
+                                <td> {{t.issue}}</td>
+                                <td>
+                                    <button type="submit" class="badge badge-outline-success" data-toggle="modal" data-target="#myModal{{t.id}}" style="background-color: #191c24">
+                                        <i class="mdi mdi-message-reply-text text-warning" style="font-size: 18px"></i>
+                                        Reply
+                                      </button>
+
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                    {% for i in cut %}
+                    <!-- Modal -->
+
+                    <div class="modal" id="myModal{{i.id}}">
+                        <div class="modal-dialog">
+                            <div class="col-12 grid-margin stretch-card bg-dark text-light modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Reply</h4>
+                                    <button type="button" style="color: white" class="close" data-dismiss="modal">
+                                &times;
+                              </button>
+                                </div>
+
+                                {% comment %} /savetmreplaytrnr/{{t.id}} {% endcomment %}
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form method="post" action="/savetmreplytrns/?id={{i.id}} ">
+
+                                        {% csrf_token %}
+                                        <textarea class="col-12 grid-margin stretch-card text-light" style="background-color: rgba(255, 255, 255, 0.267)" rows="6" name="reply" Required></textarea>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                <i class="mdi mdi-send text-info" style="font-size: 18px" name="reply" ></i>
+                                Send
+                              </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- modal end -->
+
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end here -->
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

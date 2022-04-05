@@ -1,0 +1,114 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+#tble{
+  margin-bottom: 5px;
+  color: #6c7293; 
+   /* width: 65%; 
+  margin-top: 25px; */
+  /* margin-left: 25%;  */
+  width: 100%;
+  display: none;
+}
+@media only screen and (max-width: 1300px){
+   .container{
+     margin-top: 3rem;
+   } 
+  }
+ 
+</style>
+<body>
+  
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+              <h3>Attendance List</h3>
+             
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+              <form>
+                <div class="input-group input-group-sm mb-3">
+                  <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+              title="Type in a name" style="color:white;">
+  
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table " id="myTable">
+              <thead>
+                <tr data-href="#">
+                  <th>Date</th>
+                 
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in atten %}
+                
+                
+                <tr data-href="#">
+                  <td>{{i.date|date:"d-m-Y"}}</td>
+                  
+  
+                  {% if i.status == 'present' %}
+                     <td><div class="badge badge-outline-success">{{i.status}}</div></td>
+                  {% else %}
+                    <td><div class="badge badge-outline-danger">{{i.status}}</div></td>
+                  {% endif %}
+                </tr>
+                 
+                {% endfor %}
+                
+                
+  
+               
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      function myFunction() {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+      
+      
+    $(document).ready(function(){
+      $('table tr').click(function(){
+          window.location = $(this).data('href');
+          return false;
+      });
+  });
+  </script>
+    </body>
+{% endblock %}

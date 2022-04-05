@@ -1,0 +1,154 @@
+{%extends 'TLindex.html'%}
+{%load static%}
+{%block content%}
+<style>
+  .Search {
+    margin-top: 4%;
+    float: right;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 2;
+
+  }
+</style>
+
+
+<div class="row " style="background-color: black;">
+  <div class="" style="font-size: 20px;font-weight: 600;color:#6C7293 ;">GIVE TASK</div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color:white ;">Select Employee </div>
+            </div>
+            <div class="col-md-8 ">
+              <select id="" name="ename" class="drop form-control ml-3 mt-2 text-light" required
+                style="border:1px solid #6C7293 ;">
+                <option value=""></option>
+                {% for i in spa %}
+
+                <option value="{{i.id}}">{{i.fullname}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color:white ;">Select Tester </div>
+            </div>
+            <div class="col-md-8 ">
+              <select id="" name="tname" class="drop form-control ml-3 mt-2 text-light" required
+                style="border:1px solid #6C7293 ;">
+                <option value=""></option>
+                {% for i in spa1 %}
+                
+                <option value="{{i.id}}">{{i.fullname}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color:white ;">Select Task </div>
+            </div>
+            <div class="col-md-8 ">
+              <select id="" name="task" class="drop form-control ml-3 mt-2 text-light" required
+                style="border:1px solid #6C7293 ;">
+                <option value=""></option>
+                {% for i in tasks %}
+                
+                <option value="{{i.task}}">{{i.task}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color:white ;">SubTask</div>
+            </div>
+            <div class="col-md-8 ">
+              <input type="text" name="subtask" class="drop form-control ml-3 mt-2 text-light" autocomplete="off" required
+                style="border:1px solid #6C7293 ;">
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white ;">Description</div>
+            </div>
+            <div class="col-md-8 ">
+              <textarea name="description" class="drop form-control ml-3 mt-2 text-light" required
+                style="border:1px solid #6C7293 ;height:70px;"></textarea>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2 text-light" style="color:white ;">Date</div>
+            </div>
+            <div class="col-md-8 ">
+              <div class="mt-2 mr-2 text-info">{{time|date:"d-m-Y"}}</div>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white ;">Due Date</div>
+            </div>
+            <div class="col-md-8 ">
+              <input type="date" name="date" id="due" class="drop form-control ml-3 mt-2 text-light" required
+                style="border:1px solid #6C7293 ;color:#6C7293;">
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color:white ;">Attach Files</div>
+            </div>
+            <div class="col-md-8 ">
+              <input type="file" name="files" class="form-control mt-2 "
+                style="text-decoration:none;border:none;background-color: #191c24;color:#6C7293 ;">
+            </div>
+          </div>
+          <div class=" row  mt-3 ">
+            <div class="">
+              <button type="submit" id="alert2" class="btn-primary Search">Assign</button>
+            </div>
+            <div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+{% if msg_success %}
+  <script>
+   alert('{{msg_success}}')
+     javascript: history.go(-3);
+  </script>
+  {% endif %}
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+} 
+    
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("due").setAttribute("min", today);
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,144 @@
+{%extends 'trainer_index.html'%} 
+{% load static %} 
+{% block content %}
+
+
+
+
+<div class="row" style="padding-top:50px; ">
+  <div class=" col-12 col-sm-2 col-md-3 col-lg-3"></div>
+  
+
+<div class="col-12 col-sm-8 col-md-6 col-lg-6 grid-margin">
+  <div class="card" style="height:auto;">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 mt-3">
+          <h4 class="card-description" style="color:white">Performance</h4>
+          <p class="card-description">{{mem.fullname}}</p>
+        </div>
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+          <img
+            src="{{ mem.photo.url }}"
+            class="img-fluid rounded-circle mb-3"
+            alt="image"
+            style="margin-right: 20px;  height:100px; width:100px;"
+          />
+        </div>
+      </div>
+      <br /><br />
+      <form class="form-sample"  method="post">
+       {% csrf_token %}
+        
+
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label">Attitude</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-8">
+                <select required name="sele1" id="" class="badge badge-outline-primary bg-dark "  onfocus='this.size=5;' style="color:#bfbfbf; width:80px;" onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                        <option style="display: none;" value="">0 - 10</option>
+                        <option value="0">0</option>
+                        <option value="10">1</option>
+                        <option value="20">2</option>
+                        <option value="30">3</option>
+                        <option value="40">4</option>
+                        <option value="50">5</option>
+                        <option value="60">6</option>
+                        <option value="70">7</option>
+                        <option value="80">8</option>
+                        <option value="90">9</option>
+                        <option value="100">10</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-12">
+              <div class="form-group row">
+                <label class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label">Creativity</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-8">
+                  <div class="dropdown">
+                    <select required name="sele2" id="" class="badge badge-outline-primary bg-dark required " onfocus='this.size=5;' style="color:#bfbfbf; width:80px;" onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                        <option style="display: none;" value="">0 - 10</option>
+                        <option value="0">0</option>
+                        <option value="10">1</option>
+                        <option value="20">2</option>
+                        <option value="30">3</option>
+                        <option value="40">4</option>
+                        <option value="50">5</option>
+                        <option value="60">6</option>
+                        <option value="70">7</option>
+                        <option value="80">8</option>
+                        <option value="90">9</option>
+                        <option value="100">10</option>
+                    </select>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-12">
+              <div class="form-group row">
+                <label class="col-6 col-sm-6 col-md-6 col-lg-4 col-form-label">Work Performance</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-8">
+                  <div class="dropdown "  >
+                    <select required name="sele3" id="" class="badge badge-outline-primary bg-dark " required onfocus='this.size=5;' style="color:#bfbfbf; width:80px;" onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                        <option style="display: none;" value="">0 - 10</option>
+                        <option value="0">0</option>
+                        <option value="10">1</option>
+                        <option value="20">2</option>
+                        <option value="30">3</option>
+                        <option value="40">4</option>
+                        <option value="50">5</option>
+                        <option value="60">6</option>
+                        <option value="70">7</option>
+                        <option value="80">8</option>
+                        <option value="90">9</option>
+                        <option value="100">10</option>
+                    </select>
+                  </div>
+              </div>
+              </div>
+            </div>
+
+            
+                <div class="row mt-5 mb-3">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group row">
+                        <div >
+                            <center>
+                            <button type="Submit" class="btn btn-outline-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend"></i>
+                 Submit </button>
+                            </center>
+                        <div>
+                    </div>
+                     </div>
+                </div>
+          </div>
+
+
+
+          
+      </form>
+    </div>
+    
+  </div>
+
+
+
+  
+
+</div>
+</div>
+</div>
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,407 @@
+{%extends 'TLindex.html'%}
+{%load static%}
+{%block content%}
+
+<style>
+  .Search {
+    margin-top: 4%;
+    float: left;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 2;
+
+    width: 95px;
+  }
+</style>
+
+
+<div class="row pt-3" style="background-color: black;">
+  <div class="" style="font-size: 20px;font-weight: 600;color:#6C7293;">MY PROJECTS</div>
+</div>
+<div class="row mt-4">
+  <div class="card">
+    <div class="card-body">
+      <input type="text" style="color: white;" onkeyup="myFunction()" class="form-control " id="search" name="search"
+        autocomplete="off" placeholder="Search...">
+      <div class="table-responsive">
+        <table class="table" id="myTable">
+          <thead>
+            <tr>
+              <th scope="col" style="color:#6C7293;">Task name</th>
+              <th scope="col" style="color:#6C7293;">AssignedTo</th>
+              <th scope="col" style="color:#6C7293;">Task Status</th>
+              <th scope="col" style="color:#6C7293;">Test Status</th>
+              <th scope="col" style="color:#6C7293;">Extension</th>
+              <th scope="col" style="color:#6C7293;">Project Details</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for i in sub %}
+
+
+
+            {% if sub1.task == i.task %}
+
+            <tr>
+              <td style="color: white;">{{i.task}}</td>
+              <td style="color: white;">{{i.developer}}</td>
+              <td class="text-info"><a href="" data-toggle="modal" data-target="#taskstatus{{i.id}}"
+                  style="text-decoration: none;">
+                  <div class="badge badge-outline-info">Task Status</div>
+                </a> </td>
+              <td class="text-info"><a href="#" data-toggle="modal" data-target="#testerstatus{{i.id}}"
+                  style="text-decoration: none;">
+                  <div class="badge badge-outline-info">Tester Status</div>
+                </a></td>
+              <td class="text-info"><a href="#" data-toggle="modal" data-target="#extensionstatus{{i.id}}"
+                  style="text-decoration: none;">
+                  <div class="badge badge-outline-info">Extension Status</div>
+                </a></td>
+              <td>
+                <div class="progress" data-toggle="modal" data-target="#projectdetails{{i.id}}"
+                  style="border-radius:5px;height:20px;background-color:#C2F0EB">
+                  <div class="progress-bar" style="height:20px;width:{{i.progress}}%">{{i.progress}}%</div>
+                </div>
+              </td>
+            </tr>
+            {% endif %}
+
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+
+      <span class="">
+
+
+        <i class="material-icons pt-2" style="color:#6C7293;">assignment</i>&nbsp;&nbsp;&nbsp; <a
+          href="{% url 'tlgivetask' %}" style="text-decoration:none;">Add a sub task</a>
+
+
+
+      </span>
+
+    </div>
+  </div>
+</div>
+
+
+{% for i in sub %}
+
+
+
+<!-- pop up window for Project details -->
+<form action="{% url 'tlprojectsave' i.id %}" method="post">
+  {% csrf_token %}
+<div class="row modal fade" id="projectdetails{{i.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="modal-header" style="border-bottom: 0 none;">
+        <h5 class="modal-title text-info">Sub Tasks</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="card ">
+        <div class="card-body">
+
+          
+            <div class="row ">
+              <div class="col-md-1"></div>
+              <div class="col-md-2 mt-2" style="color: white;">Start date</div>
+              <div class="col-md-2 mt-2">
+                <div class="ml-3" style="color: white;">{{i.startdate|date:"d-m-Y"}}</div>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-2 mt-2" style="color: white;"> End date</div>
+              <div class="col-md-2 mt-2" style="color: white;"> {{i.enddate|date:"d-m-Y"}}</div>
+              <div class="col-md-1"></div>
+            </div>
+
+
+            <div class="row mt-3">
+              <div class="col-md-1"></div>
+              <div class="col-md-2 mt-2" style="color: white;">Assigned to</div>
+              <div class="col-md-2 mt-2">
+                <div style="color: white;">{{i.developer}}</div>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-2 mt-2" style="color: white;">Progress</div>
+              <div class="col-md-2 mt-2"> <span class="progress" data-toggle="modal" data-target=""
+                  style="border-radius:5px;height:20px;background-color:#C2F0EB">
+                  <span class="progress-bar" style="height:20px;width:{{i.progress}}%">{{i.progress}}%</span></div>
+              <div class="col-md-1"></div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-1"></div>
+              <div class="col-md-2 mt-2" style="color: white;">Status</div>
+              <div class="col-md-2 mt-2">
+                <select class="drop form-control ml-3 mt-2 text-light" style="border:1px solid #6C7293 ;" name="prostatus" required>
+                  <option value=""> </option>
+                  <option value="in progress" class="text-light mt-2" style="color: white;">in progress</option>
+                  <option value="completed" class="text-light mt-2" style="color: white;">completed</option>
+                </select>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-2 mt-2" style="color: white;">Current status</div>
+              <div class="col-md-2 mt-2" style="color: white;"> {{i.projectstatus}}</div>
+              <div class="col-md-1"></div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-1"></div>
+              <div class="col-md-2 mt-1 mt-2" style="color: white;">Progress</div>
+              <div class="col-md-2 mt-1 mt-2">
+                <input type="text" name="progress" class="form-control text-light" autocomplete="off" style="border:1px solid #6C7293 ;">
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-2"></div>
+              <div class="col-md-2 mt-2"> <button type="submit" id="alert2" class="btn-primary Search">Start
+                  work</button>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="container mt-1 " style="border-top:1px solid grey;">
+        <div class="text-info pt-4" style="font-size: 20px;font-weight: 600;">Project description</div>
+        <div class="pt-3 " style="margin-left:20px;color: white;">{{i.description}}</div>
+      </div>
+
+      <div class="container mt-3" style="border-top:1px solid grey;border-bottom:1px solid grey;">
+        <div class="text-info pt-4 pb-2" style="font-size: 20px;font-weight: 600;">Attach files</div>
+        <a href="{{i.files.url}}" download class="text-info " style="text-decoration:none;margin-left:20px;">Download</a>
+        <br>
+        <br>
+      </div>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+</form>
+
+
+<!-- pop up window for extension status -->
+{% endfor %}
+
+{% for i in sub %}
+
+
+
+<div class="rowmt-5 modal fade" id="extensionstatus{{i.id}}">
+  <div class="modal-dialog bd-example-modal-xl modal-dialog-centered" role="document" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="modal-header" style="border-bottom: 0 none;">
+        <h5 class="modal-title text-info">Extension Request</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card ">
+        <div class="card-body">
+
+          <form action="{% url 'extensionsave'  i.id %}" method="post">
+            {% csrf_token %}
+
+            <div class="row ">
+              <div class="col-md-4">
+                <div class=" mr-2 ml-3 mt-2" style="color: white;">Requested Days</div>
+              </div>
+              <div class="col-md-8 ">
+                
+                {% if i.extension == 0 %}
+                <input type="text" value="" class="drop form-control ml-3 mt-2" required
+                style="border:1px solid #6C7293 ;">
+                
+                  {%else%}
+                <input type="text" value="{{i.extension}}" class="drop form-control ml-3 mt-2" required
+                  style="border:1px solid #6C7293 ;">
+                  {% endif %}
+              </div>
+            </div>
+            <div class="row pt-1">
+              <div class="col-md-4">
+                <div class="mr-2 ml-3 mt-2" style="color: white;">Reason</div>
+              </div>
+              <div class="col-md-8 ">
+                
+                {% if i.reason %}
+                <textarea class="form-control  ml-3 mt-2"
+                style="height:70px;border:1px solid #6C7293 ;">{{i.reason}}</textarea>
+                {%else%}
+                <textarea class="form-control  ml-3 mt-2"
+                style="height:70px;border:1px solid #6C7293 ;"></textarea>
+                {% endif %}
+                  
+                
+              </div>
+            </div>
+            <div class="row pt-1">
+              <div class="col-md-4">
+                <div class=" mr-2 ml-3 mt-2" style="color: white;">Previous Status</div>
+              </div>
+              <div class="col-md-8 ">
+                {% if i.extension_status == null %}
+                <div class="mr-2 ml-3 mt-2" style="color: white;"></div>
+                {%else%}
+                <div class="mr-2 ml-3 mt-2" style="color: white;">{{i.extension_status}} on {{i.extension_date|date:"d-m-Y"}} for {{i.extension}} days</div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12" style="margin-top:20px;">
+                <button type="button;" id="alert2" class="Search btn-primary"><a style="text-decoration: none;"
+                    class="text-light" href="{% url 'extensionreject' i.id %}"> Reject</a></button>
+                <button type="button" id="alert2" class="Search btn-primary"><a style="text-decoration: none;"
+                    class="text-light" href="{% url 'extensionapprove' i.id %}">Accept</a></button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+<!-- pop up window for tester status -->
+
+{% for i in sub %}
+
+<div class="modal fade " id="testerstatus{{i.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="modal-header" style="border-bottom: 0 none;">
+        <h5 class="modal-title text-info">Tester status</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="table-responsive mt-3 mb-3 container">
+        <table class="table  table-bordered ">
+          <thead style="background-color: black;">
+            <tr>
+              <th scope="col" style="color:#6C7293;">Date</th>
+              <th scope="col" style="color:#6C7293;">ReportBy</th>
+              <th scope="col" style="color:#6C7293;">Task</th>
+              <th scope="col" style="color:#6C7293;">Sub Task</th>
+              <th scope="col" style="color:#6C7293;">Work Done</th>
+              <th scope="col" style="color:#6C7293;">Files</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% for test in  tester %}
+           
+            {% if i.id == test.subtask_id  %}
+              
+              
+            <tr>
+              <td style="color: white;"> {{test.date|date:"d-m-Y"}} </td>
+              <td style="color: white;"> {{test.user}} </td>
+              <td style="color: white;"> {{i.task}}</td>
+              <td style="color: white;"> {{i.subtask}} </td>
+              <td style="color: white;"> {{test.workdone}} </td>
+              <td class="text-info"><a href="{{test.files.url}}" download style="text-decoration:none;">
+                  <div class="badge badge-outline-info">Download</div>
+                </a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<!-- pop up window for task status -->
+
+{% for i in sub %}
+<div class="modal fade " id="taskstatus{{i.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="modal-header" style="border-bottom: 0 none;">
+        <h5 class="modal-title text-info">Daily Work Report</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="table-responsive mt-3 mb-3 container">
+        <table class="table  table-bordered ">
+          <thead style="background-color: black;">
+            <tr>
+              <th scope="col" style="color:#6C7293;">Date</th>
+              <th scope="col" style="color:#6C7293;">ReportBy</th>
+              <th scope="col" style="color:#6C7293;">Task</th>
+              <th scope="col" style="color:#6C7293;">Sub Task</th>
+              <th scope="col" style="color:#6C7293;">Work Done</th>
+              <th scope="col" style="color:#6C7293;">Files</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for test in test %}
+            
+            {% if test.subtask_id == i.id%}
+
+            <tr>
+              <td style="color: white;"> {{test.date|date:'d-m-Y'}} </td>
+              <td style="color: white;">{{test.user}}</td>
+              <td style="color: white;">{{i.task}}</td>
+              <td style="color: white;">{{i.subtask}}</td>
+              <td style="color: white;">{{test.workdone}}</td>
+              <td class="text-info"><a href="{{test.files.url}}" download style="text-decoration:none;">
+                  <div class="badge badge-outline-info">Download</div>
+                </a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endfor %}
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+{% endblock %}

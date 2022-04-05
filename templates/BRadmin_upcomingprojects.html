@@ -1,0 +1,129 @@
+{% extends 'BRadmin_index.html' %}
+{% block content %}
+  {% load static %}
+
+  <style>
+  #a
+  {
+    font-size: 100%;
+  }
+      
+
+  </style>
+<div class="row ">
+              <div class="col-12 grid-margin">
+         <h2>  <small class="text-muted"> Upcoming projects </small>
+                      </h2>
+</div></div>
+
+ <div class="row">
+  <div class="col-sm-4 grid-margin">
+      <div class="card" >
+
+        <a href="{% url 'BRadmin_createproject' %}" style="cursor: pointer;text-decoration: none;color: inherit;">
+        <div class="card-body">
+         
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-0" id="a">Create project</h2>
+   
+              </div>
+      
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-codepen text-primary ms-auto" ></i>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <a href="{% url 'BRadmin_upcomingpro' %}" style="cursor: pointer;text-decoration: none;color: inherit;">
+        <div class="card-body">
+            
+      
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-0" id="a">Upcoming project</h2>
+                <p class="text-success ms-2 mb-0 font-weight-medium"></p>
+              </div>
+          
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-wallet-travel text-danger ms-auto"></i>
+            </div>
+          </div>
+        </div>
+    </a>
+      </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+      <div class="card" >
+
+        <a href="{% url 'BRadmin_viewprojectform' %}" style="cursor: pointer;text-decoration: none;color: inherit;">
+        <div class="card-body">
+         
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-0" id="a">Give projects</h2>
+   
+              </div>
+      
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-monitor text-success ms-auto" ></i>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <a href="{% url 'BRadmin_acceptedprojects' %}" style="cursor: pointer;text-decoration: none;color: inherit;">
+        <div class="card-body">
+            
+      
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-0" id="a">Accepted projects</h2>
+                <p class="text-success ms-2 mb-0 font-weight-medium"></p>
+              </div>
+          
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi mdi-cloud-check text-danger ms-auto"></i>
+            </div>
+          </div>
+        </div>
+    </a>
+      </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <a href="{% url 'BRadmin_rejected' %}" style="cursor: pointer;text-decoration: none;color: inherit;">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-0" id="a" >Rejected projects</h2>
+                <p class="text-danger ms-2 mb-0 font-weight-medium"></p>
+              </div>
+              
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi mdi-close text-success ms-auto"></i>
+            </div>
+          </div>
+        </div>
+    </a>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

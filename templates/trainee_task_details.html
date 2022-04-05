@@ -1,0 +1,89 @@
+{%extends 'trainee_index.html' %} {% load static %} {% block content %}
+<style>
+    #choose::file-selector-button {
+        background-color: rgb(37, 125, 207);
+        padding: 12px;
+        color: white;
+        width: 100px;
+    }
+</style>
+<!-- Give task for trainees -->
+<div class="row" style="padding-top: 20px;">
+    <!-- <div class="col-md-2"></div> -->
+    <div class="col-12 col-sm-12 col-md-7 col-lg-7 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"></h4>
+                <form class="forms-sample"  method="post" autocomplete="off" enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <div class="row mt-3">
+                        <div class="col-6 col-sm-3 col-md-3 col-lg-3">
+                            <label>Task</label>
+                        </div>
+                        <div class="col-6 col-sm-3 col-md-3 col-lg-3">
+                            <label>{{mem.taskname}}</label>
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 col-sm-3 col-md-3 col-lg-3">
+                            <label>Start Date</label>
+                        </div>
+                        <div class="col-6 col-sm-3 col-md-6 col-lg-6">
+                            <label>{{mem.startdate}}</label>
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 col-sm-3 col-md-3 col-lg-3">
+                            <label>End Date</label>
+                        </div>
+                        <div class="col-6 col-sm-3 col-md-6 col-lg-6">
+                            <label>{{mem.enddate}}</label>
+                        </div>
+
+                    </div>
+                    <div class="form-group row mt-5">
+                        <label for="exampleInputEmail2" class="col-6 col-sm-3 col-md-3 col-lg-3 col-form-label">Description</label
+            >
+            <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+              <textarea
+                class="form-control text-light"
+                rows="30"
+                id=""
+                style="height: 140px" name="description"
+                Required
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group row mt-5">
+            <label
+              for="exampleInputConfirmPassword2"
+              class="col-3 col-sm-3 col-md-3 col-lg-3 col-form-label"
+              
+              >Attach File</label
+            >
+            <div class="col-9 col-sm-8 col-md-8 col-lg-8">
+              <input type="file" class="form-control text-light" name="files" id="choose" Required >
+            </div>
+          </div>
+          <div class="row mt-5 mb-2">
+            <div class="col-3 col-sm-6 col-md-5 col-lg-5"></div>
+            <div class="col-9 col-sm-6 col-md-7 col-lg-7">
+              <button
+                class="btn btn-outline-primary btn-icon-text"
+              >
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- ends here -->
+{%endblock%}

@@ -1,0 +1,48 @@
+{% extends 'trainer_index.html' %}
+{% load static %}
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+<div class="row pt-5">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleinputusername1">
+                        <h4>Report Issue</h4>
+                    </label>
+                    <div><br></div>
+                    <div><textarea class="col-12  col-sm-12 col-md-12 col-lg-12 form-control  text-light"
+                    style="height: 200px; background-color: #2A3038;" rows="4" name="issues" Required></textarea>
+                    
+                    <br>
+                    <div class="col-12  col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-outline-primary btn-icon-text ">
+                            <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                                
+                        </button>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+</form>
+
+
+{% endblock %}
+
+<!--<textarea class="col-12 form-control text-light" style="height: 200px;
+background-color: #2A3038;" rows="4"></textarea>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-5"></div>
+<div class="col-sm-7" class="pull-right">
+    <button type="submit" class="btn btn-outline-primary btn-icon-text ">
+    <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit</button>
+</div>-->

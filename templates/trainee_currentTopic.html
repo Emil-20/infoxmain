@@ -1,0 +1,133 @@
+{%extends 'trainee_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr {
+        cursor: pointer;
+    }
+</style>
+<div class="row" style="padding-top: 20px;">
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8  grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height: auto;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3 class="page-title ">Topic List</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-light" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="text-white " style="padding-left:36px;">SNo</th>
+                                <th class="text-white">
+                                    Topics
+                                </th>
+                                <th class="text-white">
+                                    Start Date
+                                </th>
+                                <th class="text-white">
+                                    End Date
+                                </th>
+                                <th class="text-white">
+                                    Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <br> {% if mem %}{% for i in mem %}
+                            <tr>
+                                <td style="padding-left:40px;">
+                                    {{forloop.counter}}
+                                </td>
+                                <td>
+                                    {{i.topic}}
+                                </td>
+                                <td>
+                                    {{i.startdate|date:"d-m-Y"}}
+                                </td>
+                                <td>
+                                    {{i.enddate|date:"d-m-Y"}}
+                                </td>
+                                <td>
+                                    <button type="submit" class="badge badge-outline-success" data-toggle="modal" data-target="#myModal{{i.id}}" style="background-color: #191c24;"><i
+                                            class="mdi mdi-message-reply-text text-warning"
+                                            style="font-size:18px; "></i> Reply</button>
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+{% for i in mem %}
+<div class="modal" id="myModal{{i.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 grid-margin stretch-card bg-dark text-light modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Review</h4>
+                <button type="button" style="color: white" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form method="post" action="/save_trainee_review/?tid={{i.id}}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <textarea class="col-12 grid-margin stretch-card text-light" style="background-color: rgba(66, 65, 65, 0.267)" rows="6" name="review" Required></textarea>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                    <i class="mdi mdi-file-check btn-icon-prepend text-info" style="font-size: 18px"></i>
+                    Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- modal end -->
+
+
+
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

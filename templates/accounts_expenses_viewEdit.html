@@ -1,0 +1,148 @@
+{% extends 'index_accounts.html' %} {% load static %} {% block content %}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+  }
+  </style>
+
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12col-lg-12 grid-margin">
+            <div class="card mt-3 mb-5">
+                <div class="card-body">
+                        <div class="row">
+
+                            <h5>EXPENSES</h5>
+                            <div class="h-divider"></div><br><br>
+                            {% for i in var %}
+                            <form action="{% url 'accounts_expenses_viewEdit_Update' i.id %}" method="post"  autocomplete="off">
+                                {% csrf_token %}
+                                
+                                <div class="row">
+                                    <input type="hidden" class="form-control" name="team_id" value={{i.id}}>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label class="text-muted"
+                                            style="padding-left:4px ;padding-top:10px;width: 80px;"> PAYEE </label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <input type="text" class="form-control text-light" name="payee"
+                                            value="{{i.payee}}">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label class="text-muted"
+                                            style="padding-left:4px ;padding-top:10px;width:200px;">PAYMENT
+                                            ACCOUNT</label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
+                                        <input type="number" class="form-control text-light" style="width: 100%"
+                                            name="payacnt" value="{{i.payacnt}}">
+                                    </div><br><br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label class="text-muted" 
+                                            style="padding-left:4px ;padding-top:10px; width:130px;">PAYMENT
+                                            DATE</label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <input type="date" id="txtDate" class="form-control text-light" name="paydt" id="date"
+                                            value="{{i.paydate}}">
+                                    </div><br><br>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label class="text-muted"
+                                            style="padding-left:4px ;padding-top:10px;width:200px;">PAYMENT
+                                            METHOD</label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <input type="text" class="form-control text-light" style="width: 100%"
+                                            name="paymod" value="{{i.paymethod}}">
+                                    </div><br><br>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <label class="text-muted"
+                                            style="padding-left:4px ;padding-top:10px; width:110px;">REF NO</label>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <input type="text" class="form-control text-light" name="ref"
+                                            style="width:100%;" value="{{i.refno}}"><br><br>
+                                    </div>
+                                </div>
+                                <div class="h-divider"></div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="table-responsive">
+                                            <h5>CATEGORY DETAILS</h5>
+                                            <table class="table table-bordered w-80">
+                                                <thead>
+                                                    <tr>
+                                                        <th>CATEGORY</th>
+                                                        <th>DESCRIPTION</th>
+                                                        <th>AMOUNT</th>
+                                                        <th>TAX</th>
+                                                    </tr><br>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control text-light"
+                                                                name="category" value="{{i.category}}"></td>
+                                                        <td><input type="text" class="form-control text-light"
+                                                                name="description" value="{{i.description}} "></td>
+                                                        <td><input type="number" class="form-control text-light"
+                                                                name="amount" id="amount" value="{{i.amount}}"></td>
+                                                        <td><input type="number" class="form-control text-light"
+                                                                name="tax" style="width: 100%;" id="tax"
+                                                                value="{{i.tax}}"></td>
+                                                    </tr>
+
+                                                </tbody>
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                        <input type="hidden" id="total" name="total" value="{{i.total}}">
+                                        <button type="submit" class="btn btn-primary w-100 mt-4">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {%endfor%}
+                        </div>
+                </div>
+            </div>
+        </div>
+
+<script>
+     $(function() {
+    $("#amount, #tax").on("keyup", total);
+ 	function total() {
+ 	$("#total").val(Number($("#amount").val()) + Number($("#tax").val()));
+ 	//$("#subt").val(Number($("#num1").val()) - Number($("#num2").val()));
+	}
+ });
+ var dtToday = new Date();
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+            var maxDate = year + '-' + month + '-' + day;
+            document.getElementById("txtDate").setAttribute("max", maxDate);
+            console.log(maxDate)
+    
+            
+            
+
+</script>
+
+        {% endblock %}

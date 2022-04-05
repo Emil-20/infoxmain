@@ -1,0 +1,83 @@
+{% extends 'MAN_index.html' %}
+{% block content %}
+  {% load static %}
+<style>
+  
+
+
+</style>
+<div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Upcoming pro</h4>
+                      <div class="form-group">
+             <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+              </div>
+                    <div class="table-responsive" id="myTable">
+                      <table class="table">
+                        <thead>
+                          <tr class="header">
+                            
+                            <th> Project Name </th>
+                            <th> Start date </th>
+                          <th> End date </th>
+                           
+                            <th> Discription</th>
+                          
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in projects %}
+                            {% if i.status != 'Accepted' and i.status != 'Rejected' %}
+                          <tr>
+                                
+                            <td>      {{i.project}}
+                            </td>
+                          <td> {{i.startdate|date:'d-m-Y'}} </td>
+                  
+                            <td>
+                              {{i.enddate|date:'d-m-Y'}}
+                              </td>
+
+                            <td>
+
+
+                              <p style="max-width: 400px;word-wrap: break-word;">
+       {{i.description}}</p>
+                              </td>
+                           
+                         
+                        
+                          </tr>
+                          {% endif %}
+                          
+                              {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                   <script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+  {% endblock %}

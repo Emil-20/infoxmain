@@ -1,0 +1,76 @@
+{% extends 'BRadmin_index.html' %} {% load static %} {% block content %}
+
+<style>
+    @media(max-width:61.938em) {
+        .row h3 {
+            font-size: 19px;
+        }
+    }
+</style>
+
+<div class="row" style="margin-bottom: 30px;">
+    <h3 class="text-muted">{{ Dept.department }}</h3>
+</div>
+
+
+<div class="row">
+    {% for Des in Desig %} {% if Des.designation != 'admin' %} {% if Des.designation != 'manager' %}
+    {% if Des.designation == 'trainer' %}
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <a href="{% url 'BRadmin_View_Trainers' Des.id dept_id  %}" style="text-decoration: none; color: #f8f9fa;">
+                <div class="card-body">
+                   
+                     <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+
+                                <h3 class="mb-0">{{ Des.designation }}</h3>
+                               
+                            </div>
+                            
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right"> 
+                          
+                            <img class="col-4 col-sm-12 col-xl-12 " src=" {{Des.files.url}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% else %}
+        <div class="col-sm-4 grid-margin">
+            <div class="card">
+                <a href="{% url 'BRadmin_projectman'  Des.id dept_id  %}" style="text-decoration: none; color: #f8f9fa;">
+                    <div class="card-body">
+                       
+                         <div class="row">
+                            <div class="col-9 col-sm-12 col-xl-8 my-auto">
+                                <div class="d-flex d-sm-block d-md-flex align-items-center">
+    
+                                    <h3 class="mb-0">{{ Des.designation }}</h3>
+                                  
+                                </div>
+                               
+                            </div>
+                            <div class="col-3 col-sm-12 col-xl-4 text-center text-xl-right"> 
+                              
+                                <img class="col-4 col-sm-12 col-xl-12 " src=" {{Des.files.url}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% endif %}
+
+ 
+
+    </div> 
+    {% endif %} {% endif %}{% endfor %}
+
+     
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Infox Core</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+    
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-4 col-12 mx-auto">
+              <div class="card-body px-5 py-5">
+                <h3 class="card-title text-left mb-3">Login</h3>
+                <form  method="post"   autocomplete="off">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label>Username or email *</label>
+                    <input type="text" name="email" class="form-control p_input text-light" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" name="password" class="form-control p_input text-light" required>
+                  </div>
+                  <div class="form-group d-flex align-items-center justify-content-between">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        
+                    </div>
+                    <a href="{% url 'reset_password' %}" class="forgot-pass">Forgot password</a>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                  </div>
+                  <div class="d-flex">
+                    <button class="btn btn-facebook me-2 col">
+                      <i class="mdi mdi-facebook"></i> <a class="text-white text-decoration-none" href="{% url 'internshipform' %}">Internship Registration</a></button>
+                    <button class="btn btn-google col">
+                      <i class="mdi mdi-google-plus"></i><a class="text-white text-decoration-none" href="https://www.infoxtechnologies.com/"> Infox Technologies</a> </button>
+                  </div>
+                  <p class="sign-up">Don't have an Account?<a href="{% url 'man_registration_form'%}"> Sign Up</a></p>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <footer id="footer">
+       <div class="container >
+           <!-- Footer Links -->
+           <div class="container text-center text-md-left ">
+               <!-- Grid row -->
+               <div class="row mt">
+                   <!-- Grid column -->
+                   <!--<div class="col-md-12 col-lg-8 col-xl-2 mx-auto mb-4" style="margin-top:5%;">
+                       
+                       <img srcset="{% static 'infox.png' %}" alt="responsive image" class="d-block img-fluid" style="align-content: center;margin: auto;">
+                    </div>-->
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-12 col-lg-12 col-xl-12 mx-auto mb-4" style="margin-top:6%;">
+                        <h1  style="font-size: 150%;color: white;">Contact information</h1>
+                        <p style="color:white;">
+                        Indian Address:<br>
+                        Heavenly Plaza<br>
+                    6<sup>th</sup> floor
+                        Vazhakkala Kochi<br>
+                        
+                        Kerala<br>
+                        Pin :682021<br>
+                        phone: +91 7736071987
+                  
+                        </p>
+  
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <!--<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" style="margin-top:10%;">
+                          <p style="color:white;font-size: 15px;">
+                            USA Address<br>
+                            INFOX Technologies
+                            615 ST George Square Court
+                            Winston-Salem, North Carolina
+                            United States Of America
+                            Phone:+001 336-5461805
+                          </p>
+  
+  
+                     </div>-->
+                      <!-- Grid column -->
+                  
+                      <!-- Grid column -->
+                     <!-- <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" style="margin-top:16%;">
+                          <p style="color:white;">
+                               Email:hr@infoxtechnologies.com <br>
+                               Web:infoxtechnologies.com
+                              </p>
+                        </div>-->
+                        <!-- Grid column -->
+  
+                </div>
+                <!-- Grid row -->
+            </div>
+  <!-- Footer Links -->
+  
+  
+  
+  </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_error %}
+    <script>
+         Swal.fire({
+            icon: 'info',
+            title: '',
+            text: '{{ msg_error }}',
+        }).then(function () {
+            javascript: history.go(-1);
+        })
+    </script>
+    {% endif %}
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../assets/js/off-canvas.js"></script>
+    <script src="../../assets/js/hoverable-collapse.js"></script>
+    <script src="../../assets/js/misc.js"></script>
+    <script src="../../assets/js/settings.js"></script>
+    <script src="../../assets/js/todolist.js"></script>
+    <!-- endinject -->
+  </body>
+</html>

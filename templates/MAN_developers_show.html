@@ -1,0 +1,174 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <style>
+  .progress {
+      
+    background-color: #f1f1f1;
+    margin-bottom: 1rem;
+    height: 1rem;
+  }
+  
+  </style>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+  </head>
+  <body>
+    {% comment %} <div class="content-wrapper">     {% endcomment %}
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Developers</h3>
+              <div class="form-group">
+                <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+              <div class="table-responsive">
+                <table class="table"  id="myTable">
+                  <thead>
+                    <tr>
+                      
+                      <th> Name </th>
+                      <th> Employee ID </th>
+                      <th> Mail </th>
+                      <th> Contact </th>
+                      <th> Progress </th>
+                      <th>  </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in project_taskassign %}
+                      {% if i.user.designation.designation == "Developer" %}
+                    
+                    <tr>
+                      
+                      <td>{{i.user}}</td>
+                      <td>{{i.user.id}}</td>
+                      <td>{{i.user.email}}</td>
+                      <td>{{i.user.mobile}}</td>
+                      <td>
+                        {% for prog_status in prog_status %}
+                        {% if i.user == prog_status.user %}
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: {{prog_status.progress}}%" aria-valuenow="{{prog_status.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        {% endif %}
+                        {%  endfor %}
+                      </td>
+                      <td>
+                        <a href="{% url 'MAN_daily_report_new' i.user.id %}" style="text-decoration: none; color: white;"><div class="badge badge-outline-warning">Report</div></a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- <tr>
+                      <td>
+                       2
+                      </td>
+                      <td> Messsy Adam </td>
+                      <td> 12345 </td>
+                      <td> messyadam@gmail.com </td>
+                      <td> 9072563276 </td>
+                      <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </td>
+                      <td>
+                         <a href="/base_app/BRadmin_daily_report" style="text-decoration: none; color: white;"> <div class="badge badge-outline-warning">Report</div></a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                       3
+                      </td>
+                      <td> John Richards </td>
+                      <td> 12345 </td>
+                      <td> johnrichards@gmail.com </td>
+                      <td> 9072563276 </td>
+                      <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </td>
+                      <td>
+                        <a href="/base_app/BRadmin_daily_report" style="text-decoration: none; color: white;"><div class="badge badge-outline-warning">Report</div></a>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        4
+                      </td>
+                      <td> Peter Meggik </td>
+                      <td> 12345 </td>
+                      <td> petermeggik@gmail.com </td>
+                      <td> 9072563276 </td>
+                      <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </td>
+                      <td>
+                        <a href="/base_app/BRadmin_daily_report" style="text-decoration: none; color: white;"><div class="badge badge-outline-warning">Report</div></a>
+                        </td>
+                    </tr>
+                    -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </div> {% endcomment %}
+  </body>
+</html>
+<script>
+  $(document).ready(function () {
+const show_percent = true;
+var progressBars = $(".progress-bar");
+for (i = 0; i < progressBars.length; i++) {
+var progress = $(progressBars[i]).attr("aria-valuenow");
+$(progressBars[i]).width(progress + "%");
+if (show_percent) {
+$(progressBars[i]).text(progress + "%");
+}
+if (progress >= "75" ) {
+//90 and above
+$(progressBars[i]).addClass("bg-success");
+} else if (progress >= "25" && progress < "75") {
+$(progressBars[i]).addClass("bg-warning"); //From 30 to 44
+} else if (progress == "100" ) {
+$(progressBars[i]).addClass("bg-success");
+} else {
+//29 and under
+$(progressBars[i]).addClass("bg-danger");
+}
+}
+});
+
+</script>
+
+{% endblock%}

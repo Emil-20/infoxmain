@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coreapp</title>
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+
+    <style>
+        body {
+            background-color: black;
+            background-image: none;
+            overflow-x: hidden;
+        }
+
+        .row {
+            margin-top: 1vh;
+        }
+
+        #myprofile {
+            margin-left: 0rem;
+            color: white;
+            opacity: 1;
+        }
+
+       
+       
+        label {
+            color: white;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .col-lg-3 {
+
+            text-align: left;
+            margin-left: 50px;
+        }
+
+        form {
+       
+            background-color: #191c24;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 5vh;
+          border-radius: 10px;
+          
+          
+
+        }
+
+        @media(max-width:61.938em) {
+
+            .col-lg-3 {
+                text-align: left;
+        
+               
+            }
+
+            col-lg-6 .row {
+                margin-top: 5vh;
+            }
+
+            #pic {
+            
+                height: 100px;
+                width: 100px;
+                margin-bottom: 2vh;
+                margin-left: auto;
+                margin-right: auto;
+             
+            }
+        }
+    </style>
+
+    <body>
+        <div style="overflow-x: hidden;">
+            <label id="myprofile">Internship Certificate</label>
+        
+                {% for i in mem%}
+                <form class="mx-3" action="admin_intern_detailupdate?id={{i.id}}" method="post" enctype="multipart/form-data">
+                    {% csrf_token%}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 ">
+                                <img id="pic" style="border-radius: 50%;margin-left: auto;margin-right: auto;"  src="{{media_url}}{{ i.profile_pic }} " width="150" height="150">
+
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <label>Full Name : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="fullname" value="{{i.fullname}}">
+                                </div>
+                                <div class="row">
+                                    <label>College Name : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="fullname" value="{{i.collegename}}">
+                                </div>
+                                <div class="row">
+                                    <label>Reg No : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="platform" value="{{i.reg_no}}">
+                                </div>
+                                <div class="row">
+                                    <label>Platform : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="platform" value="{{i.platform}}">
+                                </div>
+                            </div>
+                            &nbsp;&nbsp;
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <label>From : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="startdate" value="{{i.start_date}}">
+                                </div>
+                                <div class="row">
+                                    <label>To : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="enddate" value="{{i.end_date}}">
+                                </div>
+
+                                <div class="row">
+                                    <label>Rating : </label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="rating" value="{{i.rating}}">
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% endfor %}
+         
+        </div>
+    </body>
+
+</html>

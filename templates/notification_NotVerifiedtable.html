@@ -1,0 +1,158 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+<div class="row mt-3 mb-5">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" style="margin-top: -16px">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-7 mt-3">
+            <h4>Trainees</h4>
+            <br />
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+              <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+                title="Type in a name" style="color:white;">
+            </div>
+          </div>
+        </div>
+
+        <!-- trainee not verified table starts -->
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr data-href="#">
+                <th>Name</th>
+                <th>Trainer Name</th>
+                <th>Message</th>
+                <th>Process</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face16.jpg' %}" alt="image" />
+                  &nbsp;Henry Klein
+                </td>
+                <td>Anna John</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face1.jpg' %}" alt="image" />
+                  &nbsp;Estella Bryan
+                </td>
+                <td>Anna John</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face3.jpg' %}" alt="image" />
+                  &nbsp;Lucy Abbott
+                </td>
+                <td>Anna John</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face5.jpg' %}" alt="image" />
+                  &nbsp;Peter Gill
+                </td>
+                <td>Anna John</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face15.jpg' %}" alt="image" />
+                  Sallie Reyes
+                </td>
+                <td>Mark Hein</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face10.jpg' %}" alt="image" />
+                  &nbsp;Saloy Reyes
+                </td>
+                <td>Mark Hein</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+              <tr data-href="#">
+                <td>
+                  <img src="{% static 'assets/images/faces/face9.jpg' %}" alt="image" />
+                  &nbsp;Reyes John
+                </td>
+                <td>Mark Hein</td>
+                <td>Will be verify Soon</td>
+                <td>
+                  <button class="btn btn-outline-success">
+                    <i class="mdi mdi-check"></i>Verify
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- trainee not verified table ends here -->
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+<script>
+  $(document).ready(function () {
+    $('table tr').click(function () {
+      window.location = $(this).data('href');
+      return false;
+    });
+  });
+</script>
+{%endblock%}

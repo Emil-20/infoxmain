@@ -1,0 +1,78 @@
+{% extends 'BRadmin_index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+  </head>
+  <body>
+    {% comment %} <div class="content-wrapper">     {% endcomment %}
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Project Managers</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+                 <div class="table-responsive">
+                  <table class="table" id="myTable">
+                    <thead>
+                      <tr>
+                        
+                        <th> Name </th>
+                        <th> Employee ID </th>
+                        <th> Mail </th>
+                        <th> Contact Number </th>
+                      </tr>
+                    </thead>
+                 
+                    <tbody>
+                      {% for proj_det in user_det %}
+                   
+                    <tr>
+                        
+                        <td> {{proj_det.fullname}}</td>
+                        <td> {{proj_det.employee_id}} </td>
+                        <td> {{proj_det.email}}</td>
+                        <td> {{proj_det.mobile}} </td>
+                      </tr>
+                    
+                   
+                {% endfor %}
+                     
+                    </tbody>
+                    
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </div> {% endcomment %}
+  </body>
+</html>
+
+
+{% endblock%}

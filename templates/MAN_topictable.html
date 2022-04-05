@@ -1,0 +1,81 @@
+{% extends 'MAN_index.html' %}
+{% block content %}
+  {% load static %}
+
+  {% comment %} <style>
+    table tr[data-href] {
+      cursor: pointer;
+    } 
+  </style> {% endcomment %}
+
+<div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Topics </h4>
+                    <div class="form-group">
+             <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+              </div>
+                    <div class="table-responsive">
+                      <table class="table" id="myTable">
+                        <thead>
+                          <tr class="header">
+                            <th> Name </th>
+                            <th> Start Date </th>
+                            <th> End Date </th>
+                           <th> Status </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in topics %}
+                          <tr>
+                            <td>{{i.topic}}</td>
+                            <td> {{i.startdate|date:"d-m-Y"}} </td>
+                            <td> {{i.enddate|date:"d-m-Y"}} </td>
+
+                            {% if i.topic_status == '1' %}
+                              <td><div class="badge badge-outline-success">Completed</div></td>
+                            {% else %}
+                              <td><div class="badge badge-outline-danger">Incomplete</div></td>
+                            {% endif %}
+
+                            
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+{% comment %} <script>
+  $(document).ready(function(){
+  $('table tr').click(function(){
+    window.location = $(this).data('href');
+    return false;
+});
+});
+</script> {% endcomment %}
+  {% endblock %}

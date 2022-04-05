@@ -1,0 +1,206 @@
+{%extends 'index.html'%} {%load static%} {%block content%}
+
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New Trainees</h4>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <form>
+            <div class="input-group input-group-sm mb-3">
+              <input
+                type="text" 
+                class="form-control text-white" id="myInput" onkeyup="myFunction()"
+                placeholder="Search . . ."
+                style="border: green"
+              />             
+            </div>
+          </form>
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Select Team</th>
+                <th>Allocate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img
+                    src="{% static 'assets/images/faces/face1.jpg'%}"
+                    alt="image"
+                  />
+                  <span class="ps-2">Henry Klein</span>
+                </td>
+                <td>01/01/2022</td>
+                <td>01/05/2022</td>
+                <td>
+                  <select class="badge badge-outline-primary bg-dark text-light">
+                    <option style="display: none;">Teams</option>
+                    <option value="AL">Team 1</option>
+                    <option value="WY">Team 2</option>
+                    <option value="AM">Team 3</option>
+                    <option value="CA">Team 4</option>
+                    <option value="RU">Team 5</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-icon-text"
+                  >
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{% static 'assets/images/faces/face2.jpg'%}"
+                    alt="image"
+                  />
+                  <span class="ps-2">Estella Bryan</span>
+                </td>
+                <td>02/02/2022</td>
+                <td>02/06/2022</td>
+                <td>
+                  <select class="badge badge-outline-primary bg-dark text-light">
+                    <option style="display: none;">Teams</option>
+                    <option value="AL">Team 1</option>
+                    <option value="WY">Team 2</option>
+                    <option value="AM">Team 3</option>
+                    <option value="CA">Team 4</option>
+                    <option value="RU">Team 5</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-icon-text"
+                  >
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{% static 'assets/images/faces/face5.jpg'%}"
+                    alt="image"
+                  />
+                  <span class="ps-2">Lucy Abbott</span>
+                </td>
+                <td>02/02/2022</td>
+                <td>02/06/2022</td>
+                <td>
+                  <select class="badge badge-outline-primary bg-dark text-light">
+                    <option style="display: none;">Teams</option>
+                    <option value="AL">Team 1</option>
+                    <option value="WY">Team 2</option>
+                    <option value="AM">Team 3</option>
+                    <option value="CA">Team 4</option>
+                    <option value="RU">Team 5</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-icon-text"
+                  >
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{% static 'assets/images/faces/face3.jpg'%}"
+                    alt="image"
+                  />
+                  <span class="ps-2">Peter Gill</span>
+                </td>
+                <td>02/02/2022</td>
+                <td>02/06/2022</td>
+                <td>
+                  <select class="badge badge-outline-primary bg-dark text-light">
+                    <option style="display: none;">Teams</option>
+                    <option value="AL">Team 1</option>
+                    <option value="WY">Team 2</option>
+                    <option value="AM">Team 3</option>
+                    <option value="CA">Team 4</option>
+                    <option value="RU">Team 5</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-icon-text"
+                  >
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{% static 'assets/images/faces/face4.jpg'%}"
+                    alt="image"
+                  />
+                  <span class="ps-2">Sallie Reyes</span>
+                </td>
+                <td>02/02/2022</td>
+                <td>02/06/2022</td>
+                <td>
+                  <select class="badge badge-outline-primary bg-dark text-light">
+                    <option style="display: none;">Teams</option>
+                    <option value="AL">Team 1</option>
+                    <option value="WY">Team 2</option>
+                    <option value="AM">Team 3</option>
+                    <option value="CA">Team 4</option>
+                    <option value="RU">Team 5</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-icon-text"
+                  >
+                    <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
+{%endblock%}

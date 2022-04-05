@@ -1,0 +1,56 @@
+{% extends 'indexadmin.html'%}
+{% load static  %}
+{% block content %}
+<style>
+     #myprofile{
+    margin-left: 0rem;
+    margin-bottom: 5vh;
+    }
+    .container{
+        max-width: 150vh;
+        height: 60vh;
+        overflow: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5vh;
+    }
+
+
+</style>
+<body>
+<div><label id="myprofile">LEAVE</label></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Branch</th>
+                    <th>Designation</th>
+                    <th>Leave From</th>
+                    <th>Leave To</th>
+                    <th>Half/Full</th>
+                    <th>Reason</th>
+                    <th>Delete</th>
+                </tr>
+                {% for i in leave %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.branch}}</td>
+                    <td>{{i.Designation}}</td>
+                    <td>{{i.leavefrom }}</td>
+                    <td>{{i.leaveto}}</td>
+                    <td>{{i.halforfull}}</td>
+                    <td>{{i.reason}}</td>
+                    <td><a href="admin_leave_delete?id={{i.id}}">Delete</a></td>
+                </tr>
+
+                {% endfor %}
+               
+              </table>
+
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

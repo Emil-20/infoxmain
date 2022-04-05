@@ -1,0 +1,104 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row mt-3 mb-5">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h3>Task List</h3>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr data-href="#">
+                                <th>Task Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if tsk %} {% for i in tsk %}
+                            <tr>
+                                <td>
+                                    <a href="/tdetails/{{i.id}} " style="text-decoration: none; color: whitesmoke;"> <span class="ps-2 "> {{i.taskname}} </span></a>
+                                </td>
+                                <td>
+                                    <a href="/tdetails/{{i.id}}" style="text-decoration: none; color: whitesmoke;"> {{i.startdate|date:"d-m-Y"}} </a></td>
+                                <td>
+                                    <a href="/tdetails/{{i.id}}" style="text-decoration: none; color: whitesmoke;"> {{i.enddate|date:"d-m-Y"}} </a></td>
+                                <td>
+                                    <div class="progress ">
+                                        <div class="progress-bar bg-warning " role="progressbar " style="width: 45% " aria-valuenow="25 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {% if i.user_files %}
+                                    <a class="btn btn-outline-primary  mr-2 ml-6 mt-2" style="font-size: 13px;width: 100px; font-weight: 100;" href="{{i.user_files.url}}" download>
+                                        <i class="mdi mdi-format-vertical-align-bottom ">Download</i></a>
+                                    {% endif %}
+                                    </a>
+                                </td>
+                            </tr>
+
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput ");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable ");
+        tr = table.getElementsByTagName("tr ");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td ")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = " ";
+                } else {
+                    tr[i].style.display = "none ";
+                }
+            }
+        }
+    }
+
+    // $(document).ready(function() {
+    //     $('table tr').click(function() {
+    //         window.location = $(this).data('href');
+    //         return false;
+    //     });
+    // });
+</script>
+
+
+
+{%endblock%}

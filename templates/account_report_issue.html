@@ -1,0 +1,47 @@
+{% extends 'index_accounts.html' %} {% block content %} {% load static %}
+
+<!-- Give task for trainees -->
+<div class="row mt-5" >
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3 "></div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6  grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <center>
+                    <h4 class="card-title">Report Issue</h4>
+                </center>
+
+                <form class="forms-sample" action="/account_report_issue/" method="post">
+                    
+                     {% csrf_token %}
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-12 col-sm-4 col-md-3 col-lg-3 col-form-label"
+              >Report</label
+            >
+            <div class="col-12 col-sm-8 col-md-9 col-lg-9">
+              <textarea
+                class="form-control text-light col-12 col-sm-12 col-md-12 col-lg-12"
+                rows="30"
+                id=""
+                style="height: 140px;" name="issue"required
+              ></textarea>
+            </div>
+          </div>
+         
+          <div class="row">
+            <div class="col-12 col-sm-5 col-md-5 col-lg-5"></div>
+            <div class="text-center pull-right">
+                <button type="submit" class="btn btn-outline-primary btn-icon-text">
+
+                  <i class="mdi mdi-file-check btn-icon-prepend" ></i> Submit
+</button>
+            </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ends here -->
+
+
+{% endblock %}

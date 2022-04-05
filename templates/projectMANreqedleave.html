@@ -1,0 +1,135 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    * {
+      color: #6C7293;
+    }
+  
+    .card {
+      margin-top: 1%;
+    }
+  
+    #qwe {
+      font-size: 19px;
+      font-weight: 500;
+    }
+  
+    .card .card-body {
+      flex: 1 1 auto;
+      padding: 0.5rem 0.2rem;
+    }
+  
+  
+    .table1 {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 5vh;
+    }
+  
+    th,
+    td {
+      text-align: center;
+    }
+  
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 5px;
+    }
+  
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #191c24;
+    }
+  
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+  
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  
+    .card-title {
+      font-size: 20px;
+      font-weight: 900px;
+    }
+  </style>
+
+<h2 style="font-size: 20px;font-weight: 600;">Requested Leave</h2>
+  
+  <div class="row">
+    <div class="col-12 grid-margin table1">
+      <div class="card p-3">
+        <div class="card-body">
+          <h4 class="card-title ">Leave</h4>
+          <input type="text" class="form-control text-light" id="myInput" name="search" autocomplete="off" placeholder="Search...">
+          <br>
+          <div class="table-responsive">
+            <table class="table" >
+              <thead>
+                <tr>
+                  <!-- <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input">
+                                        </label>
+                                    </div>
+                                </th> -->
+                  <th> S.No </th>
+                  <th> From </th>
+                  <th> To</th>
+                  <th>Leave type</th>
+                  <th>Reason</th>
+                  <th> Status </th>
+        
+  
+  
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                {% for i in var %}
+                <tr >
+                  
+                    <td>{{forloop.counter}}</td>
+                    
+                    <td> {{i.from_date|date:"d-m-Y"}}  </td>
+                    <td> {{i.to_date|date:"d-m-Y"}}</td>
+                    <td>{{i.leave_status}}</td>
+                    <td>{{i.reason}}</td>
+                    <td> 
+                      {% if i.status == "pending" %}
+                        <div class="badge badge-outline-warning">submitted</div>
+                      {% elif i.status == "approved" %}
+                        <div class="badge badge-outline-success">approved</div>
+                        {% elif i.status == "rejected" %}
+                        <div class="badge badge-outline-danger">rejected</div>
+                      {% endif %}
+                    </td>
+                  
+                </tr>
+                {% endfor %}
+              
+              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></a >
+<script>
+  // search table details
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

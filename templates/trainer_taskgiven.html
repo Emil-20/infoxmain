@@ -1,0 +1,104 @@
+{%extends 'trainer_index.html' %} {% load static %} {% block content %}
+
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top: -16px">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                        <h4>Trainees Task List</h4><br>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- given task starts here -->
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr data-href="#">
+                                <th> Trainee Name </th>
+                                <th> Task</th>
+                                <th style="padding-left: 40px;"> Attached File</th>
+                                <th style="padding-left: 55px;"> Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>{% if mem1 %} {% for i in tsk %}
+                            <tr>
+                                <td><img src="{{i.user.photo.url}}" alt="image" /> &nbsp;{{i.user}}
+                                </td>
+                                <td> {{i.taskname}}</td>
+                                <td>
+                      {% if i.user_files %}
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-6 mt-1">
+                          <a href="{{i.user_files.url}}" class="btn btn-outline-primary mdi mdi-format-vertical-align-bottom"
+                          style="font-size: 15px;overflow: hidden  mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;" download>Download</a>
+                      </div>
+                      {% endif %} </td>
+                      <td>
+
+                      {% if i.task_status == '0' %}
+                                    
+                      <div class="badge badge-outline-danger" style="width: 135px;">
+                          <i class="mdi mdi-playlist-remove"></i>&nbsp;
+                          Not Submitted
+                      </div>
+                  
+                  
+                  {%else %}
+
+                  <div class="badge badge-outline-success" style="width: 135px;"  >
+                      <i class="mdi mdi-playlist-check"></i>&nbsp;
+                       Submitted
+                  </div>
+                  {% endif %}
+                </td>
+
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ends here -->
+
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- modal end -->
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{%endblock%}

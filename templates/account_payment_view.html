@@ -1,0 +1,92 @@
+{%extends 'index_accounts.html'%} {% load static %} {% block content %}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+  
+  
+        <h2 class="card-title">
+          <center>SALARY DETAILS</center>
+        </h2>
+  
+  
+        <div class="form-group row">
+          <label for="name" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Name</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+           {{reg.fullname}}
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="bank" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Bank Name</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            {{reg.bank_name}}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="bank" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Account Number</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            {{reg.account_no}}
+          </div>
+        </div>
+        
+  
+  
+
+
+<div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th style="color:white;">NAME</th> -->
+          <th style="color:white;">DATE</th>
+         
+          <th style="color:white;"> BASSIC SALARY</th>
+          <th style="color:white;">PF</th>
+          <th style="color:white;">ESI</th>
+         
+          <th style="color:white;"> HRA </th>
+          <th style="color:white;">CONVEYENCE ALLOWANCE</th>
+          <th style="color:white;">PROFESSIONAL TAX</th>
+          <th style="color:white;"> INCETIVES </th>
+          <th style="color:white;"> DELAY </th>
+          <th style="color:white;"> LEAVES </th>
+
+         
+        </tr>
+      </thead>
+    </thead>
+    <tbody>
+        {% for i in use %}
+        
+      
+        
+        <tr>
+            <!-- <td>{{i.fullname}}</td> -->
+            <td>{{i.fromdate}}</td>
+            
+            <td>{{i.basic_salary}}</td>
+            <td>{{i.pf}}</td>
+            <td>{{i.esi}}</td>
+            <td>{{i.hra}}</td>
+            <td>{{i.conveyns}}</td>
+            <td>{{i.pf_tax}}</td>
+            <td>{{i.incentives}}</td>
+            <td>{{i.delay}}</td>
+            <td>{{i.leavesno}}</td>
+
+           
+      
+
+            
+        </tr>
+        {% endfor%}
+        
+       
+        
+    </tbody>
+</table>
+   </div>
+</div>
+  </div>
+</div>
+{%endblock%}

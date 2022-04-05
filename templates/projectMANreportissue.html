@@ -1,0 +1,61 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    #head {
+        color: #6c7293;
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: auto;
+        padding: 0.2% 1% 1.5% 0.1%;
+        width: 79%;
+    }
+
+    .card {
+        border-radius: 0.25rem;
+        width: 100%;
+    }
+
+    #exampleTextarea1 {
+        height: 30vh;
+        color: white;
+    }
+
+    .btn {
+        margin-top: 4%;
+        float: right;
+        margin-right: 5%;
+        padding-left: 3%;
+        padding-right: 3%;
+        line-height: 2;
+
+    }
+
+    .card-title1 {
+        color: white;
+    }
+</style>
+
+<body>
+
+   
+        <div><label id="head">Report Issue</label></div>
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'MANreportsuccess' %}" method='post'>
+                    {% csrf_token %}
+                    <h4 class="card-title1">Describe your Issue</h4>
+                    <textarea class="form-control" id="exampleTextarea1" name="MANreportissue" rows="4"></textarea>
+                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                        <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit </button>
+                   
+                </form>
+            </div>
+        </div>
+
+</body>
+
+{% endblock %}

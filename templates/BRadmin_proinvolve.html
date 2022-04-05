@@ -1,0 +1,117 @@
+{% extends 'BRadmin_index.html' %} {% load static %} {% block content %}
+
+<style>
+    .progress {
+        background-color: #f1f1f1;
+        margin-bottom: 1rem;
+        height: 1rem;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Involved Projects</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr class="header">
+
+                                <th> Project Name </th>
+                                <th> Start Date </th>
+                                <th> End Date </th>
+
+                                <th> Progress bar </th>
+                                <th> Status </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            {% for pro in pro_data %}
+                            <tr>
+
+                                <td>
+
+                                    <span class="ps-2">{{ pro.project }}</span>
+                                </td>
+                                <td> {{ pro.startdate|date:"d-m-Y" }} </td>
+                                <td> {{ pro.enddate|date:"d-m-Y" }} </td>
+
+                                <td>
+                                    <!-- <div class="progress" style="height:20px;">
+                                        <div class="progress-bar bg-success" style="height:20px;width:{{pro.progress}}%">{{pro.progress}}%</div>
+                                    </div> -->
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: {{pro.progress}}%" aria-valuenow="{{pro.progress}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                               
+                                {% if pro.status == 'accepted' %}
+                            <td>
+                                <div class="badge badge-outline-success">{{pro.status}}</div>
+                            </td>
+                            {% else %}
+                            <td>
+                                <div class="badge badge-outline-danger">{{pro.status}}</div>
+                            </td>
+                            {% endif %}
+                            </tr>
+                            
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        const show_percent = true;
+        var progressBars = $(".progress-bar");
+        for (i = 0; i < progressBars.length; i++) {
+            var progress = $(progressBars[i]).attr("aria-valuenow");
+            $(progressBars[i]).width(progress + "%");
+            if (show_percent) {
+                $(progressBars[i]).text(progress + "%");
+            }
+            if (progress <= "25") {
+                //90 and above
+                $(progressBars[i]).addClass("bg-danger");
+            } else if (progress >= "25" && progress < "75") {
+                $(progressBars[i]).addClass("bg-warning"); //From 30 to 44
+
+            } else {
+                //29 and under
+                $(progressBars[i]).addClass("bg-success");
+            }
+        }
+    });
+</script>
+{% endblock %}

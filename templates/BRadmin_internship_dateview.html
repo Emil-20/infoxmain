@@ -1,0 +1,186 @@
+{% extends 'BRadmin_index.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+    .table1 {
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #191c24;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12 grid-margin table1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Internship Details</h4>
+                <input type="text" class="form-control " onkeyup="myFunction()" id="search" name="search" autocomplete="off"
+                    placeholder="Search...">
+                <br>
+                <div class="table-responsive">
+                    <table class="table" >
+                        
+                        <thead>
+                            <tr>
+                                <!-- <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input">
+                                        </label>
+                                    </div>
+                                </th> -->
+                                <th> Id </th>
+                                <th> Full Name </th>
+                                <th> Reg date</th>
+                                
+                                <th> College Name </th>
+                                <th> Reg No</th>
+                                <th> Course </th>
+                                <th> Stream </th>
+                                <th> Platform </th>
+                                <th> Start Date </th>
+                                <th> End Date </th>
+                                <th> Mobile </th>
+                                <th> Alternative Mobile </th>
+                                <th> Email </th>
+                                
+                                <th> Rating </th>
+                                <th> Hr Manager </th>
+                                <th> Guide </th>
+                                <th> Profile Pic </th>
+                                <th> Attached File </th>
+                                <th> Update</th>
+                                <th> Certificate</th>
+                                <th> Delete</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            
+                            {% for i in data %}
+                                
+                            
+                                
+                            <tr>
+                  
+                                <td>{{forloop.counter }}</td>
+                                 <td>
+                                    <img src="{{i.profile_pic.url}}" alt="image" />
+                                    <span class="ps-2">{{i.fullname}}</span>
+                                </td>
+                                <td> {{i.reg_date|date:"d-m-Y"}}</td>
+                               
+                                <td> {{i.collegename }} </td>
+                                <td> {{i.reg_no }} </td>
+                                <td> {{i.course }}</td>
+                                <td> {{i.stream}} </td>
+                                <td> {{i.platform}} </td>
+                                <td>{{i.start_date}} </td>
+                                <td> {{i.end_date}} </td>
+                                <td> {{i.mobile}} </td>
+                                <td> {{i.alternative_no}} </td>
+                                <td> {{i.email}} </td>
+                                
+                                <td> {{i.rating}} </td>
+                                <td> {{i.hrmanager}}</td>
+                                <td> {{i.guide}} </td>
+                               <td> <a href="{{i.profile_pic.url}} " download="{{i.fullname}}">
+                                        <div class="badge badge-outline-success">Download</div>
+                                    </a></td>
+                                <td> <a href="{{i.attach_file.url}} " download="{{i.fullname}}">
+                                        <div class="badge badge-outline-success">Download</div>
+                                    </a> </td>
+                                <td><a href="{% url 'BRadmin_internship_update' i.id %}">
+                                        <div class="badge badge-outline-warning">Update</div>
+                                    </a></td>
+                                <td> <a href="{% url 'pdf' i.id %}">
+                                        <div class="badge badge-outline-success">Download</div>
+                                    </a></td>
+                                <td> <a href="{% url 'interndelete' i.id%}"> 
+                                        <div class="badge badge-outline-danger">Delete </div>
+                                </a>
+                                </td>
+
+                                <!-- <td><div class="badge badge-outline-success">Approved</div></td> -->
+                                {% endfor %}
+                            </tr>
+                            
+                            
+                        </tbody>
+       
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+
+
+
+        
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+
+  $(document).on('click', '.confirm-delete', function(){
+      
+    return confirm('Are you sure you want to delete this?');
+    
+})
+</script>
+{% endblock %}

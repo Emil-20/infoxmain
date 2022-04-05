@@ -1,0 +1,88 @@
+{% extends 'index_trainingmanager.html' %} {% load static %} {% block content %}
+
+<!-- Trainers Solved Issue Table -->
+
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top: -16px">
+                    <div><br></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>TRAINERS</h4>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th> Department </th>
+                                <th> Problem </th>
+                                <th> Reply </th>
+                                <th> Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if cut %} {%for t in cut%}
+                            <tr>
+                                <td>
+
+                                    {% comment %} <img src="{{t.user.photo}}" alt="image" /> {% endcomment %}
+                                    <img src="{{media_url}}{{ t.reporter.photo.url }}"> {% comment %} {{t.user.photo}} {% endcomment %}
+                                    <span class="ps-2">{{t.reporter.fullname}}</span></a>
+                                </td>
+                                <td> {{t.reporter.department.department}} </td>
+                                <td class="text-wrap text-justify" style="width:300px">{{t.issue}}</td>
+                                <td class="text-wrap text-justify" style="width:300px">{{t.reply}}</td>
+                                <td>
+                                    <div style="color: rgb(94, 194, 94);font-size: medium;">Solved
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end here -->
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

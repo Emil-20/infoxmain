@@ -1,0 +1,72 @@
+{% extends 'trainee_index.html' %} {% block content %} {% load static %}
+
+<!-- Give task for trainees -->
+<div class="row" style="padding-top: 20px;">
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3 "></div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6  grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <center>
+                    <h4 class="card-title">Report Issue</h4>
+                </center>
+
+                <form class="forms-sample" action="/trainee_report_reported/" method="post">
+                  {% csrf_token   %}
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-md-12">
+                            <div class="row"></div>
+                            <div class="form-group row">
+                                <label class="col-3 col-sm-4 col-md-3 col-lg-3 col-form-label mt-3">To</label
+                >
+                <div class="col-9 col-sm-4 col-md-4 col-lg-4">
+                  <div class="dropdown">
+                   
+                    <select name="reportto"  class="badge badge-outline-primary bg-dark text-justify mt-3" style="color: #bfbfbf;">
+                      <option  selected style="display: none;">Select</option>
+                      {% for i in list  %}
+                      <option  value='{{i.id}}'>Training manager</option>
+                      {% endfor %}
+                      {% for i in memteam  %}
+                      <option value='{{i.id}}'>{{i.fullname}}</option> 
+                      {% endfor %} 
+                     
+                    </select>
+                 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-12 col-sm-4 col-md-3 col-lg-3 col-form-label"
+              >Report</label
+            >
+            <div class="col-12 col-sm-8 col-md-9 col-lg-9">
+              <textarea
+                class="form-control text-light col-12 col-sm-12 col-md-12 col-lg-12"
+                rows="30"
+                 name="report"
+                style="height: 140px;"
+                Required
+              ></textarea>
+            </div>
+          </div>
+         
+          <div class="row">
+            <div class="col-12 col-sm-5 col-md-5 col-lg-5"></div>
+            <div class="text-center pull-right">
+                <button type="submit" class="btn btn-outline-primary btn-icon-text">
+
+                  <i class="mdi mdi-file-check btn-icon-prepend" ></i> Submit
+</button>
+            </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ends here -->
+
+
+{% endblock %}

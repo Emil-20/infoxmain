@@ -1,0 +1,102 @@
+{%extends 'trainer_index.html'%}
+{% load static %}
+{% block content %}
+{% comment %} <style>
+    select{
+        width: 100px;
+        text-overflow: auto;
+    }
+</style> {% endcomment %}
+
+<div class="row" style="padding-top:20px; ">
+  <div class="col-12 col-sm-2 col-md-2 col-lg-2"></div>
+  
+
+
+
+<div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin stretch-card">
+    <div class="card"  >
+      <div class="card-body" style="height:auto;padding-top:20px; ">
+        <br>
+        <center>
+        <h3 class="card-title">Add Topic</h3>
+        </center>
+      <br><br>
+        
+        <form class="forms-sample" method="post" autocomplete="off" >
+        {% csrf_token %}
+            <div class="form-group row">
+                <label for="exampleInputEmail2" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Select Team</label>
+                <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                    <div class="dropdown">
+                        
+                        <select name="select" id=""  class=" badge  badge-outline bg-dark text-light" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' required >
+                          {% for i in crt %}
+                          <option style="display: none; " value="" >Select Team</option>
+                          
+                          <option value="{{i.id}}" required>{{i.name}}  </option>
+                          {% endfor %}
+                          {% comment %} <option value="">Team Two</option>
+                          <option value="">Team Two</option>
+                          <option value="">Team Four</option>
+                          <option value="">Team Five</option>
+                          <option value="">Team Six</option>
+                          <option value="">Team Seven</option>
+                          <option value="">Team Eight</option>
+                          <option value="">Team Nine</option>
+                          <option value="">Team Ten</option> {% endcomment %}
+                      </select>
+                    </div>
+                    
+                </div>
+            </div>
+
+              <div class="form-group row">
+                <label for="exampleInputEmail2" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label ">Topic</label>
+                <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                  <input type="text" name="topic" class="form-control text-light" id="" required>
+                </div>
+              </div>
+          
+          <div class="form-group row">
+            <label for="exampleInputEmail2" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Start Date</label>
+            <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+              <input type="Date" name="start" class="form-control text-light" id="from" Required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputMobile" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">End Date</label>
+            <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                <input type="Date" name="end" class="form-control text-light" id="to" Required >
+            </div>
+          </div><br><br>
+          
+        
+          <div class="row mb-5">
+              <center>
+              <button type="Submit" class="btn btn-outline-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend"></i>
+                 Submit </button>
+              </center>
+            </div>
+          </div>
+        </form>
+        </div>      
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#from').attr('min',today);
+  $('#to').attr('min',today);
+</script>
+
+{%endblock%}

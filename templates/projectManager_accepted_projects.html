@@ -1,0 +1,75 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row ">
+  <h4 class="card-title" style="font-size: 20px;color:#6C7293; font-weight: 600;">Accepted Projects</h4><br><br>
+  <div class="col-md-12 col-12 col-sm-12 col-lg-12  grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Projects</h4>
+        <br>
+        <input type="search" class="form-control rounded" id="myInput" onkeyup="myFunction()" placeholder="Search"
+          aria-label="Search" aria-describedby="search-addon" style="color: white;" />
+        <div class="table-responsive">
+          <div class="col-md-12 col-12 col-sm-12 col-lg-12 ">
+
+
+          </div>
+          <table class="table" >
+            <thead>
+              <tr>
+                <th>
+                  <!-- <div class="form-check form-check-muted m-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                      </label>
+                    </div> -->
+                </th>
+                <th> Project Name </th>
+                <th> Start Date </th>
+                <th> End Date </th>
+                <th> Status </th>
+              </tr>
+            </thead>
+
+            <tbody id="myTable">
+              {% for i in projects %}
+
+
+
+              <tr>
+                <td></td>
+                <td>{{i.project}}</td>
+                <td> {{i.startdate|date:" d-m-Y"}} </td>
+                <td> {{i.enddate|date:" d-m-Y"}}</td>
+                <td>
+                  <div class="badge badge-outline-success">{{i.status}}</div>
+                </td>
+                </td>
+              </tr>
+
+              {% endfor %}
+
+            </tbody>
+
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+
+$(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+{% endblock %}

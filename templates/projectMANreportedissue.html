@@ -1,0 +1,204 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    * {
+        color: #6C7293;
+    }
+
+    #head {
+        color: #6c7293;
+        font-size: 20px;
+        font-weight: 600;
+        
+        margin-top: auto;
+        padding: 0.2% 1% 1.5% 1%;
+        width: 79%;
+    }
+
+    .card {
+        margin-top: 1%;
+    }
+
+    #qwe {
+        font-size: 19px;
+        font-weight: 500;
+    }
+
+    .card .card-body {
+        flex: 1 1 auto;
+        padding: 0.5rem 0.2rem;
+    }
+
+
+    * {
+        color: #6C7293;
+    }
+
+    .table1 {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1vh;
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #191c24;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 900px;
+    }
+</style>
+
+<div><label id="head">Reported Issues</label></div>
+
+
+<div class="row">
+    <div class="col-12 grid-margin table1">
+        <div class="card p-3">
+            <div class="card-body">
+                <label style="font-size: 18px; font-weight: 400;color: white !important;">Issues</label><br><br>
+                <input type="text" class="form-control text-light" id="myInput" onkeyup="myFunction()" name="search"
+                    autocomplete="off" placeholder="Search by Name">
+                <br>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th> Sl.No </th>
+                                <th> Name </th>
+                                <th> Issue</th>
+                                <th> Date </th>
+                                <th> Action</th>
+
+
+                            </tr>
+                        </thead>
+                        {% for d in var %}
+                        <tbody>
+
+                            <tr>
+
+                                <td>{{forloop.counter}}</td>
+                                
+                                <td>{{d.reporter}}</td>
+                                <td>{{d.issue}}</td>
+                                
+                                <td> {{d.reported_date|date:" d-m-Y"}}</td>
+                               
+                                <td>
+                                    {% if not d.reply %}
+                                    <a href="#">
+                                    <div class="btn btn-outline-warning" data-toggle="modal" >
+                                        <i class=" text-warning mdi mdi-send btn-icon-prepend"></i>Pending
+                                    </div>
+
+                                    </a>
+                                    {% else %}
+                                    
+                                    
+                                    <a href="{% url 'projectmanagerreportedissue2' d.id %}">
+                                        <div class="badge badge-outline-success">Submitted</div>
+                                    </a>
+                                    {% endif %}
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </td>
+
+                            </tr>
+
+                           
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reply</h4>
+                <button type="button" style="color: white; border: none;background-color: transparent;" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="projectreply">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row p-3">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                            <textarea class="col-12 col-sm-12 col-md-12 col-lg-12 form-control  text-light"
+                                style="height: 200px; background-color: #2A3038; " name="reply" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center pb-3">
+                        <button type="submit" onclick="redirect()" class="btn btn-outline-primary btn-icon-text ">
+                            <i class="text-primary mdi mdi-send btn-icon-prepend"></i>
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

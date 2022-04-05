@@ -1,0 +1,58 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  @media(max-width:61.938em){
+    .row h3{
+      font-size: 19px;
+    }
+  }
+</style>
+
+
+            <div class="row" style="margin-bottom: 50px;">
+                <h3 class="text-muted">Departments</h3></div>
+               
+                <div class="row"> 
+                  {% for i in department %}
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+
+                  <a href="{% url 'MAN_projects' i.id %}" style="text-decoration: none; color: #f8f9fa;">
+                  <div class="card-body">
+                    <!-- <h5>Revenue</h5> -->
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                         
+                          <h3 class="mb-0">{{i.department}}</h3>
+                          <!-- <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p> -->
+                        </div>
+                        <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <img class="col-4 col-sm-12 col-xl-12 " src=" {{i.files.url}}" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  </a>
+
+                </div>
+              </div>
+
+              {% endfor %}
+            </div>
+          
+            
+        <!-- </div> -->
+        <!-- main-panel ends -->
+      <!-- </div> -->
+      <!-- page-body-wrapper ends -->
+    <!-- </div> -->
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+   
+
+
+{% endblock %}

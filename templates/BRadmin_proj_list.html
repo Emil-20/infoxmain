@@ -1,0 +1,43 @@
+{% extends 'BRadmin_index.html' %}
+{% load static %}
+{% block content %}
+<div class="row" style="margin: 30px;">
+  <h3 class="text-muted">Current Projects</h3>
+</div>
+<center>
+  <div class="row " style="margin-top: 20px;">
+
+    {% for i in proj_det  %}
+    {% if i.status == "accepted" %}
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <a href="{% url 'BRadmin_proj_det' i.id %}"  style="text-decoration: none; color: white;">
+          
+          <div class="card-body">
+            
+            <div class="row">
+              <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                  <h4 class="mb-0">{{i.project}}</h4>
+                  <!-- <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p> -->
+                </div>
+                <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+              </div>
+              <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                <img class="img-sm rounded-circle " src=" {{i.files.url}}" alt="">
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+  
+  </div>
+
+
+</center>
+    
+{% endblock %}

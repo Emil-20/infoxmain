@@ -1,0 +1,164 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  table tr[data-href] {
+    cursor: pointer;
+  }
+</style>
+
+<div class="row pt-3">
+  <div class="" style="font-size: 20px;font-weight: 600;color:#6C7293;">New Projects</div>
+</div>
+<div class="row mt-4">
+
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h4> Projects</h4><br>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <form>
+              <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()"
+                  placeholder="Search for names.." title="Type in a name" style="color:white;">
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- table start hear -->
+
+        <div class="table-responsive">
+          <table class="table " id="myTable">
+            <thead>
+
+              <tr>
+                <th> Project Name </th>
+                <th> Start Date </th>
+                <th> End Date </th>
+                <th> Status </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in projects %}
+              <!--<tr data-href="{% url 'projectmanager_description' i.id %}">-->
+              <tr>
+                <td>
+                 {{i.project}}
+                </td>
+                <td> {{i.startdate|date:" d-m-Y"}} </td>
+                <td> {{i.enddate|date:" d-m-Y"}}</td>
+                 <td>
+                  <a href="{% url 'proMAN_acceptproj' i.id %}">
+                  <button class="btn btn-outline-success">Accepted</button></a>
+                  <a href="#">
+                    <div class="btn btn-outline-danger"  style="margin-left: 20px;" data-toggle="modal"
+                        data-target="#myModal{{i.id}}">Rejected
+                    </div>
+
+                </a>
+               
+                </td>
+              </tr>
+              {% endfor  %}
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- Modal -->
+{% for i in projects %}
+<div class="modal" id="myModal{{i.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reason</h4>
+                <button type="button" style="color: white; border: none;background-color: transparent;" class="close"
+                    data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="{% url 'proMAN_rejectproj' i.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row p-3">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                                    <textarea class="col-12 col-sm-12 col-md-12 col-lg-12 form-control  text-light"
+                                        style="height: 200px; background-color: #2A3038; " name="reply"
+                                        rows="4"> </textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center pb-3">
+                                <button type="submit" 
+                                    class="btn btn-outline-primary btn-icon-text ">
+                                    
+                                    SUBMIT
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor%}
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const rows = document.querySelectorAll("tr[data-href]");
+      rows.forEach(row => {
+        row.addEventListener("click", () => {
+          window.location.href = row.dataset.href;
+        });
+      });
+    });
+
+  </script>
+
+    <!-- modal js -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- endmodal -->
+
+  {% endblock %}

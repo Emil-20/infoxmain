@@ -1,0 +1,117 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    {% comment %} <div class="content-wrapper">     {% endcomment %}
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Daily Report</h3>
+              <div class="form-group">
+                <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+              <div class="table-responsive">
+                <table class="table"  id="myTable">
+                  <thead>
+                    <tr>
+                      <th> Date </th>
+                      <th> ReportBy </th>
+                      <th> Task </th>
+                      <th> SubTask </th>
+                      <th> Work Done </th>
+                      <th> Files </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        02 Jan 2022
+                      </td>
+                      <td> Herman Beck </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Project Module </td>
+                      <td> On Progress </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        14 Jan 2022
+                      </td>
+                      <td> Messsy Adam </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Dashboard </td>
+                      <td> On Progress </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        21 Jan 2022
+                      </td>
+                      <td> John Richards </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Reported Issues </td>
+                      <td> On Progress </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        30 Jan 2022
+                      </td>
+                      <td> Peter Meggik </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Attendance </td>
+                      <td> Completed </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </div> {% endcomment %}
+  </body>
+</html>
+{% endblock%}

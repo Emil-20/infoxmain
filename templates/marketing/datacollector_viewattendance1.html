@@ -1,0 +1,29 @@
+{% extends 'marketing/datacollector_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_carddet.css' %}">
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body" style="overflow-x: auto;">
+           <table class="table table-responsive table-bordered text-center" style="color: white;">
+              <tr>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Login Time</th>
+                  <th>Logout Time</th>
+              </tr>
+              <tr>
+                  <td>5-5-2022</td>
+                  <td>Present</td>
+                  <td>10 am</td>
+                  <td>5 pm</td>
+              </tr>
+           </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}        

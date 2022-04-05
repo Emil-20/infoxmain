@@ -1,0 +1,150 @@
+{%extends 'devindex.html'%}
+{%load static%}
+{%block content%}
+ <body>
+  <style>
+    * {
+    color: #6C7293;
+  }
+
+  .table1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+  }
+
+  th,
+  td {
+    text-align: center;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #191c24;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 900px;
+  }
+  </style>
+  <div class="row">
+    <div class="  " style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293">REPORTED
+      ISSUES</div>
+  </div>
+  <div class="row">
+    <div class="col-12 grid-margin table1">
+      <div class="card ">
+        <div class="card-body">
+   
+          <input type="text" class="form-control " onkeyup="myFunction()" id="search" name="search" autocomplete="off" placeholder="Search...">
+          <br>
+          <div class="table-responsive">
+            <table class="table" id="myTable">
+              <thead>
+                <tr>
+                  <!-- <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input">
+                                        </label>
+                                    </div>
+                                </th> -->
+                  <th> Sl.No </th>
+                  <th> Name </th>
+                  <th> Issue</th>
+                  <th>  Date </th>
+                  <th> Action</th>
+  
+  
+                </tr>
+              </thead>
+              {% for d in var %}
+              <tbody>
+  
+                <tr>
+                  
+                    <td>{{forloop.counter}}</td>
+                    
+                    <td> {{d.reporter.fullname}}</td>
+                    <td> {{d.issue}}</td>
+                    
+                    <td> {{d.reported_date|date:'d-m-Y'}}</td>
+                    
+                    <td>
+                      {% if not d.reply %}
+                      <a href="#">
+                      <div class="btn btn-outline-warning" data-toggle="modal" >
+                          <i class=" text-warning mdi mdi-send btn-icon-prepend"></i>Pending
+                      </div>
+
+                      </a>
+                      {% else %}
+                      
+                      
+                      <a href="{% url 'devissues' d.id %}">
+                        <div class="badge badge-outline-success">Submitted</div></a>
+                      {% endif %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </td>
+                    
+                </tr>
+  
+                
+              </tbody>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script>
+    function myFunction() {
+     var input, filter, table, tr, td, i, txtValue;
+     input = document.getElementById("search");
+     filter = input.value.toUpperCase();
+     table = document.getElementById("myTable");
+     tr = table.getElementsByTagName("tr");
+     for (i = 0; i < tr.length; i++) {
+       td = tr[i].getElementsByTagName("td")[1];
+       if (td) {
+         txtValue = td.textContent || td.innerText;
+         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+           tr[i].style.display = "";
+         } else {
+           tr[i].style.display = "none";
+         }
+       }
+     }
+   }
+   </script>
+  
+  
+
+</body>
+</html>
+{%endblock%}

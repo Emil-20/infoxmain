@@ -1,0 +1,100 @@
+{%extends 'promanagerindex.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+  <div class=" ml-5 " style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293;">Projects</div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-sm-4 grid-margin">
+    <a href="{% url 'projectmanager_upprojects'%}" style="text-decoration: none;">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style="color: white;">Upcoming project</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-cloud-download text-warning ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-4 grid-margin">
+    <a href="{% url 'projectmanager_currentproject'%}" style="text-decoration: none;">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style="color: white;">Current project</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-arrow-right-drop-circle text-info ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-4 grid-margin">
+    <a href="{% url 'projectmanager_completeproject'%}" style="text-decoration: none;">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style="color: white;">Completed project</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-cloud-check text-success ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-4 grid-margin">
+    <a href="{% url 'projectmanager_createproject'%}" style="text-decoration: none;">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style="color: white;">Create project</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-file-plus text-primary ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-4 grid-margin">
+    <a href="{% url 'projectmanager_assignproject'%}" style="text-decoration: none;">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style="color: white;">Assign project</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-codepen text-danger ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {%endblock%}

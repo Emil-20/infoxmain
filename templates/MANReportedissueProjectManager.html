@@ -1,0 +1,108 @@
+{% extends 'index.html' %} {% block content %} {% load static %}
+
+<h3 class="text-muted">ProjectManager</h3><br><br>
+<div class="row ">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Issues</h4>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr class="header">
+
+                                <th> Sl.No </th>
+                                <th> Name </th>
+                                <th> Date </th>
+                                <th> Status </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+
+                                <td>
+                                    <a href="MANReportedissueProjectManager1" style="text-decoration: none;color: #6C7293;"> <span class="ps-2">Python</span></a>
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-success">Solved</div>
+                                </td>
+
+
+                            </tr>
+                            <tr>
+                                <td>01</td>
+
+                                <td>
+
+                                    <a href="MANReportedissueProjectManager1" style="text-decoration: none;color: #6C7293;"> <span class="ps-2">React JS</span></a>
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-warning">Pending</div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>01</td>
+
+                                <td>
+
+                                    <a href="MANReportedissueProjectManager1" style="text-decoration: none;color: #6C7293;"> <span class="ps-2">HTML</span></a>
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-warning">Pending</div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>
+
+                                    <a href="MANReportedissueProjectManager1" style="text-decoration: none;color: #6C7293;"> <span class="ps-2">Django</span></a>
+                                </td>
+                                <td> 04 Dec 2019 </td>
+
+                                <td>
+                                    <div class="badge badge-outline-success">Solved</div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

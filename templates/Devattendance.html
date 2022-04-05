@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends 'devindex.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .Search {
+      width: 100px;
+      margin-top: 4%;
+      float: right;
+      margin-right: 5%;
+      padding-left: 3%;
+      padding-right: 3%;
+      line-height: 2;
+      border: 1px solid #6c7293;
+      color: #fff;
+      background: #0090e7;
+  }
+
+  /* #tble {
+      display: none;
+  } */
+
+  label {
+      color: white;
+  }
+
+  @media (max-width:767px) {
+      .Search {
+          margin-top: -2%;
+          float: right;
+          margin-right: 0%;
+          padding-left: 3%;
+          padding-right: 3%;
+          line-height: 2;
+      }
+  }
+</style>
+<form action="{% url 'Devattendancesort' %}" method="post">
+  {% csrf_token %}
+<h2 style="color: #6c7293;">Attendance</h2>
+<div class="col-md-12 grid-margin stretch-card pt-3">
+  <div class="card">
+      <div class="card-body pt-5">
+          <form class="forms-sample">
+              <div class="form-group row">
+                  <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Start Date</label>
+                  <div class="col-sm-9">
+                      <input type="date" name="fromdate" class="form-control txtDate" id="exampleInputUsername2"/>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label for="exampleInputEmail2" class="col-sm-3 col-form-label">End Date</label>
+                  <div class="col-sm-9">
+                      <input type="date" name="todate" class="form-control txtDate" id="exampleInputEmail2"/>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div for="exampleInputEmail2" class="col-md-11 col-form-label"></div>
+                  <div class="col-md-12">
+                      <button type="submit" style="float: right;" id="btnSearch" class="btn btn-outline-primary btn-icon-text">
+                          <i class="mdi mdi-file-check btn-icon-prepend"></i> Search </button>
+                     
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+</form>
+
+<script>
+    $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        $('.txtDate').attr('max', maxDate);
+
+    })
+</script>
+
+{% endblock %}

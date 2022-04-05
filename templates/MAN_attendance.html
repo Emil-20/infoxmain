@@ -1,0 +1,158 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+#tble{
+  margin-bottom: 5px;
+  color: #6c7293; 
+   /* width: 65%; 
+  margin-top: 25px; */
+  /* margin-left: 25%;  */
+  width: 100%;
+  display: none;
+}
+@media only screen and (max-width: 1300px){
+   .container{
+     margin-top: 1rem;
+   } 
+  }
+
+  table tr[data-href] {
+    cursor: pointer;
+}
+ 
+</style>
+<body>
+  
+
+    <div class="container">
+      <h2 style="margin-left: 20px; color:grey">Attendance</h2>
+      <div class="card" >
+       
+        
+          <div class="card-body">
+           <form  method="POST" action="" id="personForm" >  
+            {% csrf_token %}
+              <div class="">
+                   <!-- <label>SELECT FROM DATE</label>  -->
+                  
+                   <label class="sr-only" for="inlineFormInputName2">Select Department</label>
+                   <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="Department" style="background-color: #191c24; color: white;">
+                      <option selected></option>
+                      {% for i in department %}
+                      <option value="{{i.id}}">{{i.department}}</option>
+                      {% endfor%}
+                    </select>
+                   <!-- <input type="select" class="form-control mb-2 mr-sm-2" id="txtFrom"> -->
+                  
+              <div class="">
+                <label class="sr-only" for="inlineFormInputName2">Select Designation</label>
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="Desig" style="background-color: #191c24; color: white;">
+                  <!-- <option selected></option>
+                  {% for i in designation %}
+                  <option value="1">{{i.designation}}</option>
+                  {% endfor%} -->
+                </select>
+                <!-- <input type="select" class="form-control mb-2 mr-sm-2" id="txtTo"> -->
+               
+              </div>
+               <label class="sr-only" for="inlineFormInputName2">Select Employee</label>
+                   <select name="empname" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="emp" style="background-color: #191c24; color: white;">
+                      <!-- <option selected></option>
+                      {% for i in user_registration %}
+                      <option value="{{i.fullname}}">{{i.fullname}}</option>
+                      {% endfor%} -->
+                    </select>
+              <!-- <button id="btnSearch" type="button" class="btn btn-danger Search"  >Search</button> -->
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                 <button type="submit"  style="height: 40px;" id="btnSearch" class="btn btn-primary mb-2 mt-2 w-100">Search</button>
+                </div>
+              </div>
+  
+              
+                   
+               
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+   
+
+
+      <script type="text/javascript">
+        $("#Department").change(function () {
+          const url = $("#personForm").attr("data-cities-url");
+            const deptId = $(this).val();
+            $.ajax({
+                url: '{% url 'man_desi' %}',
+                data: {
+                    'dept_id': deptId
+                },
+                success: function (data) {
+                    $("#Desig").html(data);
+                    console.log(data);
+                }
+            });
+    
+        });
+        $("#Desig").change(function () {
+          const url = $("#personForm").attr("data-cities-url");
+            const deptId = $("#Department").val();
+            const desigId = $("#Desig").val();
+            $.ajax({
+                url: '{% url 'man_emp' %}',
+                data: {
+                    'dept_id': deptId  ,
+                    'desig_id': desigId
+                },
+                success: function (data) {
+                    $("#emp").html(data);
+                    console.log(data);
+                }
+            });
+          });
+       </script>
+
+
+
+
+
+
+   
+
+    <script>
+      const targetDiv = document.getElementById("tble");
+      const btn = document.getElementById("btnSearch");
+      btn.onclick = function () {
+        if (targetDiv.style.display = "block") {
+          targetDiv.style.display = "block";
+        } else {
+          targetDiv.style.display !== "none";
+        }
+      };
+    </script>
+
+
+<script>
+  $(function () {
+    $("#txtFrom").datepicker({
+      minDate: new Date(2022, 2 - 1, 1)
+    });
+  });
+  $(function () {
+    $("#txtTo").datepicker({
+      maxDate: new Date(2022, 3 - 1, 1)
+    });
+  });
+</script>
+    </body>
+{% endblock %}

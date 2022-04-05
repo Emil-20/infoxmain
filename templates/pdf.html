@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Infox core</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+      
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 25px;
+                font-weight: 100;
+              
+               padding: 10px 20px 0px 20px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 50px 0px 50px;
+                text-align: left !important;
+                
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+            .details .content{
+                text-align: justify;
+                font-size: 20px !important;
+                line-height: 30px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                
+
+            }
+        </style>
+    </head>
+    <body>
+<div class='details' style="margin-left: 14cm; top:2cm">
+        
+        <p style="color: black; width: 200px;"><b>{{date|date:'d-m-Y'}}</b></p>
+  <br><br><br>
+    </div>
+ 
+    
+        <div class='wrapper'>
+            <div class='header'>
+               
+                <p class='title'style="color: black"><b>TO WHOMSOEVER IT MAY CONCERN</b></p> 
+                <p class='title'style="color: black"><b>Certificate of Completion</b></p> 
+            </div>
+        <div>
+     
+
+            <br>
+ 
+        <div class='details text-justify'>
+            <div class="content">This is to certify that <b>Mr./Ms </b><b>{{ mem.fullname }}</b> 
+                (REG.NO : <b>{{mem.reg_no}})</b> student of <b> {{mem.course}} ({{mem.stream}}) </b> from <b>{{mem.collegename}}</b>, 
+                has successfully completed his/her internship in <b>{{ mem.platform }}</b> in this organization, under 
+                the guidance of <b>{{mem.guide}}</b>. The duration of internship was from <b>{{ mem.start_date }}</b> to<b> 
+                    {{ mem.end_date }}</b>.<br><br>
+                  <p style="text-indent:2cm;"><b>Mr./Ms {{mem.fullname}}</b> has exibited professional behaviour during the period of internship.
+                  The contribution that he/she made to the organization during this tenture has been <b>{{mem.rating}}</b>.</p>
+                    <br>
+                    <br>
+                    
+                    
+                    <span><b>{{mem.hrmanager}}
+                    <br>
+                    HR Manager</b> <br>
+                    
+                    <div style="margin-left: 14cm;">
+                        <img src="{{ mem.qr }}" alt="..." height="150px"><br>
+                        &nbsp;&nbsp;(To verify)
+                    </div>
+                       
+                        
+                        
+             
+                      
+                
+                
+                
+                </span>
+                
+                      
+               
+                                
+                </div>
+        </div>
+    </div>
+    
+</span>       
+</div>
+    </div>
+    <script>
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+         document.getElementById("currentDate").value = date;
+    </script>
+        
+    </body>
+</html>

@@ -1,0 +1,162 @@
+{% extends 'BRadmin_index.html' %}
+{% block content %}
+  {% load static %}
+
+
+  <div class="row align-items-center">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Give Task</h4>
+          <p class="card-description"> </p>
+         
+           <form class="forms-sample" method="post" action="{% url 'BRadmin_givetask' %}" enctype="multipart/form-data">
+               {% csrf_token %}
+                   <div class="form-group">
+                            <label>Select Department</label>
+                            
+                             
+                     
+                        <select class="form-control" id="Department" style="color:white;" name="Department" required>
+                                 <option selected="true" disabled="disabled" value="">-Not Selected-</option>
+        {% for i in dept %}
+                                <option value="{{i.id}}">{{i.department}}</option>
+                               
+
+                                {% endfor %}
+                              </select>
+                          
+                          
+                          </div>
+
+            
+                   <div class="form-group">
+                            <label>Select Designation</label>
+                            
+                         
+                                     <select class="form-control" id="Desig" style="color:white;" name="designation">
+    <!-- <option selected="true" disabled="disabled" value="">Select an option</option> -->
+                              </select>
+                          
+                          </div>
+                   <div class="form-group">
+                            <label>Select Employee</label>
+                            
+                      
+                            <select class="form-control" style="color:white;" name="projectname" id="emp">
+        <!-- {% for i in emp %}
+                              <option value="{{i.fullname}}">{{i.fullname}}</option>
+                               
+
+                                {% endfor %}  -->
+                              </select>
+                          
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleTextarea1">Task</label>
+                            <textarea class="form-control" name="task" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                               </div>
+                               <div class="form-group">
+                                <label for="exampleTextarea1">Description</label>
+                                <textarea class="form-control" name="discrip" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                                   </div>
+                        <div class="form-group">
+                          <label for="exampleInputName1">StartDate</label>
+                          <input type="date" class="form-control txtDate" id="txtDate" name="start" required style="color: white;">                  
+                        </div>                                          
+                        <div class="form-group">                       
+                          <label for="exampleInputName1">End Date</label>
+                          <input type="date" class="form-control txtFrom" id="txtFrom" name="end" required style="color: white;">      
+                        </div>
+                      <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="img[]" class="file-upload-default" required style="color: white;">
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="select a file">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" style="height: 37px;">Upload</button>
+                          </span>
+                        </div>
+                      </div>
+                      
+      
+                      
+  <script>
+    $(function() {
+      var dtToday = new Date();
+      var month = dtToday.getMonth() + 1;
+      var day = dtToday.getDate();
+      var year = dtToday.getFullYear();
+      if (month < 10)
+          month = '0' + month.toString();
+      if (day < 10)
+          day = '0' + day.toString();
+      var minDate = year + '-' + month + '-' + day;
+      $('.txtDate').attr('min', minDate);
+    })
+  </script>
+<script>
+  $(function() {
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var minDate = year + '-' + month + '-' + day;
+    $('.txtFrom').attr('min', minDate);
+  })
+</script>
+
+            
+           
+            <div class="form-check form-check-flat form-check-primary">
+              
+            <button type="submit" class="btn btn-primary me-2">Assign</button>
+        
+          </form>
+        </div>
+      </div>
+    </div>
+   </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+        $("#Department").change(function () {
+          const url = $("#personForm").attr("data-cities-url");
+            const deptId = $(this).val();
+            $.ajax({
+                url: '{% url 'man_desi' %}',
+                data: {
+                    'dept_id': deptId
+                },
+                success: function (data) {
+                    $("#Desig").html(data);
+                    console.log(data);
+                }
+            });
+    
+        });
+        $("#Desig").change(function () {
+          const url = $("#personForm").attr("data-cities-url");
+            const deptId = $("#Department").val();
+            const desigId = $("#Desig").val();
+            $.ajax({
+                url: '{% url 'man_emp' %}',
+                data: {
+                    'dept_id': deptId  ,
+                    'desig_id': desigId
+                },
+                success: function (data) {
+                    $("#emp").html(data);
+                    console.log(data);
+                }
+            });
+          });
+       </script>
+
+
+
+
+  {% endblock %}

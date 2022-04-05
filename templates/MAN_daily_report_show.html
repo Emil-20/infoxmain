@@ -1,0 +1,129 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+  </head>
+  <body>
+    {% comment %} <div class="content-wrapper">     {% endcomment %}
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Daily Report</h3>
+              <div class="form-group">
+                <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+              <div class="table-responsive">
+                <table class="table"  id="myTable">
+                  <thead>
+                    <tr>
+                      <th> Date </th>
+                      <th> ReportBy </th>
+                      <th> Task </th>
+                      <th> SubTask </th>
+                      <th> Work Done </th>
+                      <th> Files </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in tester_status %}
+                      {% if i.user_id == project.user_id %}
+                    <tr>
+                      <td>{{i.date|date:"d-m-Y" }}</td>
+                      <td> {{i.user}} </td>
+                      <td>
+                       {{i.task.description}}
+                      </td>
+                      <td> {{i.subtask}} </td>
+                      <td> {{i.status}} </td>
+                      <td>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary" ><a href="{{i.files.url}}" style="color: white;" download="{{i.files.url}}">Download</a></button>
+                        </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- <tr>
+                      <td>
+                        14 Jan 2022
+                      </td>
+                      <td> Messsy Adam </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Dashboard </td>
+                      <td> On Progress </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        21 Jan 2022
+                      </td>
+                      <td> John Richards </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Reported Issues </td>
+                      <td> On Progress </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        30 Jan 2022
+                      </td>
+                      <td> Peter Meggik </td>
+                      <td>
+                        Manager Module
+                      </td>
+                      <td> Attendance </td>
+                      <td> Completed </td>
+                      <td>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </div>
+                        </td>
+                    </tr> -->
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </div> {% endcomment %}
+  </body>
+</html>
+{% endblock%}

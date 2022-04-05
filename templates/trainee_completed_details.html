@@ -1,0 +1,74 @@
+{% extends 'trainee_index.html' %} {% load static %} {% block content %}
+
+<div class="row pt-3" style="background-color: black;">
+    <div class="mt-2 ml-5 " style="font-size: 20px;font-weight: 600;margin-left:40px; color: #6c7293;"></div>
+</div>
+<div class="content-wrapper">
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card" style="color: #6c7293;">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="row pt-1">
+                            <div class="col-md-4">
+                                <div class=" mr-2 ml-3 mt-2" style="color:#6C7293;">Task</div>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100; color:#6C7293;">frontend</h4>
+                                <!-- <input type="text" class="drop form-control ml-3 mt-2" required> -->
+                            </div>
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-md-4">
+                                <div class=" mr-2 ml-3 mt-2" style="color:#6C7293;"> Due Date</div>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4 class="mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:#6C7293;">feb. 02 ,2022</h4>
+                                <!-- <input type="date" class="drop form-control ml-3 mt-2" required> -->
+                            </div>
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-md-4">
+                                <div class=" mr-2 ml-3 mt-2" style="color:#6C7293;"> Submit Date</div>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:#6C7293;">feb. 05 ,2022</h4>
+                                <!-- <input type="date" class="drop form-control ml-3 mt-2" required> -->
+                            </div>
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-md-4">
+                                <div class=" mr-2 ml-3 mt-2" style="color:#6C7293;">Description</div>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:#6C7293;">frontend designing</h4>
+                                <!-- <input type="text" class="drop form-control ml-3 mt-2" required> -->
+                            </div>
+                        </div>
+
+                        <div class="row pt-1">
+                            <div class="col-md-4">
+                                <div class=" mr-2 ml-3 mt-2" style="color:#6C7293;">Attached Files</div>
+                            </div>
+                            <div class="col-md-8 ">
+                                <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100; "><img src="{% static 'work report.jpg'%} " style="width: 60%;">
+                                    <!-- <input type="file"  class="form-control mt-2 " style="text-decoration:none;border:none;background-color: #191c24;" > 
+                     </div>
+                    </div>
+                    <div class=" row  mt-3 ">
+                      <div class="col-md-4"></div>
+                       <div class="col-md-4">
+                      </div>
+                       <div class="col-md-4"><button type="submit" id="alert2" class="btn btn-primary ml-5" >Assign</button></div> -->
+                                    <div>
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+            {% endblock %}

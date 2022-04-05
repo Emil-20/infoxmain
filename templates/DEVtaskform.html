@@ -1,0 +1,85 @@
+{%extends 'devindex.html'%}
+{%load static%}
+{%block content%}
+
+
+<div class="row pt-3" style="background-color: black;">
+  <div class="mt-1 ml-5 " style="font-size: 20px;font-weight: 600; color:#6C7293;">GIVE TASK</div>
+</div>
+
+<div class="row mt-1 ">
+
+  <div class="col-md-8 w-100">
+    <div class="card">
+      <div class="card-body">
+        {% for ta in task %}
+        <form action="{% url 'DEVtaskformsubmit' ta.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color: white;">Task</div>
+            </div>
+              
+            <div class="col-md-8 ">
+              <h4 class="mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:white;">{{ta.task}}</h4>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class="mr-2 ml-3 mt-2" style="color:white;">Submission Date </div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class="mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100; color: white;">{{time|date:"d-m-Y"}}</h4>
+              </select>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2 " style="color:white;">Due Date </div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class="mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:white;">{{ta.enddate|date:"d-m-Y"}}</h4>
+              </select>
+            </div>
+          </div>
+                        
+          {% endfor %}
+
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;">Screenshot</div>
+            </div>
+            <div class="col-md-8 ">
+              <input type="file" class="form-control mt-2 " multiple
+                style="text-decoration:none;border:none;background-color: #191c24;" name="scn">
+            </div>
+          </div>
+
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;">Description</div>
+
+            </div>
+            <div class="col-md-8 ">
+              <textarea class="form-control" style="color:#ffffff; width: 100%;height: 4cm;" name="description"
+                required></textarea>
+            </div>
+          </div>
+
+
+          <div class=" row  mt-3 ">
+
+            <div class="col-md-12">
+              <a style="float: right;"><button type="submit" class="btn btn-primary">Submit</button></a>
+            </div>
+            <div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

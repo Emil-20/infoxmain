@@ -1,0 +1,235 @@
+{% extends 'BRadmin_index.html'%}
+{% load static %}
+{% block content %}
+<style>
+    #myprofile {
+        margin-left: 3vh;
+        margin-top: 3vh;
+        font-size: 24px;
+        color: gray;
+    }
+
+    form {
+        margin-left: auto;
+        margin-right: auto;
+        /* min-width: 100px;
+        max-width: 550px;
+        width: 550px; */
+        margin-top: 5vh;
+    }
+
+    #form-label {
+        color: white
+    }
+
+    .btn-primary {
+        border-radius: 5px;
+        margin-top: 2vh;
+        height: 50px;
+        width: 200px;
+    }
+
+    .form-control {
+        color: white;
+
+    }
+
+
+    .ui-datepicker table {
+        width: 100%;
+        font-size: .9em;
+        border-collapse: collapse;
+        margin: 0 0 0.4em;
+        background-color: black;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #191c24;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .btn {
+            border:1px solid #636d87;
+            color: #636d87;
+        }
+</style>
+
+<label id="myprofile">Registration Update</label>
+<hr>
+<form action="{% url 'registrationupdatesave' mem.id %}" autocomplete="off" method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <label id="form-label">Name:</label>
+                <input type="text" class="form-control " name="name" autocomplete="off" value="{{mem.fullname}}"><br>
+                <label id="form-label">Email:</label>
+                <input type="text" class="form-control" name="email" autocomplete="off" value="{{mem.email}}"><br>
+                <label id="form-label">Mobile number:</label>
+                <input type="text" class="form-control" name="mobile" autocomplete="off" value="{{mem.mobile}}"><br>
+                <label id="form-label">Qualification:</label>
+                <input type="text" class="form-control" name="qualification" autocomplete="off" value="{{qem.ugdegree}}"><br>
+                <label id="form-label">Duration:</label>
+                <input type="text" class="form-control" name="duration" autocomplete="off" value="{{qem.ugpassoutyr}}"><br>
+                <label id="form-label">Platform:</label>
+                <input type="text" class="form-control" name="platform" autocomplete="off" value=""><br>
+                <label id="form-label">Date of Joining:</label>
+                <input type="text" class="form-control" name="dateofjoin" autocomplete="off" value="{{mem.joiningdate}}"><br>
+                <label id="form-label">Reference id:</label>
+                <input type="text" class="form-control" name="referenceid" autocomplete="off" value="{{mem.employee_id}}"><br>
+                <label id="form-label">Payment:</label>
+                <input type="text" class="form-control" name="payment" autocomplete="off" value=""><br>
+                <label id="form-label">Update condition:</label>
+                <input type="text" class="form-control" name="updatecondition" autocomplete="off" value=""><br>
+                <label id="form-label">Add condition no :</label>
+                <input type="text" class="form-control" name="addconditionno" autocomplete="off" value=""><br>
+                <label id="form-label">Certificate add Designation:</label>
+                <input type="text" class="form-control" name="certificateadddesignation" autocomplete="off" value=""><br>
+                <label id="form-label">Designation:</label>
+                <input type="text" class="form-control" name="designation" autocomplete="off" value="{{mem.designation}}"><br>
+                <label id="form-label">Trainer:</label>
+                <input type="text" class="form-control" name="trainer" autocomplete="off" value="{{mem.trainer}}"><br>
+                <label id="form-label">Hr:</label>
+                <input type="text" class="form-control" name="hr" autocomplete="off" value="{{mem.hrmanager}}"><br>
+                <label id="form-label">Manager Department:</label>
+                <input type="text" class="form-control" name="managerdepartment" autocomplete="off" value="{{mem.department}}"><br>
+
+
+                <label id="myprofile">View Details</label>
+                <hr>
+
+                <label id="form-label">Name:</label>
+                <input type="text" class="form-control" name="name1" autocomplete="off" value="{{mem.fullname}}"><br>
+                <label id="form-label">Email:</label>
+                <input type="text" class="form-control" name="email1" autocomplete="off" value="{{mem.email}}"><br>
+                <label id="form-label">Mobile number:</label>
+                <input type="text" class="form-control" name="mobile1" autocomplete="off" value="{{mem.mobile}}"><br>
+                <label id="form-label">Alternative number:</label>
+                <input type="text" class="form-control" name="altmobile1" autocomplete="off" value="{{mem.alternativeno}}"><br>
+                <label id="form-label">Father's name:</label>
+                <input type="text" class="form-control" name="fathersname" autocomplete="off" value="{{mem.fathername}}"><br>
+                <label id="form-label">Mother's name:</label>
+                <input type="text" class="form-control" name="mothersname" autocomplete="off" value="{{mem.mothername}}"><br>
+                <label id="form-label">Present Address:</label><br>
+                <input type="text" class="form-control" name="presentaddress1" autocomplete="off" value="{{mem.presentaddress1}}"><br>
+                <input type="text" class="form-control" name="presentaddress2" autocomplete="off" value="{{mem.presentaddress2}}"><br>
+                <input type="text" class="form-control" name="presentaddress3" autocomplete="off" value="{{mem.presentaddress3}}"><br>
+                <input type="text" class="form-control" name="pincode" autocomplete="off" value="{{mem.pincode}}"><br>
+                <input type="text" class="form-control" name="district" autocomplete="off" value="{{mem.district}}"><br>
+                <input type="text" class="form-control" name="state" autocomplete="off" value="{{mem.state}}"><br>
+                <label id="form-label">Permanent Address:</label><br>
+                <input type="text" class="form-control" name="permanentaddress1" autocomplete="off" value="{{mem.permanentaddress1}}"><br>
+                <input type="text" class="form-control" name="permanentaddress2" autocomplete="off" value="{{mem.permanentaddress2}}"><br>
+                <input type="text" class="form-control" name="permanentaddress3" autocomplete="off" value="{{mem.permanentaddress3}}"><br>
+                <input type="text" class="form-control" name="permanentpincode" autocomplete="off" value="{{mem.permanentpincode}}"><br>
+                <input type="text" class="form-control" name="permanentdistrict" autocomplete="off" value="{{mem.permanentdistrict}}"><br>
+                <input type="text" class="form-control" name="permanentstate" autocomplete="off" value="{{mem.permanentstate}}"><br>
+                <label id="myprofile">Academic Profile</label>
+                <hr>
+                <label id="myprofile" style="font-size: 15px;">Plus Two</label><br><br>
+                <label id="form-label">School:</label>
+                <input type="text" class="form-control" name="school" autocomplete="off" value="{{qem.school}}"><br>
+                <label id="form-label">Aggregate:</label>
+                <input type="text" class="form-control" name="aggregate" autocomplete="off" value="{{qem.schoolaggregate}}"><br>
+                <label id="form-label">Certificate upload :</label>&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;"
+                    href="">viewfile</a>
+                <br><br>
+                <label id="myprofile" style="font-size: 15px;">UG</label>
+                <br><br>
+                <label id="form-label">Degree:</label>
+                <input type="text" class="form-control" name="degree" autocomplete="off" value="{{qem.ugdegree}}"><br>
+                <label id="form-label">Stream:</label>
+                <input type="text" class="form-control" name="stream" autocomplete="off" value="{{qem.ugstream}}"><br>
+                <label id="form-label">Passout Year:</label>
+                <input type="text" class="form-control" name="passoutyear" autocomplete="off" value="{{qem.ugpassoutyr}}"><br>
+                <label id="form-label">Aggregate</label>
+                <input type="text" class="form-control" name="aggregate1" autocomplete="off" value="{{qem.ugaggregrate}}"><br>
+                <br><br>
+                <label id="myprofile" style="font-size: 15px;">PG</label>
+                <br><br>
+                <input type="text" class="form-control" name="pg" autocomplete="off" value="{{qem.pg}}"><br>
+                <label id="form-label">Certificate upload :</label>&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;"
+                    href="">viewfile</a>
+                <br><br>
+                <label id="myprofile">Extra Curricular</label>
+                <hr>
+                <label id="myprofile" style="font-size: 15px;">Internship</label><br><br>
+                <label id="form-label">Details:</label>
+                <input type="text" class="form-control" name="details" autocomplete="off" value="{{xem.internshipdetails}}"><br>
+                <label id="form-label">Duration:</label>
+                <input type="text" class="form-control" name="duration1" autocomplete="off" value="{{xem.internshipduration}}"><br>
+                <label id="form-label">Certification:</label>
+                <input type="text" class="form-control" name="certification" autocomplete="off" value="{{xem.internshipcertificate}}"><br>
+                <label id="myprofile" style="font-size: 15px;">Online Training</label><br><br>
+                <label id="form-label">Details:</label>
+                <input type="text" class="form-control" name="details1" autocomplete="off" value="{{xem.onlinetrainingdetails}}"><br>
+                <label id="form-label">Duration:</label>
+                <input type="text" class="form-control" name="duration2" autocomplete="off" value="{{xem.onlinetrainingduration}}"><br>
+                <label id="form-label">Certification:</label>
+                <input type="text" class="form-control" name="certification1" autocomplete="off" value="{{xem.onlinetrainingcertificate}}"><br>
+                <label id="myprofile" style="font-size: 15px;">Project Details</label><br><br>
+                <label id="form-label">Title:</label>
+                <input type="text" class="form-control" name="title" autocomplete="off" value="{{xem.projecttitle}}"><br>
+                <label id="form-label">Description:</label>
+                <input type="text" class="form-control" name="description" autocomplete="off" value="{{xem.projectdescription}}"><br>
+                <label id="form-label">URL:</label>
+                <input type="text" class="form-control" name="url" autocomplete="off" value="{{xem.projecturl}}"><br>
+                <label id="form-label">Duration:</label>
+                <input type="text" class="form-control" name="duration3" autocomplete="off" value="{{xem.projectduration}}"><br>
+                <label id="myprofile" style="font-size: 15px;">Skills</label><br><br>
+                <label id="form-label">Skill 1:</label>
+                <input type="text" class="form-control" name="skill1" autocomplete="off" value="{{xem.skill1}}"><br>
+                <label id="form-label">Skill 2:</label>
+                <input type="text" class="form-control" name="skill2" autocomplete="off" value="{{xem.skill2}}"><br>
+                <label id="form-label">Skill 3</label>
+                <input type="text" class="form-control" name="skill3" autocomplete="off" value="{{xem.skill3}}"><br>
+
+
+                <label id="myprofile">Photo & Signature for ID Card Generation</label>
+                <hr>
+
+                <label id="form-label">ID proof:</label>&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="">view
+                    files</a><br><br>
+                <input type="file"><br><br>
+
+
+                <label id="form-label">Photo:</label>&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" href="">view
+                    files</a><br><br>
+                <input type="file">
+                <br>
+                <label id="myprofile">Update Student</label>
+                <hr>
+
+                <label id="form-label">Date of Appoint:</label>
+                <input type="text" class="form-control" name="dateofappoint" autocomplete="off" value="{{mem.joiningdate}}"><br>
+                <label id="form-label">Starting Date:</label>
+                <input type="text" class="form-control" name="startdate" autocomplete="off" value="{{mem.startdate}}"><br>
+                <label id="form-label">Ending Date:</label>
+                <input type="text" class="form-control" name="enddate" autocomplete="off" value="{{mem.enddate}}"><br>
+                <label id="form-label">Hr:</label>
+                <input type="text" class="form-control" name="hr" autocomplete="off" value="{{mem.hr}}"><br>
+                <label id="form-label">Manager Department:</label>
+                <input type="text" class="form-control" name="managerdepartment1" autocomplete="off" value="{{mem.department}}"><br>
+                <label id="form-label">Performance:</label>
+                <input type="text" class="form-control" name="performance" autocomplete="off" value="{{mem.workperformance}}"><br>
+                <button type="submit" style="float: right;" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

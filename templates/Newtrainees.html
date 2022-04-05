@@ -1,0 +1,132 @@
+{%extends 'index_trainingmanager.html'%} {%load static%} {%block content%}
+
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New Trainees</h4>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <form>
+            <div class="input-group input-group-sm mb-3">
+              <input
+                type="text"
+                class="form-control text-white"
+                id="myInput"
+                onkeyup="myFunction()"
+                placeholder="Search . . ."
+                style="border: green"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Select Team</th>
+
+                <th>Department</th>
+                <th>Course</th>
+                <th>Allocate</th>
+              </tr>
+            </thead>
+            
+            
+              <tbody>
+                {%if memm%}
+                {%for memm in memm%}
+                <tr>
+                  <form method="post" action="/newtraineeesteam/?tid={{memm.id}}" enctype="multipart/form-data">
+                    {%csrf_token%}
+                  <td>
+                    <img src="{{memm.photo.url}}" alt="image" />
+                    <span class="ps-2">{{memm.fullname}}</span>
+                  </td>
+                  <td>{{memm.startdate}}</td>
+                  <td>{{memm.enddate}}</td>
+                  <td>
+                    
+                    <select
+                      class="badge badge-outline-primary bg-dark text-light"
+                      name="team"
+                    >
+                    {%for i in team%} 
+                    <option style="display: none">Teams</option>
+                      
+                      
+                     
+
+                      <option value="{{i.id}}">{{i.name}}</option>
+                      {%endfor%} 
+                    </select>
+                    
+                  </td>
+                  <td>
+                    <select
+                      class="badge badge-outline-primary bg-dark text-light"
+                      name="dept"
+                    ><option style="display: none">Department</option>
+                      {%for i in dept%}
+
+                      <option value="{{i.id}}">{{i.department}}</option>
+                      {%endfor%}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      class="badge badge-outline-primary bg-dark text-light"
+                      name="cou"
+                    ><option style="display: none">Course</option>
+                      {%for i in des%}
+
+                      <option value="{{i.id}}">{{i.name}}</option>
+                      {%endfor%}
+                    </select>
+                  </td>
+                  <td>
+                    <button
+                      type="submit"
+                      class="btn btn-outline-primary btn-icon-text"
+                    >
+                      <i class="mdi mdi-file-check btn-icon-prepend"></i>Submit
+                    </button>
+                  </td>
+                </form>
+                </tr>
+                {%endfor%}
+                {%else%}
+                <h5 style="text-align:center">Nothing to display!</h5>
+                {%endif%}
+              </tbody>
+            
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
+{%endblock%}

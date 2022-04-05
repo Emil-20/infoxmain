@@ -1,0 +1,33 @@
+{% extends 'marketing/exec_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_giveattendance.css' %}">
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body">
+            <div>
+            <label>Select From Date:</label>
+            <br>
+            <input type="date" name="" id="">
+            </div>
+            <br>
+
+            <div>
+            <label class="mt-5">Select To Date:</label>
+            <br>
+            <input type="date" name="" id="">
+            </div>
+
+
+            <div id="btndiv" class="mt-5 text-center"><br>
+            <button class="btn btn-secondary" onclick="location.href='/marketingapp/exec_showattendance'">View Attendance</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}    

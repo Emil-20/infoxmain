@@ -1,0 +1,92 @@
+{%extends 'trainer_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row mt-5">
+    <div class=" col-12 col-sm-3 col-md-3 col-lg-3"></div>
+    <div class=" col-12 col-sm-6 col-md-6 col-lg-6 grid-margin ">
+        <div class="card" style="height:auto">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>Trainees List</h4>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm ">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="text-white ">Name</th>
+                                <th class="text-white ">Join Date</th>
+                                <th class="text-white ">Start Date</th>
+                                <th class="text-white ">End Date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <br> {% if mem %}{% for t in mem %}
+                            <tr data-href="{% url 'trainer_previoustraineesdetails' t.id %}">
+                                <td>
+                                    <img src="{{t.photo.url}}" alt="image" />
+                                    <span class="ps-2">{{t.fullname}}</span>
+                                </td>
+                                <td> {{t.joiningdate|date:"d-m-Y"}}</td>
+                                <td> {{t.startdate|date:"d-m-Y" }}</td>
+                                <td> {{t.enddate|date:"d-m-Y"}}</td>
+
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    $(document).ready(function() {
+        $('table tr').click(function() {
+            window.location = $(this).data('href');
+            return false;
+        });
+    });
+</script>
+
+
+
+{%endblock%}

@@ -1,0 +1,114 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+  </head>
+  <body>
+    {% comment %} <div class="content-wrapper">     {% endcomment %}
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Team Leaders</h3>
+              <div class="form-group">
+                <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+              <div class="table-responsive">
+                <table class="table"  id="myTable">
+                  <thead>
+                    <tr>
+                     
+                      <th> Name </th>
+                      <th> Employee ID </th>
+                      <th> Mail </th>
+                      <th> Contact </th>
+                      
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                       {% for i in user_det %}
+                   
+                    <tr data-href="{% url 'MAN_developers' i.id  %}">
+                        
+                        <td> {{i.fullname}}</td>
+                        <td> {{i.employee_id}} </td>
+                        <td> {{i.email}}</td>
+                        <td> {{i.mobile}} </td>
+                      </tr>
+                    
+                   
+                {% endfor %}
+                    <!-- <tr onclick="window.location='/base_app/MAN_developers' ">
+                      <td>
+                       2
+                      </td>
+                      <td> Messsy Adam  i.project.id == proj_det.id and </td>
+                      <td> 12345 </td>
+                      <td> messyadam@gmail.com </td>
+                      <td> 9072563276 </td>
+                      
+                    </tr>
+                    <tr onclick="window.location='/base_app/MAN_developers' ">
+                      <td>
+                       3
+                      </td>
+                      <td> John Richards </td>
+                      <td> 12345 </td>
+                      <td> johnrichards@gmail.com </td>
+                      <td> 9072563276 </td>
+                      
+                    </tr>
+                    <tr onclick="window.location='/base_app/MAN_developers' ">
+                      <td>
+                        4
+                      </td>
+                      <td> Peter Meggik </td>
+                      <td> 12345 </td>
+                      <td> petermeggik@gmail.com </td>
+                      <td> 9072563276 </td>
+                      
+                    </tr> -->
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </div> {% endcomment %}
+  </body>
+</html>
+<script>
+  $(document).ready(function() {
+      $('table tr').click(function() {
+          window.location = $(this).data('href');
+          return false;
+      });
+  });
+</script>
+{% endblock%}

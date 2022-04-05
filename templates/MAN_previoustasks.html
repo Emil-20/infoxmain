@@ -1,0 +1,68 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- <div class="content-wrapper">   -->
+      <!-- <h4 class="card-title">HR</h4>   -->
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Previous Tasks</h4>  
+              <div class="form-group">
+                <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+              <div class="table-responsive">
+                <table class="table">
+                
+                  <thead>
+                    <tr>
+                      <th> Task name </th>
+                      <th> Start Date </th>
+                      <th> End Date </th>
+                      <th> Response </th>
+                      <th> Status </th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">
+                    {% for pa in names %}  
+                    {% if forloop.first %} {% endif %}
+                    {% if pa.status == "Completed" %}
+                    <tr>
+                      <td>{{ pa.tasks }}</td>
+                      <td>{{ pa.startdate|date:'d-m-Y' }}</td>
+                      <td>{{ pa.enddate|date:'d-m-Y' }}</td>
+                      <td>{{ pa.description }}</td>
+                      <td><div class="badge badge-outline-success">{{ pa.status }}</div></td>
+                      
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+{% endblock%}

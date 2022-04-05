@@ -1,0 +1,31 @@
+{% extends 'marketing/marketingTL_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_cardlist.css' %}">
+
+<div class="container desktopcont">
+
+    <a href="{% url 'marketingTL_viewissue' %}">
+        <div class="card">
+            <div class="card-body">
+                <p class="pp"><span id="s1">Issue: test</span> <span id="s2">Reported on: </span></p>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="container mobcont">
+
+    <a href="{% url 'marketingTL_viewissue' %}">
+        <div class="card">
+            <div class="card-body">
+                <p class="pp">Issue: test</p>
+                <p class="pp mt-4 mt-lg-0">Reported on: </p>
+
+            </div>
+        </div>
+    </a>        
+</div>
+{% endblock %}    

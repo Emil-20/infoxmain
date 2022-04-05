@@ -1,0 +1,213 @@
+{% extends 'MAN_index.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+    .table1 {
+        margin-left: auto;
+        margin-right: auto;
+       
+    }
+
+    th,
+    td {
+        text-align: center;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #191c24;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .card-title{
+        font-size: 20px;
+        font-weight: 900px;
+    }
+</style>
+
+<div class="row">
+    <div class=" col-12 grid-margin table1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Registration Details (Resigned)</h4>
+                <input type="text" class="form-control text-light" onkeyup="myFunction()" id="search" name="search" autocomplete="off"
+                    placeholder="Search...">
+                <br>
+                <div class="table-responsive">
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <!-- <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input">
+                                        </label>
+                                    </div>
+                                </th> -->
+                                <th> Sl.No </th>
+                                <th> Name </th>
+                                <th> Email </th>
+                                
+                                <th>Department</th>
+                                <th> Designation </th>
+                               
+                                <th> Trainer </th>
+                                <th> Date of Appointment </th>
+                                <th> Employee Id </th>
+                                <th> Payment </th>
+                                <th> Balance Payment </th>
+                               
+                                <th> Offer Letter </th>
+                                <th> Experience Certificate </th>
+                                <th> Relieve letter</th>
+                                <th> Authorization letter</th>
+                                
+                                    <th> Delete </th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                           
+                           {% for i in mem1  %}
+                               
+   
+                               
+                            <tr>
+                             <form method="post" action='' enctype="multipart/form-data">
+                                 {%csrf_token%}
+                                 <input type="hidden" name="id" value="{{i.id}}">
+                                <td>
+                                   {{forloop.counter}}
+                                </td>
+                                <td style="text-align:left;">
+                                    <img src="{{i.photo.url}}" alt="image" />
+                                    <span class="ps-2">{{i.fullname}}</span>
+                                </td>
+                                <td style="text-align:left;"> {{i.email}} </td>
+                                <td>{{i.department}}</td>
+                                <td>{{i.designation}}</td>
+                               
+                                <td> {{i.trainer}} </td>
+                                <td> {{i.joiningdate|date:"d-m-Y"}}</td>
+                                <td> {{i.employee_id}}</td>
+                        
+                                <td> </td>
+                                <td> </td>
+                               
+                                <td> <a href="{% url 'pdfof' i.id %}"> 
+                                    <div class="badge badge-outline-success">Download</div></a>
+                                  </td>
+                                 
+                                <td> <a href="{% url 'pdfex' i.id %}">  
+                                    <div class="badge badge-outline-success">Download</div></a>
+                                   </td>
+                                   <td> <a href="{% url 'pdfre' i.id %}">  
+                                    <div class="badge badge-outline-success">Download</div></a>
+                                   </td>
+                                    <td> <a href="{% url 'pdfau' i.id %}">  
+                                    <div class="badge badge-outline-success">Download</div></a>
+                                   </td>
+                                   <td> <a id="alert2"  href="{% url 'registrationdelete' i.id %}"> 
+                                    <div class="badge badge-outline-danger">Delete</div></a>
+                                  
+                                </td>
+                                </form>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+   
+    function popup() {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger',
+
+
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
+    }
+
+
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+
+
+</script>
+{% endblock %}

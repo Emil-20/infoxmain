@@ -1,0 +1,146 @@
+{% extends 'devindex.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    #firstbox{
+      background-color: white;
+      height: 175px;
+      float: right;
+      width: 79%;
+    }
+    #firstbox div{
+      padding-left: 5%;
+      float: left;
+    }
+    #adname{
+      padding-top: 14px;
+      color: #58B7AA;
+      font-weight: 600;
+      max-width: 300px;
+    }
+    #bigimage{
+      float: right;
+      margin-right: 10%;
+    }
+    #smallbox{
+      background-color: white;
+      width: 250px;
+      border-radius: 15px;
+      display: inline-flex;
+      float: right;
+      margin-right: 38%;
+      margin-left: 0%;
+      margin-top: 1%;
+    
+    }
+    #smallbox h1{
+      margin-left: 15%;
+    }
+    #smallbox span{
+      color: #475151;
+    }
+    #smallbox1{
+      background-color: white;
+      width: 250px;
+      border-radius: 15px;
+      display: inline-flex;
+      float: right;
+      margin-right: 58%;
+      margin-left: 1%;
+      margin-top: -12.5%;
+    }
+    #smallbox h1{
+    
+      margin-right: 80px;
+      float: right;
+      font-weight: 300;
+      margin-left: 35px;
+      margin-top: -3%;
+      color: #000000;
+    
+    }
+    #smallbox1 span{
+      color: #475151;
+    }
+    #boxes{
+      max-width: 75%;
+      float: right;
+      margin-right: -8%;
+      margin-top: 4.5%;
+    }
+    #boxe h5{
+      margin-right:41%;
+      float: right;
+      font-weight: 300;
+      margin-left: 30px;
+      margin-top: -2%;
+      color: #000000;
+      opacity: 0.55;
+    
+    }
+    #boxe1 h5{
+      margin-right: 160px;
+      float: right;
+      font-weight: 300;
+      margin-left: 35px;
+      margin-top: -2%;
+      color: #000000;
+      opacity: 0.55;
+    }
+    h5{
+      opacity: 0.55;
+      color:#000000;
+    }
+    
+      </style>
+          </head>
+    <body>
+    <!-- <div  id="nav" class="container-fluid">
+            <a class="one" id="infox"><b>iNFOX</b></a>
+            <a class="two" id="core"><b>Core</b></a>
+            <a class="three" id=""></a>
+              {% for t in mem %}
+        {% if forloop.first %}{% endif %}
+            <span class="four">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="{{ t.employeeimage.url }}" class="rounded-circle"  width="50" height="50" id="img2"></span><a href="logout" style="padding-right: 1%;padding-top: 1%;color: white">LOGOUT</a>
+    {% endfor %}
+    </div>
+    
+    
+    <div class="sidenav">
+      <a href="dr" class="col" id="sidebox1">MY PROFILE</a>
+      <a href="drtopics" class="col" id="sidebox1">TOPICS</a>
+      <a href="drweeklytask" class="col" id="sidebox1">WEEKLY TASKS</a>
+      <a href="drprojects" class="col" id="sidebox1">PROJECTS</a>
+      <a href="drattendance" class="col" id="sidebox1">ATTENDANCE</a>
+      <a href="drreportissues" class="col" id="sidebox1">REPORTED ISSUES</a>
+      <a href="drpayments" class="col" id="sidebox1">PAYMENTS</a>
+      <a href="drapplyleave" class="col" id="sidebox1">APPLY LEAVE</a>
+    </div>
+    <div><label id="myprofile">APPLY LEAVE</label>
+    
+    <div id="row">
+    <li id="smallbox" class="col shadow p-3 mb-5 bg-white"><a href="drleavereq">
+      <h5>
+        Requested leaves
+      </h5>
+      <div>
+       <img class="row-sm" src="{% static 'Group7.png' %}" width="100" height="78" style="margin-left: 110px">
+       </div></a>
+    
+    </li>
+    <li id="smallbox1" class="col shadow p-3 mb-5 bg-white"><a href="drapplyleave2">
+      <h5 >
+        Apply leave
+      </h5>
+      <div>
+       <img class="row-sm" src="{% static 'Group6.png' %}" width="100" height="80" style="margin-left: 110px">
+       </div></a>
+    
+    </li>
+    </div>
+    </div> -->
+   
+    </body>
+    {% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'devindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  #h2{
+    color:#6C7293;
+  }
+  h2{
+    color: white;
+  }
+</style>
+<h2 id="h2">Leave</h2>
+  <div class="row " style="padding-top:20px;">
+    
+    <div class="col-sm-4 grid-margin">
+      <div class="card" style="max-height: 250px">
+      <a href="current" style="text-decoration: none;">
+        <div class="card-body">
+          <a href="{% url 'Devapplyleav1' %}" style="text-decoration: none">
+                
+         <div class="row" style="padding-top:10px;">
+            <div class="col-12 col-sm-12 col-lg-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style= "color:white;">Apply Leave</h4>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-archive text-primary ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <div class="col-sm-4 grid-margin">
+      <div class="card" style="max-height: 250px">
+        <a href="{% url 'Devleaverequiest' %}" style="text-decoration: none">
+                
+        <div class="card-body">
+       <div class="row" style="padding-top:10px;">
+            <div class="col-12 col-sm-12 col-lg-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0" style= "color:white;">Requested leave</h4>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-arrange-send-to-back text-primary ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+{% endblock %}

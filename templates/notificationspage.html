@@ -1,0 +1,30 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+<!-- not verified and verified -->
+<div class="row" style="margin-top: 90px;">
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card pt-3">
+      <a href="notverified" style="text-decoration: none">
+        <div class="card-body">
+          <h4 class="card-title text-center text-danger" style="font-size: 25px">
+            Not Verified
+          </h4>
+          <canvas id="transaction-history" class="transaction-chart"></canvas>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-6 grid-margin stretch-card">
+    <div class="card pt-3">
+      <a href="verified" style="text-decoration: none">
+        <div class="card-body">
+          <h4 class="card-title text-center text-success" style="font-size: 25px">
+            Verified
+          </h4>
+          <canvas id="transaction-history1" class="transaction-chart"></canvas>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- end here -->
+{%endblock%}

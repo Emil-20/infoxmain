@@ -1,0 +1,152 @@
+{%extends 'index.html'%}
+{% load static %} {% block content %}
+
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Attendance List</h3>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <form>
+              <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+            title="Type in a name" style="color:white;">
+
+                
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table " id="myTable">
+            <thead>
+              <tr data-href="#">
+                <th>Date</th>
+                <th>Login Time</th>
+                <th>Logout Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-href="#">
+                <td>04 Dec 2019</td>
+                <td>11:30:05 AM</td>
+                <td>12:30:05 AM</td>
+
+                <td>
+                  <div class="badge badge-outline-success">Present</div>
+                </td>
+              </tr>
+
+              <tr data-href="#">
+                <td>04 Dec 2019</td>
+                <td>---</td>
+                <td>---</td>
+
+                <td>
+                  <div class="badge badge-outline-danger">Absent</div>
+                </td>
+              </tr>
+              
+
+              <tr data-href="#">
+                <td>15 Dec 2019</td>
+                <td>11:30:05 AM</td>
+                <td>12:30:05 AM</td>
+
+                <td>
+                  <div class="badge badge-outline-success">Present</div>
+                </td>
+              </tr>
+
+              <tr data-href="#">
+                <td>04 Dec 2019</td>
+                <td>---</td>
+                <td>---</td>
+
+                <td>
+                  <div class="badge badge-outline-danger">Absent</div>
+                </td>
+              </tr>
+              
+              <tr data-href="#">
+                <td>16 Dec 2019</td>
+                <td>11:30:05 AM</td>
+                <td>12:30:05 AM</td>
+
+                <td>
+                  <div class="badge badge-outline-success">Present</div>
+                </td>
+              </tr>
+
+              <tr data-href="#">
+                <td>04 Dec 2019</td>
+                <td>---</td>
+                <td>---</td>
+
+                <td>
+                  <div class="badge badge-outline-danger">Absent</div>
+                </td>
+              </tr>
+              
+
+              <tr data-href="#">
+                <td>04 Dec 2019</td>
+                <td>11:30:05 AM</td>
+                <td>12:30:05 AM</td>
+
+                <td>
+                  <div class="badge badge-outline-success">Present</div>
+                </td>
+              </tr>
+
+              <tr data-href="#">
+                <td>04 Dec 2019</td>
+                <td>---</td>
+                <td>---</td>
+
+                <td>
+                  <div class="badge badge-outline-danger">Absent</div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+    
+    
+  $(document).ready(function(){
+    $('table tr').click(function(){
+        window.location = $(this).data('href');
+        return false;
+    });
+});
+</script>
+
+{%endblock%}

@@ -1,0 +1,199 @@
+{%extends 'MAN_index.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+    #choose::file-selector-button {
+        background-color: rgb(37, 125, 207);
+        
+        
+    }
+</style>
+
+
+{% for user in mem  %}
+
+<div class="row">
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
+  <div class="card mt-3 mb-5">
+    <div class="card-body">
+      <form class="form-sample">
+        <div class="row">
+          <div class="col-8 col-sm-8 col-md-10 col-lg-10 mt-3">
+            <h4 class="card-description"> Personal Information </h4>
+          </div>
+          <div class="col-4 col-sm-4 col-md-2 col-lg-2">
+            <img src="{{user.photo.url}}" id="image" class="img-fluid rounded-circle mb-3 " alt="image" style="margin-right:20px;height:100px; width:100px;"
+            data-toggle="modal" data-target="#myModal{{user.id}}">
+          </div>
+        </div>
+        <p class="card-description"> Personal details </p>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Full Name:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.fullname}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Gender:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.gender}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Date of Birth:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.dateofbirth}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Category:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.designation.designation}}</p>
+              </div>
+            </div>
+          </div>
+          {% comment %} <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Trainer Name</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                <p class="mt-2">{{puserro.trainer}}</p>
+              </div>
+            </div>
+          </div> {% endcomment %}
+          
+          <br><br><br><br>
+          <p class="card-description"> Address</p>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Address1:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.useresentaddress1}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">State:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.state}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Address2:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.useresentaddress2}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Postcode:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.pincode}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">City:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.district}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group row">
+              <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Country:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <p class="mt-2">{{user.country}}</p>
+              </div>
+            </div>
+          </div>
+          
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  
+{% endfor %}
+  
+{% for user in mem  %}
+
+<form method="post" action="{% url 'MAN_accsettingimagechange' user.id %}" enctype="multipart/form-data">
+  {% csrf_token %}
+<div class="modal" id="myModal{{user.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">userofile picture</h4>
+                <button type="button" style="color: white;" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+         
+            <!-- Modal body -->
+            <div class="modal-body">
+            
+                <div class="card" style="height:auto;">
+                    <div class="card-body">
+                        <p> A picture helps people recognize you and lets you know when you’re signed in to your account </p>
+                        <hr>
+
+                        <div class="row pt-4">
+                            <div class="col-3 col-sm-4 col-md-4 col-lg-4 "></div>
+                                <div class="col-9 col-sm-8 col-md-8 col-lg-8">
+                                    <img src="{{user.photo.url}}" id="image" class="img-fluid rounded-circle mb-3 " alt="image" style="height:120px; width:120px; " >
+                                </div>
+                                                    
+                        </div>   
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer justify-content-between">
+                {% comment %} <div class="row">
+                <div class="col-lg-5"> {% endcomment %}
+
+                    <button type="submit"  class="btn btn-outline-userimary btn-icon-text"  style="width:220px;overflow:hidden ">
+                    <input type="file" id="choose" name="filename" ></button>
+
+                    <button type="submit"  class="btn btn-outline-success btn-icon-text" style="width:190px; ">
+                    <i class="mdi  mdi-reload text-success " style="font-size:18px; "></i>Update</button>
+                
+            
+            </div>
+            
+        </div>
+    </div>
+</div>
+</form>
+  
+{% endfor %}
+  
+
+
+<!-- modal end -->
+
+
+
+{%endblock%}

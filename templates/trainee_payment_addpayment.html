@@ -1,0 +1,82 @@
+{%extends 'trainee_index.html'%} {% load static %} {% block content %} {% comment %}
+<style>
+    select {
+        width: 100px;
+        text-overflow: auto;
+    }
+</style> {% endcomment %}
+
+<div class="row" style="padding-top:20px;">
+    <div class="col-12 col-sm-2 col-md-2 col-lg-2"></div>
+
+
+
+
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body" style="height:auto;padding-top:20px; ">
+                <br>
+                <center>
+                    <h3 class="card-title">Add payment</h3>
+                </center>
+                <br><br>
+
+                <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+                      {% csrf_token  %}
+                    
+
+                    <div class="form-group row">
+                        <label for="amount" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Amount</label>
+                        <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                            <input type="text" id="amount" name="amount" class="form-control text-light" id="amount" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="exampleInputdate" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Payment Date</label>
+                        <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                            <input type="date" id="txtDate" name="paymentdate" class="form-control text-light" id="exampleInputdate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-5">
+                        <label for="exampleInputConfirmPassword2" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Attach File</label>
+                        <div class="col-9 col-sm-8 col-md-8 col-lg-8">
+                          <input type="file" class="form-control text-light" name="files" id="choose">
+                        </div>
+                    </div><br><br>
+                   
+
+
+                    <div class="row mb-5">
+                        <center>
+                            <button type="Submit" class="btn btn-outline-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend"></i>
+                 Submit </button>
+                        </center>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<script>
+   var dtToday = new Date();
+   var month = dtToday.getMonth() + 1;
+   var day = dtToday.getDate();
+   var year = dtToday.getFullYear();
+   if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    document.getElementById("txtDate").setAttribute("max", maxDate);
+    document.getElementById("txtDate1").setAttribute("max", maxDate);
+    
+   
+
+</script>
+
+{%endblock%}

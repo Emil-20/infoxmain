@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    {% comment %} <div class="content-wrapper">     {% endcomment %}
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Project Managers</h3>
+              <div class="form-group">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+                 <div class="table-responsive">
+                  <table class="table" id="myTable">
+                    <thead>
+                      <tr>
+                        <th> # </th>
+                        <th> Name </th>
+                        <th> Employee ID </th>
+                        <th> Mail </th>
+                        <th> Contact Number </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> 1 </td>
+                        <td> Herman Beck </td>
+                        <td> 1234 </td>
+                        <td> herman@gmail.com </td>
+                        <td> 9072563276 </td>
+                      </tr>
+                      <tr>
+                        <td> 2 </td>
+                        <td> Messsy Adam </td>
+                        <td> 5678 </td>
+                        <td> messyadam@gmail.com </td>
+                        <td> 9072563276 </td>
+                      </tr>
+                      <tr>
+                        <td> 3 </td>
+                        <td> John Richards </td>
+                        <td> 8734 </td>
+                        <td> johnrichards@gmail.com </td>
+                        <td> 9072563276 </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </div> {% endcomment %}
+  </body>
+</html>
+
+
+{% endblock%}

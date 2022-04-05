@@ -1,0 +1,222 @@
+{%extends 'trainer_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+    
+    .class_Above85 {
+        background-color: rgb(45, 156, 1)
+    }
+    
+    .class_Above75 {
+        background-color: rgb(45, 156, 1)
+    }
+    
+    .class_Above65 {
+        background-color: #f1b614;
+    }
+    
+    .class_Above45 {
+        background-color: #f1b614;
+    }
+    
+    .class_Above35 {
+        background-color: #f21111;
+    }
+    
+    .class_Above25 {
+        background-color: #f21111;
+    }
+    
+    .class_Above10 {
+        background-color: #f21111;
+    }
+</style>
+
+<div class="row mt-5">
+    <div class="col-12 col-sm-2 col-md-2 col-lg-2 "></div>
+    <div class=" col-12 col-sm-8 col-md-8 col-lg-8 grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height:auto">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>Current Team List</h4>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm ">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="text-white ">SNo</th>
+                                <th class="text-white">Teams</th>
+                                
+                                <th class="text-white">Progress </th>
+                                <th class="text-white">Performance </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <br>{% if tm %} {% for i in tm %}
+
+                            <tr>
+                                <td>
+                                    <a href="{% url 'trainer_currenttrainees' i.id %}" style="text-decoration:none; color: #6C7293"> {{ forloop.counter }} </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'trainer_currenttrainees' i.id %}" style="text-decoration:none; color: #6C7293"> {{i.name}}  </a>
+                                </td>
+                                
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar " role="progressbar" style="width: {{i.progress}}% " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{i.progress}}% </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {% if i.progress == 100 %}
+                                    <button type="button" disabled class="btn btn-outline-primary btn-icon-text" data-toggle="modal" data-target="#myModal{{i.id}}">                        
+                                            Progress
+                                    </button> {% else %}
+                                    <button type="button" class="btn btn-outline-primary btn-icon-text" data-toggle="modal" data-target="#myModal{{i.id}}">                        
+                                            Progress
+                                    </button>
+                                </td>
+
+                            </tr>
+                            {% endif %} {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal -->
+{% for i in tm %}
+<div class="modal" id="myModal{{i.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Progress</h4>
+                <button type="button" style="color: white;" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form method="post" action="/attenperform?id={{i.id}}">
+                {% csrf_token %}
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="card" style="height:auto;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8 col-sm-8 col-md-8 col-lg-8 mt-3">
+
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-9 col-sm-6 col-md-6 col-lg-6 col-form-label">Performance </label>
+                                                <div class="col-3 col-sm-6 col-md-6 col-lg-6">
+                                                    <select name="sele" class="badge badge-outline-primary bg-dark " onfocus='this.size=5;' style="color:#bfbfbf; width:80px;" onblur='this.size=1;' onchange='this.size=1; this.blur();' >
+                                                <option style="display: none;" >0 - 10</option>
+                                                <option value="0">0</option>
+                                                <option value="10">1</option>
+                                                <option value="20">2</option>
+                                                <option value="30">3</option>
+                                                <option value="40">4</option>
+                                                <option value="50">5</option>
+                                                <option value="60">6</option>
+                                                <option value="70">7</option>
+                                                <option value="80">8</option>
+                                                <option value="90">9</option>
+                                                <option value="100">10</option>
+                                        </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                <i class="mdi mdi-file-check text-info" style="font-size:18px; "></i>Submit</button>
+            </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- modal end -->
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+    progressBar = document.querySelectorAll('.progress-bar');
+    progressBar.forEach(function(onebyone) {
+        console.log(onebyone.style.width)
+
+        if (onebyone.style.width == '100%') {
+            onebyone.classList.add('class_Above85');
+        } else if (onebyone.style.width >= '85%' && onebyone.style.width <= '99%') {
+            onebyone.classList.add('class_Above85');
+        } else if (onebyone.style.width >= '75%' && onebyone.style.width <= '84%') {
+            onebyone.classList.add('class_Above75');
+        } else if (onebyone.style.width >= '65%' && onebyone.style.width <= '74%') {
+            onebyone.classList.add('class_Above65');
+        } else if (onebyone.style.width >= '45%' && onebyone.style.width <= '64%') {
+            onebyone.classList.add('class_Above45');
+        } else if (onebyone.style.width >= '35%' && onebyone.style.width <= '44%') {
+            onebyone.classList.add('class_Above35');
+        } else if (onebyone.style.width >= '25%' && onebyone.style.width <= '34%') {
+            onebyone.classList.add('class_Above25');
+        } else if (onebyone.style.width <= '24%' && onebyone.style.width >= '0%') {
+            onebyone.classList.add('class_Above10');
+        }
+
+    })
+</script>
+
+
+
+{%endblock%}

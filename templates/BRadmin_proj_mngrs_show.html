@@ -1,0 +1,130 @@
+{% extends 'BRadmin_index.html' %}
+{% load static %}
+{% block content %}
+<style>
+  
+  /* {% comment %} @media(max-width:61.938em) {
+    .row h3{
+      font-size: 17px;
+    }
+  }
+  @media(max-width:1023px) {
+    .row h3{
+      font-size: 20px;
+    }
+  }
+  @media(max-width:460px) {
+    .row h3{
+      font-size: 15px;
+    }
+  } {% endcomment %} */
+</style>
+<div class="row" style="margin: 30px;">
+  <h3 class="text-muted">Project Team</h3>
+</div>
+{% comment %} <div class="row" style="margin: 30px;">
+  <h2 class="text-muted">Projects</h2>
+</div>
+<div class="row"> 
+  <div class="col-sm-6 grid-margin">
+    <div class="card">
+      <a href="BRadmin_proj_list" style="text-decoration: none; color: #f8f9fa;">
+      <div class="card-body">
+        <!-- <h5>Revenue</h5> -->
+        <div class="row">
+          <div class="col-10 col-sm-12 col-xl-8 my-auto">
+            <div class="d-flex d-sm-block d-md-flex align-items-center">
+              
+            <h4 class="mb-0">Current Projects</h4>
+          
+              
+              <p class="text-success ms-2 mb-0 font-weight-medium">350+</p>
+            </div>
+            <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+          </div>
+          <div class="col-4 col-sm-6 col-xl-4 text-center text-xl-right">
+            <i class="icon-lg mdi mdi-library-plus text-primary ms-auto"></i>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div> {% endcomment %}
+  {% comment %} <div class="col-sm-6 grid-margin">
+    <a href="/app/BRadmin_proj_cmpltd" style="text-decoration: none; color: #f8f9fa;">
+    <div class="card">
+      
+      <div class="card-body">
+        <!-- <h5>Sales</h5> -->
+        <div class="row">
+          <div class="col-8 col-sm-12 col-xl-8 my-auto">
+            <div class="d-flex d-sm-block d-md-flex align-items-center">
+              
+            <h4 class="mb-0">Completed Projects</h4>
+          
+              <!-- <h2 class="mb-0">attendance</h2> -->
+              
+              <p class="text-success ms-2 mb-0 font-weight-medium">2500+</p>
+              
+            </div>
+            <!-- <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6> -->
+          </div>
+          <div class="col-4 col-sm-6 col-xl-4 text-center text-xl-right">
+            <i class="icon-lg mdi mdi-book-multiple text-primary ms-auto"></i>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div> {% endcomment %}
+  
+  
+    <div class="row " style="margin-top: 20px;">
+      <div class="col-sm-6 grid-margin">
+        <div class="card">
+          <a href="{% url 'BRadmin_proj_mangrs1_new' project.id %}" style="text-decoration: none; color: white;">
+            <div class="card-body">
+              {% comment %} <h5>Project Managers</h5> {% endcomment %}
+              <div class="row">
+                <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                  <div class="d-flex d-sm-block d-md-flex align-items-center">
+                    <h4 class="mb-0">Project Managers</h4>
+                    <!-- <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p> -->
+                  </div>
+                  <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+                </div>
+                <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                  <i class="icon-lg mdi mdi-account-group text-primary ms-auto"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6 grid-margin">
+        <div class="card">
+          <a href="{% url 'BRadmin_proj_mangrs2_new' project.id %}" style="text-decoration: none; color: white;">
+          <div class="card-body">
+            {% comment %} <h5>Completed Projects</h5> {% endcomment %}
+            <div class="row">
+              <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                <div class="d-flex d-sm-block d-md-flex align-items-center">
+                  <h4 class="mb-0">Team Leaders</h4>
+                  <!-- <p class="text-success ms-2 mb-0 font-weight-medium">+8.3%</p> -->
+                </div>
+                <!-- <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6> -->
+              </div>
+              <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                <i class="icon-lg mdi mdi-account-group text-danger ms-auto"></i>
+              </div>
+            </div>
+          </div></a>
+        </div>
+      </div>
+      
+    </div>
+
+
+  
+    
+{% endblock %}

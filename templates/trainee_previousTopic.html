@@ -1,0 +1,118 @@
+{%extends 'trainee_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row" style="padding-top: 20px;">
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height:auto;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                    <h3 class="page-title ">Topic List</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        
+                        <thead>
+                            <tr>
+                                <th class="text-white " style="padding-left:26px;">SNo</th>
+                                <th class="text-white">
+                                    Topics
+                                </th>
+                                <th class="text-white">
+                                    Start Date
+                                </th>
+                                <th class="text-white">
+                                    Status
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if mem %} {% for t in mem %}
+                           
+                            <tr>
+                                <td style="padding-left:40px;">
+                                    {{forloop.counter}}
+                                </td>
+                                <td>
+                                    {{t.topic}}
+                                </td>
+                                <td>
+                                    {{t.startdate|date:"d-m-Y"}}
+                                </td>
+                                <td>
+
+                                    <button type="submit" class="badge badge-outline-primary" data-toggle="modal" data-target="#myModal{{t.id}}" style="background-color: #191c24;">
+                                        Review</button>
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% for t in mem %}
+<!-- Modal -->
+<div class="modal" id="myModal{{t.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Review</h4>
+                <button type="button" style="color: white;" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card">
+                    {{t.review}}
+                </p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- modal end -->
+{% endfor %}
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

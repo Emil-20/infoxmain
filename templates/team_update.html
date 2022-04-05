@@ -1,0 +1,55 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card" style="height: 320px">
+        <div class="card-body">
+          <div class="dropdown">
+            <label style="font-size: large; margin-top: 50px">Select Trainer</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-outline-primary dropdown-toggle pt-2"type="button"id="dropdownMenuIconButton2"data-bs-toggle="dropdown"
+            aria-haspopup="true"aria-expanded="false">
+              <i class="mdi mdi-account-multiple-plus p-2"style="font-size: larger"></i>
+            </button>
+            <div class="dropdown-menu"aria-labelledby="dropdownMenuIconButton2">
+              <h6 class="dropdown-header">Trainers</h6>
+              <a class="dropdown-item" href="#">trainer1</a>
+              <a class="dropdown-item" href="#">trainer2</a>
+              <a class="dropdown-item" href="#">trainer3</a>
+            </div>
+          </div>
+          <br />
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Team Name</label>
+            <div class="col-sm-9">
+              <input type="text"class="form-control"id="exampleInputUsername2"placeholder=""/>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-7" class="pull-right">
+              <button type="Submit"class="btn btn-outline-primary btn-icon-text"onclick="redirect()">
+                <i class="mdi mdi-refresh btn-icon-prepend"></i>Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //js for submit button in new_team.html page
+  function redirect() {
+    window.location.href = "new_team";
+  }
+  // js for delete button in new_team1.html page
+  function confirmation() {
+    var result = confirm("Are you sure...?");
+    if (result) {
+      // Delete logic goes here
+    }
+  }
+</script>
+{%endblock%}

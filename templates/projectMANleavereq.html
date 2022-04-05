@@ -1,0 +1,237 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+  
+
+  .text-left,
+  #hf {
+    font-family: rubik, sans-serif;
+    color: white;
+    font-weight: 500;
+  }
+
+
+
+
+
+
+
+  .ui-widget-content {
+    border: none;
+    background: #191c24;
+    color: #636d87;
+  }
+
+  .ui-datepicker th {
+    padding: 0.7em 0.3em;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    color: #636d87;
+  }
+
+  .ui-state-default,
+  .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default,
+  .ui-button,
+  html .ui-button.ui-state-disabled:hover,
+  html .ui-button.ui-state-disabled:active {
+    border: 1px solid #636d87;
+    border-radius: 50%;
+    background: #191c24;
+    font-weight: normal;
+    color: #636d87;
+    text-align: center;
+  }
+
+  .ui-widget-header {
+    border: 1px solid #636d87;
+    background: #191c24;
+    color: #636d87;
+    font-weight: bold;
+  }
+
+  .ui-widget.ui-widget-content {
+    border: 1px solid #636d87;
+  }
+</style>
+</style>
+
+<body>
+  <div id="myprofile" style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293;">APPLY LEAVE</div><br>
+  <div class="container">
+    <div id="firstbox" class="row shadow " style="background-color: #191c24;">
+      <div class="col-md-12 ">
+
+        <form method="POST" action="{% url 'projectMANleavereq' %}" enctype="multipart/form-data" id="myForm">
+          
+          {% for i in pro %}
+          <input type="hidden" name="pr_id" value="{{i.id}}">
+          {% endfor %}
+
+          {% csrf_token %}
+          <div class="container mt-5 mb-5">
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <div class="text-left mt-3 ">FROM</div>
+                <input autocomplete="off" type="date" name="from" class="form-control text-light mt-2 txtDate" style="border-radius:5px;"
+                  id="from" onchange="myFunction()" placeholder="Leave From..." autocomplete="off" required>
+              </div>
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">TO</div>
+                <input autocomplete="off" type="date" name="to" class="form-control text-light mt-2" style="border-radius:5px;"
+                  id="to" onchange="myFunction()" placeholder="Leave To..." autocomplete="off" required>
+              </div>
+            </div>
+            <div class="col pt-2" id="halful">
+              <input type="radio" id="half" name="haful" value="half Day">
+              <label id="hf">Half Day</label><br>
+              <input type="radio" id="full" name="haful" value="full Day" checked="checked">
+              <label id="hf">Full Day</label><br>
+            </div>
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-5 ">REASON</div>
+                <textarea autocomplete="off" type="text" name="reason" class="form-control mt-2 text-light"
+                style="border-radius:5px;height: 100px;" id="reason" placeholder="Leave Reason" required></textarea>
+              </div>
+            </div>
+            <div class=" row  mt-5 ">
+
+              <div class="col-md-4 offset-5">
+                <button type="submit" class="btn btn-primary " id="btn-submit">Apply</button>
+              </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <script>
+
+
+
+
+
+
+    document.getElementById("halful").style.display = "none";
+
+    function myFunction() {
+      var x = document.getElementById("from").value;
+      var y = document.getElementById("to").value;
+      if (x, y == '') {
+        document.getElementById("halful").style.display = "none";
+      }
+      else if (x == y) {
+        document.getElementById("halful").style.display = "block";
+      }
+      else {
+        document.getElementById("halful").style.display = "none";
+      }
+    }
+    $(document).on('click', '#btn-submit', function (e) {
+      e.preventDefault();
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: " Do you want to apply this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, apply Leave!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true,
+        preConfirm: () => {
+          if (document.getElementById('reason').value) {
+            // Handle return value 
+          } else {
+            Swal.showValidationMessage('reason input missing')
+          }
+          if (document.getElementById('to').value) {
+            // Handle return value 
+          } else {
+            Swal.showValidationMessage('to input missing')
+          }
+          if (document.getElementById('from').value) {
+            // Handle return value 
+          } else {
+            Swal.showValidationMessage('from input missing')
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Applied',
+            'Your leave has been Applied.',
+            'success'
+          )
+          $('#myForm').submit();
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your leave request cancelled',
+            'error'
+          )
+        }
+      })
+    })
+  </script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  $(function() {
+      var dtToday = new Date();
+      var month = dtToday.getMonth() + 1;
+      var day = dtToday.getDate();
+      var year = dtToday.getFullYear();
+      if (month < 10)
+          month = '0' + month.toString();
+      if (day < 10)
+          day = '0' + day.toString();
+      var minDate = year + '-' + month + '-' + day;
+      $('.txtDate').attr('min', minDate);
+  })
+</script>
+
+<script>
+  var start = document.getElementById('from');
+  var end = document.getElementById('to');
+
+  start.addEventListener('change', function() {
+    if (start.value)
+        end.min = start.value;
+  }, false);
+  end.addEventLiseter('change', function() {
+    if (end.value)
+        start.max = end.value;
+  }, false);
+</script>
+
+</body>
+</html>
+
+
+
+
+{% endblock %}

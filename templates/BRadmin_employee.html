@@ -1,0 +1,23 @@
+<option selected="true" disabled="disabled" value="">-Not Selected-</option>
+
+
+    {% for user in user %}
+        <option value="{{ user.id }}">{{ user.fullname }}</option>
+    {% endfor %}
+
+<!-- {% for user in user %}
+        {% for dept in dept %}
+            {% for desi in desi %}
+               {% if desi.designation == user.designation.designation and dept.department == user.department.department %} 
+                
+
+                  <option value="{{ user.fullname }}">{{ user.fullname }},{{ user.department }},{{ user.designation }}</option>
+
+                {% endif %}  
+            {% endfor %}
+        {% endfor %}
+    {% endfor %} -->
+        
+                
+
+

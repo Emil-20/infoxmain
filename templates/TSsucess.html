@@ -1,0 +1,35 @@
+{% extends 'testerindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+@media screen and (max-width: 22em) {
+    .mb-0 {
+        margin-left: -30px;
+        padding-top: 0px;
+    }    
+}
+</style>
+
+<div class="container-scroller pt-5">
+      <div class="row w-100 m-0 pt-5">
+        <div class="content-wrapper full-page-wrapper d-flex align-items-center pt-5">
+          <div class="card col-lg-4 mx-auto">
+            <div class="card-body px-5 py-5">
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                      <div class="d-flex d-sm-block d-md-flex align-items-center">
+                        <h2 class="mb-0" style="font-size:x-large;">Task assigned successfully</h2>
+                      </div>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                      <i class="icon-lg mdi mdi-checkbox-marked-outline text-success ms-auto"></i>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'SuperAdmin_index.html' %}
+{% block content %}
+  {% load static %}
+  <style>
+  #a
+  {
+    font-size: 100%;
+  }
+      
+
+  </style>
+ 
+<div class="row align-items-center">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Branch</h4>
+          <p class="card-description"> </p>
+         
+           <form class="forms-sample" method="post" action="SuperAdmin_AddBranch" enctype="multipart/form-data"> 
+            {% csrf_token %}               
+                           <div class="form-group">
+                        <label for="exampleTextarea1">Branch Name</label>
+                        <textarea class="form-control" name="Brname" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                           </div>
+                           <div class="form-group">
+                            <label for="exampleTextarea1">Location</label>
+                            <textarea class="form-control" name="location" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                               </div>
+                               <div class="form-group">
+                                <label>Branch Type</label>                        
+                                <select class="form-control" style="color:white;" name="Brtype" id="empname">
+                                    <option value="">-Select An Option-</option>
+                                    <option>Main</option>
+                                    <option>Sub</option>
+                                  </select>                             
+                              </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Branch Admin</label>
+                                <textarea class="form-control" name="Bradmin" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                            </div> 
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Email</label>
+                                <textarea class="form-control" name="Bremail" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Contact Number</label>
+                                <textarea class="form-control" name="Brcontact" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                            </div>                       
+                      <div class="form-group">
+                        <label>Logo</label>
+                        <input type="file" name="img[]" class="file-upload-default"  data-show-upload="true"  data-show-caption="true" required style="color: white;" multiple>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info multi" disabled placeholder="select a logo" multiple>
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" style="height: 37px;">Upload</button>
+                          </span>
+                        </div>
+                      </div>
+                      <!-- <div class="form-check form-check-flat form-check-primary">
+              
+                        <button type="submit" class="btn btn-primary me-2">Assign</button>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary w-100" style="height: 40px; margin-top: 2px;">Register</button>
+                        </div>
+                    </div>
+                     
+  {% endblock %}

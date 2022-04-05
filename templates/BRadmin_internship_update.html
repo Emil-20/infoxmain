@@ -1,0 +1,170 @@
+{% extends 'BRadmin_index.html'%}
+{% block content %}
+{% load static %}
+
+<style>
+    .row {
+        margin-top: 2vh;
+    }
+
+    .container {
+        margin-top: 5vh;
+    }
+
+    #myprofile {
+        margin-left: 0rem;
+        color: white;
+        font-size: 20px;
+        font-weight: 900px;
+    }
+
+    .btn {
+        border: 1px solid #636d87;
+        color: #636d87;
+    }
+    label{
+        color: white;
+    }
+</style>
+<div>
+    <label id="myprofile">Internship Details Update</label>
+
+    <form action="{% url 'internshipupdatesave' var.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token%}
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Full Name</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="fullname" value="{{var.fullname}}">
+                </div>
+                <div class="col-lg-3">
+                    <label>College Name</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="college" value="{{var.collegename}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Reg.No</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="regno" value="{{var.reg_no}}">
+                </div>
+                <div class="col-lg-3">
+                    <label>Course</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="course" value="{{var.course}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Stream</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="stream" value="{{var.stream}}">
+                </div>
+                <div class="col-lg-3">
+                    <label>Platform</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="platform" value="{{var.platform}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Start Date</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="startdate" value="{{var.start_date}}">
+                </div>
+                <div class="col-lg-3">
+                    <label>End Date</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="enddate" value="{{var.end_date}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Mobile</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="mobile" value="{{var.mobile}}">
+                </div>
+                <div class="col-lg-3">
+                    <label>Alernative MOB.</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="altmob" value="{{var.alternative_no}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Email</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="email" value="{{var.email}}">
+                </div>
+                <div class="col-lg-3">
+                    <label>Rating</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="rating" value="{{var.rating}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Hr Manager</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="hrmanager" value="{{var.hrmanager}}"><br>
+                </div>
+                <div class="col-lg-3">
+                    <label>Guide</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control text-light" autocomplete="off" name="guide" value="{{var.guide}}">
+                </div>
+            
+               <div class="col-lg-3">
+                    <label>Reg_Date</label>
+                </div>
+                <div class="col-lg-3">
+                    <input type="date" id="datefield" class="form-control text-light" autocomplete="off" name="regdate" value="{{var.reg_date|date:'Y-m-d'}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary " style="margin-right: 10vh;float: right;width: 20vh;" type="submit">OK</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+} 
+    
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("datefield").setAttribute("max", today);
+</script>
+
+
+{% endblock %}

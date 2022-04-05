@@ -1,0 +1,70 @@
+{% extends 'devindex.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row pt-3" style="background-color: black;">
+  <div class=" col-12 mt-2  " style="font-size: 20px;font-weight: 600; color: #6c7293;">TASKS</div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-8 "style="margin-left: auto;margin-right: auto;">
+    <div class="card" style="color: #6c7293;">
+      <div class="card-body">
+        <form action="" method="post">
+          
+          {% for tas in task %}
+
+          {% csrf_token %}
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;">Task</div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100; color:white;">{{tas.description}}</h4>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;"> Due Date</div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class="mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:white;">{{tas.enddate|date:"d-m-Y"}}</h4>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;"> Submit Date</div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:white;">{{tas.submitted_date|date:"d-m-Y"}}</h4>
+            </div>
+          </div>
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;">Description</div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:white;">{{tas.employee_description}}</h4>
+            </div>
+          </div>
+
+          <div class="row pt-1">
+            <div class="col-md-4">
+              <div class=" mr-2 ml-3 mt-2" style="color:white;">Attached Files</div>
+            </div>
+            <div class="col-md-8 ">
+              <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100; "><img
+                  src="{{tas.employee_files.url}}" style="width: 60%;">
+                <div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+            
+
+
+</div>
+{% endblock %}

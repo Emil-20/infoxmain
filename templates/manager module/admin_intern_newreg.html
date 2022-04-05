@@ -1,0 +1,69 @@
+{% extends 'indexadmin.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+
+    #myprofile{
+    margin-left: 0rem;
+    }
+    #smallbox{
+        background-color: white;
+        max-width: 300px;
+        border-radius: 15px;
+        display: inline-flex;
+        float: left;
+        margin-left: 10%;
+        padding: 20px;
+        margin-top: 5%;
+    }
+    #smallbox h1{
+        margin-left: 15%;
+    }
+    #smallbox span{
+        color: #475151;
+    }
+    #ig{
+        margin-left: 110px;
+        width:130px;
+        height:80px;
+        position: relative;
+    }
+    @media(max-width:61.938em){
+    
+    #smallbox{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    
+    }
+
+</style>
+<body>
+    <div><label id="myprofile">INTERNSHIP REGISTRATION</label>
+
+    <div id="row">
+        <li id="smallbox" class="col shadow p-3 mb-5 bg-white"><a style=" text-decoration: none;" href="admin_intern_showreg">
+          <h5>
+            <span style="color:#827f7d;">VIEW ALL</span>
+          </h5>
+          <div>
+           <img id="ig" class="row-sm" src="{% static 'Group63.png' %}"  >
+           </div></a>
+           
+        </li>
+        <li id="smallbox" class="col shadow p-3 mb-5 bg-white"><a style=" text-decoration: none;" href="admin_intern_bydate">
+            <h5>
+              <span style="color:#827f7d;">VIEW BY DATE</span>
+            </h5>
+            <div>
+             <img id="ig" class="row-sm" src="{% static 'Group63.png' %}"  >
+             </div></a>
+          </li>
+    </div>
+
+
+</body>
+
+{% endblock %}

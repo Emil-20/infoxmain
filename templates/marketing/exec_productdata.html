@@ -1,0 +1,61 @@
+{% extends 'marketing/exec_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_carddet.css' %}">
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body" style="overflow-x: auto;">
+           <table class="table table-responsive table-bordered text-center" style="color: white;">
+              <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone number</th>
+                  <th>Location</th>
+                  <th>Status</th>
+              </tr>
+              <tr>
+                  <td>Mahesh</td>
+                  <td>mahesh@gmail.com</td>
+                  <td>5675676756</td>
+                  <td>Kochi</td>
+                 <td>
+                     <a data-bs-toggle="modal" data-bs-target="#exampleModal">Set status</a>
+                </td>
+              </tr>
+           </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div>
+          <h5 class="modal-title text-center" id="exampleModalLabel">Assign Status</h5>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body px-lg-5" style="overflow-y: auto; max-height: 40vh;">
+            <div class="d-flex justify-content-center align-items-center">                
+                <a href="">
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6 mb-3 px-lg-4">
+                        <button class="btn-light">Interested</button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button class="btn-light" style="width: 120px;">Not Interested</button>
+                    </div>
+                </div>
+                </a>        
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+{% endblock %}        

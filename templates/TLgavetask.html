@@ -1,0 +1,66 @@
+{% extends 'TLindex.html' %}
+{% load static %}
+{% block content %}
+<style>
+  *{
+    color:#6C7293;
+  }
+  .Search {
+    margin-top: 4%;
+    float: right;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 2;
+    border: 1px solid #6c7293;;
+    color:#6c7293;
+    background: #191c24;
+}
+.col-form-label{
+  color: white;
+}
+</style>
+<h2>PROJECTS</h2>
+<form action="" method="post">
+  {% csrf_token %}
+  {% for tas in task %}
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">TASK</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{tas.task}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">DATE</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{tas.enddate|date:"d-m-Y"}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">DESCRIPTION</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{tas.employee_description}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">SUBMIT DATE</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{tas.submitted_date|date:"d-m-Y"}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">SCREENSHOT</label>
+            <div class="col-sm-9">
+                <img src="{{tas.employee_files.url}}" style="height: 100px; width: 100px;">
+            </div>
+          </div> 
+          {% endfor %}
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock  %}

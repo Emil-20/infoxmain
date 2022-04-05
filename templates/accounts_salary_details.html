@@ -1,0 +1,96 @@
+{%extends 'index_accounts.html'%}
+{% load static %}
+{% block content %}
+
+    
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
+      <div class="card mt-3 mb-5">
+                <div class="card-body" >
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-white " >Name</th> 
+                                    
+                                    <th class="text-white ">Account Number</th>
+                                    <th class="text-white ">Basic Salary</th>
+                                    <th class="text-white " >HRA</th> 
+                                    <th class="text-white ">Conveyns</th>
+                                    <th class="text-white ">Professional Tax</th>
+                                    <th class="text-white ">Incentives</th>
+                                    <th class="text-white ">pf</th>
+                                    <th class="text-white ">esi</th>
+                                    <th class="text-white ">Delay</th>
+                                    <th class="text-white ">Leave</th>
+                                      
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <br>
+                                <tr>
+                                    
+                                   
+                                       
+                                   
+                                        
+                                    <td  >
+                                        <img src="{{media_url}}{{mem1.photo.url}}" class="img-fluid rounded-circle " alt="image"  > 
+                                        {{mem1.fullname}}
+                                    </td>
+                                    
+                                    
+                                   
+                                    
+                                    <td class="pl-5">  {{mem1.account_no}}</td>
+                                    
+                                    {% for i  in usk %}
+                                    <td> {{i.basic_salary}}</td>
+                                    <td>  {{i.hra}}</td>
+                                    <td> {{i.conveyns}}</td>
+                                    <td>  {{i.pf_tax}}</td>
+                                    <td>  {{i.incentives}}</td>
+                                    <td>  {{i.pf}}</td>
+                                    <td>  {{i.esi}}</td>
+                                    <td>  {{i.delay}}</td>
+                                    <td>  {{i.leavesno}}</td>
+                                    {% endfor %}
+                                </tr>
+                                
+                                
+    
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i <script tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        </script>
+    {% endblock %}

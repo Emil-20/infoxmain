@@ -1,0 +1,30 @@
+
+#******************** new Internship************************************#
+    re_path( r'^admin_intern_newreg', views.admin_intern_newreg, name='admin_intern_newreg'),
+    re_path( r'^admin_intern_showreg', views.admin_intern_showreg, name='admin_intern_showreg'),
+    re_path( r'^admin_intern_showdetails', views.admin_intern_showdetails, name='admin_intern_showdetails'),
+    re_path( r'^admin_intern_detailupdate', views.admin_intern_detailupdate, name='admin_intern_detailupdate'),
+    re_path( r'^admin_intern_delete', views.admin_intern_delete, name='admin_intern_delete'),
+    re_path( r'^admin_intern_bydate', views.admin_intern_bydate, name='admin_intern_bydate'),
+    re_path( r'^admin_intern_showbydate', views.admin_intern_showbydate, name='admin_intern_showbydate'),
+
+    #******************leaveform***************************************#
+
+    re_path( r'^admin_leaveform', views.admin_leaveform, name='admin_leaveform'),
+    re_path( r'^admin_leave_delete', views.admin_leave_delete, name='admin_leave_delete'),
+    re_path( r'^pdf', views.render_pdf_view, name='render_pdf_view'),
+
+    #***************bibin leave*******************
+    re_path(r'^leave$', views.leave, name='leave'),
+    re_path(r'^admin_leave_form$', views.admin_leave_form, name='admin_leave_form'),
+
+#************************Amal internship***********************
+
+    re_path(r'^internshipregister$', views.internshipregister, name='internshipregister'),
+    re_path(r'^internshipregister1$', views.internshipregister1, name='internshipregister1'),
+
+#*******************************qrcode******************
+
+
+    re_path(r'^admin_code$', views.admin_code, name='admin_code'),
+    re_path(r'^qrcodenew$', views.qrcodenew, name='qrcodenew'),

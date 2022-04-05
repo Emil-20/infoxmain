@@ -1,0 +1,6 @@
+<option selected="true" disabled="disabled" value="">Select an option</option>
+{% for desig in Desig %}
+      {% if desig.designation != 'HR' %}
+<option value="{{ desig.id }}">{{ desig.designation }}</option>
+ {% endif %}
+{% endfor %}

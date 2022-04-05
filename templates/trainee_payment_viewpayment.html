@@ -1,0 +1,92 @@
+{%extends 'trainee_index.html' %} {% load static %} {% block content %}
+
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top: -16px">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                        <h4>Payment List</h4><br>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- given task starts here -->
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr data-href="#">
+                                <th> SiNo </th>
+                                <th> Name </th>
+                                <th>amount</th>
+                                <th>Date</th>
+                                <th style="padding-left: 40px;"> Attached File</th>
+                                
+                            </tr>
+                        </thead>
+
+                   
+                        <tbody>{% if mem %} {% for i in mem %}
+                            <tr>
+                                <td>{{forloop.counter }}</td>
+                                <td><img src="{{i.user_id.photo.url}}" alt="image" /> &nbsp;{{i.user_id.fullname}}
+                                </td>
+                                <td> {{i.amount_pay}}</td>
+                                <td>{{i.amount_date|date:"d-m-Y"}}</td>
+                                <td>
+                      {% if i.amount_downlod %}
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-6 mt-1">
+                          <a href="{{i.amount_downlod.url}}" class="btn btn-outline-primary mdi mdi-format-vertical-align-bottom"
+                          style="font-size: 15px;overflow: hidden  mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;" download>Download</a>
+                      </div>
+                      {% endif %} </td>
+                    
+
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ends here -->
+
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- modal end -->
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{%endblock%}

@@ -1,0 +1,403 @@
+{%extends 'devindex.html'%}
+{%load static%}
+{%block content%}
+
+
+<div class="row pt-3" style="background-color: black;">
+  <div class="" style="font-size: 20px;font-weight: 600;color:#6C7293;">PROJECTS</div>
+</div>
+<div class="row mt-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title">Projects</div>
+      <input type="text" class="form-control" id="search" onkeyup="myFunction()" placeholder="search...">
+      <div class="table-responsive">
+        <table class="table" id="myTable">
+          <thead>
+            <tr>
+              <th scope="col" style="color:#6C7293;">Task name</th>
+              <th scope="col" style="color:#6C7293;">AssignedTo</th>
+              <th scope="col" style="color:#6C7293;">Task Status</th>
+              <th scope="col" style="color:#6C7293;">Test Status</th>
+              <th scope="col" style="color:#6C7293;">Extension</th>
+              <th scope="col" style="color:#6C7293;">Project Details</th>
+              <th scope="col" style="color:#6C7293;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for dp in devp %}
+            <tr>
+              <td style="color:white;">{{dp.task}}</td>
+
+              <td style="color:white;">{{dp.developer}}</td>
+              <td class="text-primary"><a href="" data-toggle="modal" data-target="#taskstatus{{dp.id}}"
+                  style="text-decoration: none;">
+                  <div class="badge badge-outline-info">Task Status</div>
+                </a></td>
+
+              <td class="text-primary"><a href="" data-toggle="modal" data-target="#testerstatus{{dp.id}}"
+                  style="text-decoration: none;">
+                  <div class="badge badge-outline-info">Tester Status</div>
+                </a></td>
+              <td class="text-primary"><a href="" data-toggle="modal" data-target="#exampleModalCenter2{{dp.id}}"
+                  style="text-decoration: none;">
+                  <div class="badge badge-outline-info">Extension Status</div>
+                </a></td>
+              <td>
+                <div class="progress" data-toggle="modal" data-target="#exampleModalCenter3{{dp.id}}"
+                  style="border-radius:5px;height:20px;background-color:#C2F0EB">
+                  <div class="progress-bar" style="height:20px;width:{{dp.progress}}%">{{dp.progress}}%</div>
+
+                </div>
+              </td>
+              {% if dp.status == null %}
+                  
+                        <td>  <a href="{% url 'DEVtaskform' dp.id %}">
+                            <div class="badge badge-outline-primary">Pending</div>
+                            </a>
+                        </td>
+                    {% else %}
+                        <td>    
+                            <a href="{% url 'DEVtask' dp.id %}">
+                                <div class="badge badge-outline-success">submitted</div>
+                            </a>
+                        </td>
+                    {% endif %}
+                    
+                    
+                    
+          
+                  
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- pop up window for Project details -->
+
+{% for dp in devp %}
+<form action="{% url 'devprjsave' dp.id %}" method="post">
+  {% csrf_token %}
+<div class="rowmt-5 modal fade" id="exampleModalCenter3{{dp.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="card ">
+        <div class="card-body">
+          <div class="container">
+            <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+              style="background-color: #191c24;border:none; float: right; font-size: 20px;">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="text-info" style="font-size: 20px;font-weight: 600;">Sub Tasks</div>
+          
+            <div class="row mt-5">
+              <div class="col-md-1"></div>
+              <div class="col-md-2 mt-2" style="color:white;">Start date</div>
+              <div class="col-md-2 mt-2">
+                <div class="ml-3" style="color:white;">{{dp.startdate|date:"d-m-Y"}}</div>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-2 mt-2" style="color:white;"> End date</div>
+              <div class="col-md-2 mt-2" style="color:white;"> {{dp.enddate|date:"d-m-Y"}}</div>
+              <div class="col-md-1"></div>
+            </div>
+          </div>
+
+          <div class="row mt-5 ml-2">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 mt-2" style="color:white;">Assigned to</div>
+            <div class="col-md-2 mt-2">
+              <div style="color:white;"> {{dp.developer}} </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2 mt-2 " style="color:white;">Progress</div>
+            <div class="col-md-2 mt-2 "> <span class="progress" data-toggle="modal" data-target=""
+                style="border-radius:5px;height:20px;max-width:150px;background-color:#C2F0EB">
+                <span class="progress-bar" style="height:20px;width:{{dp.progress}}%">{{dp.progress}}%</span></div>
+            <div class="col-md-1"></div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 mt-2" style="color:white;">Status</div>
+            <div class="col-md-2 mt-2">
+              <select name="devstat" class="drop form-control ml-3 mt-2" required>
+                <option value=""> </option>
+                <option value="In progress" class="text-light" style="color:white;">in progress</option>
+                <option value="Completed" class="text-light" style="color:white;">completed</option>
+              </select>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2" style="color:white;">Current status</div>
+            <div class="col-md-2" style="color:white;"> {{dp.projectstatus}}</div>
+            <div class="col-md-1"></div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 mt-1" style="color:white;">Progress</div>
+            <div class="col-md-2 mt-1">
+              <input name="devpro" autocomplete="off" type="text" class="form-control">
+              <br>
+            </div>
+
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <button type="submit" class="btn-primary text-light">Start work</button>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="container mt-3 " style="border-top:1px solid grey;">
+        <div class="text-info pt-4" style="font-size: 20px;font-weight: 600;">Project description</div>
+        <div class="pt-3 " style="margin-left:20px;color:white;">{{dp.tl_description}}</div>
+      </div>
+
+      <div class="container mt-3" style="border-top:1px solid grey;border-bottom:1px solid grey;">
+        <div class="text-info pt-4 pb-2" style="font-size: 20px;font-weight: 600;">Attach files</div>
+        <a href="{{dp.files.url}}" download class="text-info " style="text-decoration:none;margin-left:20px;">Download</a>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</div>
+</form>
+{% endfor %}
+
+
+{% for dp in devp %}
+
+<!-- pop up window for tester status -->
+<div class="modal fade" id="testerstatus{{dp.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="modal-header" style="border-bottom: 0 none;">
+        <h5 class="modal-title text-info">Tester status</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none; float: right;font-size: 20px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="table-responsive mt-3 mb-3 container">
+        <table class="table  table-bordered ">
+          <thead style="background-color: black;">
+            <tr>
+              <th scope="col" style="color:#6C7293;">Date</th>
+              <th scope="col" style="color:#6C7293;">ReportBy</th>
+              <th scope="col" style="color:#6C7293;">Task</th>
+              <th scope="col" style="color:#6C7293;">Sub Task</th>
+              <th scope="col" style="color:#6C7293;">Work Done</th>
+              <th scope="col" style="color:#6C7293;">Files</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for i in testerstatus %}
+       
+              {% if i.subtask_id == dp.id %}
+            <tr>
+              <td style="color:white;">{{i.date|date:"d-m-Y"}}</td>
+              <td style="color:white;">{{i.tester}}</td>
+              <td style="color:white;">{{i.subtask.task}}</td>
+              <td style="color:white;">{{i.subtask}}</td>
+              <td style="color:white;">{{i.workdone}}</td>
+              <td class="text-info"><a href="{{i.files.url}}" download style="text-decoration:none;">
+                  <div class="badge badge-outline-primary">Download</div>
+                </a></td>
+            </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<!-- pop up window for extension status -->
+
+{% for dp in devp %}
+
+<div class="rowmt-5 modal fade" id="exampleModalCenter2{{dp.id}}">
+  <div class="modal-dialog bd-example-modal-xl modal-dialog-centered" role="document" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <div class="card ">
+        <div class="card-body">
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+            style="background-color: #191c24;border:none;float: right;font-size: 20px;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="text-info" style="font-size: 20px;font-weight: 600;">Extension Request</div>
+
+          <form action="{% url 'DEVextension' dp.id %}" method="post">
+            {% csrf_token %}
+
+            <div class="row mt-5">
+              <div class="col-md-4">
+                <div class=" mr-2 ml-3 mt-2 text-light" style="color:white;">Requested Days</div>
+              </div>
+              <div class="col-md-8 ">
+                <input type="number" name="dayz" class="drop form-control ml-3 mt-2" required>
+              </div>
+            </div>
+            <div class="row pt-1">
+              <div class="col-md-4">
+                <div class="mr-2 ml-3 mt-2 text-light" style="color:white;">Reason</div>
+              </div>
+              <div class="col-md-8 ">
+                <textarea class="form-control ml-3 mt-2" name="reason" rows="4" cols="50"></textarea>
+              </div>
+            </div>
+            <div class="row pt-1">
+              <div class="col-md-4">
+                <div class=" mr-2 ml-3 mt-2" style="color:white;">Previous Status</div>
+              </div>
+              
+              {% if dp.extension == 0 %}
+              <div class="col-md-8 ">
+                <div class="mr-2 ml-3 mt-2" style="color:white;">No extensions !!!</div>
+              </div>
+              {% else %}
+              <div class="col-md-8 ">
+                <div class="mr-2 ml-3 mt-2" style="color:white;">{{dp.extension_status}} on {{dp.extension_date|date:"d-m-Y"}} for {{dp.extension}} days</div>
+              </div>
+              {% endif %}
+       
+            </div>
+
+            <div class="" style="float:right;">
+              <button type="submit" class="btn btn-primary ">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<!-- pop up window for task status -->
+{% for dp in devp %}
+<form action="{% url 'DEVtaskstatus' dp.id %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="modal fade" id="taskstatus{{dp.id}}">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+      <div class="modal-content modal-xl" style="background-color: #191c24;">
+        <div class="modal-header">
+          <h5 class="modal-title text-info">Daily Work Report</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+            style="font-size: 20px;;background-color: #191c24;border:none;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="table-responsive mt-3 mb-3 container">
+
+          <table class="table   table-bordered ">
+            <thead style="background-color: black;">
+              <tr>
+                <th scope="col" style="color:#6C7293;">Date</th>
+                <th scope="col" style="color:#6C7293;">Task</th>
+                <th scope="col" style="color:#6C7293;">Sub Task</th>
+                <th scope="col" style="color:#6C7293;">Work Done</th>
+                <th scope="col" style="color:#6C7293;">Files</th>
+                <th scope="col" style="color:#6C7293;">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {% for i in teststatus %}
+
+              {% if i.subtask_id == dp.id %}
+
+              <tr>
+                <td style="color:white;">{{i.date|date:"d-m-Y"}}</td>
+
+                <td style="color:white;">{{dp.task}}
+                </td>
+                <td style="color:white;">{{dp.subtask}}
+                </td>
+                <td style="color:white;">{{i.workdone}}
+                </td>
+                <td style="color:white;">{% for ss in i.json_testerscreenshot %}
+                                    <div class="badge badge-outline-primary"><a style="text-decoration: none;" href="{{ ss }}" download> Download</a></div>
+                                    {% endfor %}
+                </td>
+
+              </tr>
+
+              {% endif %}
+
+
+              {% endfor %}
+
+              <tr>
+                <td style="color:white;">{{time|date:"d-m-Y"}}</td>
+
+                <td style="color:white;">{{dp.task}}
+                </td>
+                <td style="color:white;">{{dp.subtask}}
+                </td>
+
+                <td style="color:white;"><textarea name="workdone" class="form-control-sm bg-transparent text-light" cols="25" rows="7"
+                    ></textarea></td>
+                <td class="text-info"><input type="file" name="filed" multiple></td>
+                <td class="text-info"><button type="submit" class="btn badge-outline-primary">submit</button></td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endfor %}
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
+<script type="text/javascript">
+  function setselected(id) {
+    $('input[name="selected"]').val(id);
+  }
+</script>
+
+{% endblock %}

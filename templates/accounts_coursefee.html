@@ -1,0 +1,145 @@
+{%extends 'index_accounts.html'%} {%load static%} {%block content%}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+  }
+  </style>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-8 grid-margin">   
+        
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title " style="float:left;">New Team</h4>
+                
+                <button type="button" class="btn btn-outline-info pull-right mr-3" style="float:right;" onclick="location.href='{% url 'accounts_coursefee_addnew' %}'">
+                    <i class="mdi mdi-equal-box"></i>Add New</button>
+            
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+                    
+                    <form>
+                        
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-white col-12 col-sm-12 col-md-12 col-lg-12 mt-2" id="myInput" onkeyup="myFunction()" placeholder="Search . . ." style="border: green" />
+                       </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="text-white">SNo.</th>
+                                <th class="text-white">Name</th>
+                                <th class="text-white">Total Fee</th>
+                                <th class="text-white">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if mem %}
+                            {% for t in mem %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                    
+                                <td>{{t.name}}</td>
+                                <td>{{t.total_fee}}</td>
+                                <!--<form action="coursedelete?tid={{t.id}}" method="post">-->
+                                <form action="{% url 'coursedelete' t.id %}" method="post">
+                                    {% csrf_token %}
+                                    <td>
+                                        <button type="button" data-toggle="modal" data-target="#myModal{{t.id}}" class="btn btn-social-icon-text btn-outline-primary"><i class="mdi mdi-tooltip-edit"></i>Update</button>
+                                        <button type="submit" class="btn btn-social-icon-text btn-outline-danger" onclick="confirmation()"><i class="mdi mdi-delete-forever"></i>Delete</button>
+    
+                                    </td>
+                                </form>
+
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <h5 style="text-align:center">Nothing to display...</h5>
+                            {% endif %}
+                           
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% for t in mem %}
+<!-- Modal -->
+<div class="modal" id="myModal{{t.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 grid-margin stretch-card bg-dark text-light modal-content">
+        <!-- Modal Header -->
+            <!--<form action="coursefeeupdate?tid={{t.id}}" method="post" enctype="multipart/form-data" autocomplete="off">-->
+                <form action="{% url 'coursefeeupdate' t.id %}" method="post" enctype="multipart/form-data" autocomplete="off">
+                {%csrf_token%}
+                    <div class="modal-header">
+                        <h4 class="modal-title">UPDATE</h4>
+                        <button type="submit" style="color: white" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card" style="height: 200px">
+                                <div class="card-body">
+                                    
+                                    <div class="form-group row pt-2">
+                                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Total Fee</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control text-light" name="totalfee"value={{t.total_fee}} required /></div>
+                                        </div>
+                                        <br />
+                                        <div class="row pt-2">
+                                        
+                                            <div class="col-sm-5"></div>
+                                            <div class="col-sm-7" class="pull-right">
+                                                <button type="submit" class="btn btn-outline-warning btn-icon-text"><i class="mdi mdi-refresh btn-icon-prepend"></i>Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  {%endfor %}
+    <!-- modal end -->
+
+    <script>
+        // js for delete button in new_team1.html page
+        function confirmation() {
+            var result = confirm("Are you sure...?");
+            if (result) {
+                // Delete logic goes here
+            }
+        }
+
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}

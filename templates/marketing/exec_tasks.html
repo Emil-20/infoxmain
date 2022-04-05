@@ -1,0 +1,37 @@
+{% extends 'marketing/exec_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_tasks.css' %}">
+<div class="container">
+    <a href="{% url 'exec_products' %}">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="card-title">Products</div>
+                </div>
+            </div>
+        </div>
+    </a>    
+
+<div class="card card1">
+    <div class="card-body">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="card-title">Services</div>
+        </div>
+    </div>
+</div>
+
+<a class="card2" href="{% url 'exec_recruitments' %}">
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="card-title">Recruitments</div>
+        </div>
+    </div>
+</div>
+</a>
+</div>
+
+{% endblock %}

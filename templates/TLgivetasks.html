@@ -1,0 +1,80 @@
+{% extends 'TLindex.html' %}
+{% load static %}
+{% block content %}
+<style>
+    textarea {
+        width: 250px;
+        height: 100px;
+}
+@media screen and (max-width: 22em) {
+    textarea {
+        width: 170px;
+        height: 100px;
+}
+    
+}
+
+  *{
+    color:#6C7293;
+  }
+  .Search {
+    margin-top: 4%;
+    float: left;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 2;
+ 
+}
+.col-sm-3{
+  color: white;
+}
+</style>
+
+
+<h2>PROJECTS</h2>
+
+<div class="col-md-12 grid-margin stretch-card pt-2">
+    <div class="card">
+      <div class="card-body">
+        {% for ta in task %}
+        <form action="{% url 'TLtaskformsubmit' ta.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">TASK</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{ta.task}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">SUBMISSION DATE</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{time|date:"d-m-Y"}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputUsername2" class="col-sm-3 col-form-label">DUE DATE</label>
+            <div class="col-sm-9">
+                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">{{ta.enddate|date:"d-m-Y"}}</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputMobile" class="col-sm-3 col-form-label">SCREENSHOT</label>
+            <div class="col-sm-5">
+              <input type="file" name="scn" class="form-control" style="text-decoration:none;border:none;background-color: #191c24;color:#6C7293 ;">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleInputMobile" class="col-sm-3 col-form-label">DESCRIPTION</label>
+              <span class="col-sm-9">
+                <textarea class="form-control" name="description" style="height: 150px; max-width: 300px; color: white;"></textarea>
+                </span>
+          </div>
+          <button style="float: right;" type="submit" class="btn btn-primary Search me-2" >Submit</button>
+         
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock  %}

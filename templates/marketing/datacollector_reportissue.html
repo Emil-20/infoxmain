@@ -1,0 +1,63 @@
+{% extends 'marketing/datacollector_base.html' %}
+
+{% load static %}
+{% block main %}
+
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_carddet.css' %}">
+
+<style>
+
+    textarea {
+        background-color: gray;
+    }
+
+    @media (min-width: 62em) {
+        .container {
+        position: relative;
+        top: 15%;
+        left: 10%;
+        }
+        textarea {
+            width: 51.5vw;
+        }
+        .card {
+        width: 56.5vw;
+    }
+    }
+
+    @media (max-width: 61.9375em) {
+        .container {
+        position: relative;
+        top: 15%;
+        display: flex;
+        justify-content: center;
+        }
+        textarea {
+            width: 60vw;
+            height: 40vh;
+        }
+        .card {
+        width: 80vw;
+       }
+       .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+       }
+    }
+</style>
+<div class="container">
+<div class="card">
+    <div class="card-body">
+        <label for="">
+            Describe your issue:
+        </label>
+        <br>
+        <textarea name="" id="" rows="10" class="mt-4 mx-2"></textarea>
+
+        <button class="mt-5" type="submit">Submit</button>
+    </div>
+</div>
+</div>
+{% endblock %}

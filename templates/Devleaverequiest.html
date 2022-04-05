@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% extends 'devindex.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+  * {
+    color: #6C7293;
+  }
+
+  .card {
+    margin-top: 1%;
+  }
+
+  #qwe {
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  .card .card-body {
+    flex: 1 1 auto;
+    padding: 0.5rem 0.2rem;
+  }
+
+
+  * {
+    color: #6C7293;
+  }
+
+  .table1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+  }
+
+  th,
+  td {
+    text-align: center;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #191c24;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 900px;
+  }
+</style>
+
+<body>
+
+
+
+
+
+  <h2>REQUESTED LEAVE</h2>
+
+  <div class="row">
+    <div class="col-12 grid-margin table1">
+      <div class="card p-3">
+        <div class="card-body">
+
+          <input type="text" class="form-control " id="search" onkeyup="myFunction()" name="search" autocomplete="off"
+            placeholder="Search...">
+          <br>
+          <div class="table-responsive">
+            <table class="table" id="myTable">
+              <thead>
+                <tr>
+                  <!-- <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input">
+                                        </label>
+                                    </div>
+                                </th> -->
+                  <th> S.No </th>
+
+                  <th> From Date</th>
+                  <th> To Date </th>
+                  <th>Leave Type</th>
+                  <th>Reason</th>
+                  <th> Action</th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for d in devl %}
+
+                <tr>
+
+                  <td>{{forloop.counter}}</td>
+                  
+                  <td>{{d.from_date|date:"d-m-Y"}}</td>
+                  <td>{{d.to_date|date:"d-m-Y"}}</td>
+                  <td>{{d.leave_status}}</td>
+                  <td>{{d.reason}}</td>
+                  <td><a href="#">
+
+                      {% if d.status == "pending" %}
+                        <div class="badge badge-outline-primary">submitted</div>
+                        {% elif d.status == "approved" %}
+                        <div class="badge badge-outline-success">approved</div>
+                        {% elif d.status == "rejected" %}
+                        <div class="badge badge-outline-danger">rejected</div>
+                      {% endif %}
+
+                    </a>
+                  </td>
+
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("search");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+
+
+
+
+
+</body>
+{% endblock %}
+
+</html>

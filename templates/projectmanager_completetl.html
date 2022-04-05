@@ -1,0 +1,107 @@
+{% extends 'promanagerindex.html'%}
+{% load static%}
+{% block content %}
+
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">TL</h3>
+          <div class="form-group">
+            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+              style="color:white;">
+          </div>
+          <div class="table-responsive">
+            <table class="table" >
+              <thead>
+                <tr>
+               
+                  <th> Name </th>
+                  <th> Employee ID </th>
+                  <th> Mail </th>
+                  <th> Contact </th>
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                {% for i in com %}
+                {% for j in display %}
+                {% for user in user %}
+                {% if i.id == j.project_id and user.id == j.tl_id %}
+
+                <tr data-href="{% url 'projectmanager_completeteam' i.id %}">
+                  
+                  <td>{{user.fullname}}</td>
+                  <td> {{user.employee_id}}</td>
+                  <td> {{user.email}} </td>
+                  <td> {{user.mobile}} </td>
+                </tr>
+
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+    $(document).ready(function () {
+            $('table tr').click(function () {
+                window.location = $(this).data('href');
+                return false;
+            });
+        });
+</script>
+
+
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="/static/assets/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="/static/assets/vendors/chart.js/Chart.min.js"></script>
+<script src="/static/assets/vendors/progressbar.js/progressbar.min.js"></script>
+<script src="/static/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+<script src="/static/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="/static/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+<script src="/static/assets/js/jquery.cookie.js%22%20type%3D%22text/javascript"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="/static/assets/js/off-canvas.js"></script>
+<script src="/static/assets/js/hoverable-collapse.js"></script>
+<script src="/static/assets/js/misc.js"></script>
+<script src="/static/assets/js/settings.js"></script>
+<script src="/static/assets/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<script src="/static/assets/js/dashboard.js"></script>
+<script src="/static/assets/js/file-upload.js"></script>
+<!-- End custom js for this page -->
+<script src="/static/assets/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+
+<!-- inject:js -->
+<script src="/static/assets/js/chart.js"></script>
+{% endblock %}

@@ -1,0 +1,103 @@
+{%extends 'trainee_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tbody tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row" style="padding-top: 20px;">
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height:auto">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                    <h3 class="page-title ">Task List</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr data-href="#">
+                                <th class="text-white " style="padding-left:36px;">SNo</th>
+                                <th class="text-white">
+                                    Task
+                                </th>
+                                <th class="text-white">
+                                    Start Date
+                                </th>
+                                <th class="text-white">
+                                    End Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if mem %}
+                            <br> {% for i in mem %}
+                            <tr data-href="{% url 'trainee_task_details' i.id %}">
+
+
+                                <td style="padding-left:40px;">
+                                    {{forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {{i.taskname}}
+                                </td>
+                                <td>
+                                    {{i.startdate|date:"d-m-Y"}}
+                                </td>
+                                <td>
+                                    {{i.enddate|date:"d-m-Y"}}
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    $(document).ready(function() {
+        $('table tr').click(function() {
+            window.location = $(this).data('href');
+            return false;
+        });
+    });
+</script>
+
+
+
+{%endblock%}

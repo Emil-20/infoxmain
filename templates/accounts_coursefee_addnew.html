@@ -1,0 +1,68 @@
+{%extends 'index_accounts.html'%} {%load static%} {%block content%}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+  }
+  </style>
+<div class="row" style="padding-top: 20px;">
+    <h3 class="card-title text-center" style="color:white; font-weight: bold;">ADD NEW COURSE </h3><br><br>
+    <div class="col-12 col-sm-10 col-md-10 col-lg-6 mx-auto">
+        <br>
+        <div class="card " >
+            <div class="card-body">
+
+                <div class="row" style="margin-top: -10px">
+                   
+                 
+
+                        <form class="forms-sample" action="" method="Post" autocomplete="off">
+                            {% csrf_token %}
+
+                            
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label style="color:white;font-weight: bold;">Course Name</label>
+                                        <input style="font-weight: bold;" type="text" name="coursename" id="coursename" class="drop form-control ml-8 mt-2 text-light" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label style="color:white;font-weight: bold;">Total Fee</label>
+                                        <input style="color:white;font-weight: bold;" type="number" name="totalfee" id="totalfee"  class="drop form-control ml-8 mt-2 text-light" required>
+                                    </div>
+                                </div>
+                            </div>
+                              
+
+                              
+                            <br/>
+                            <div class="row">
+                                <div class="col-12 col-sm-5 col-md-5 col-lg-5"></div>
+                                <div class="text-center pull-right">
+                                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                        <i class="mdi mdi-content-save btn-icon-prepend"></i>SAVE
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+
+                            {%if msg%}
+                                <h5 style="text-align:center">{{msg}}</h5>
+                            {%endif%}
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

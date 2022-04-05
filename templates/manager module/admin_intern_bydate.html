@@ -1,0 +1,44 @@
+{% extends 'indexadmin.html'%}
+{% load static %}
+{% block content %}
+<style>
+    #myprofile{
+    margin-left: 0rem;
+    }
+   .tbox{
+       max-width: 150vh;
+       height: 60vh;
+       overflow: auto;
+       margin-left: auto;
+       margin-right: auto;
+       margin-top: 5vh;
+   }
+   table{
+       width: 100%;
+       text-align: center;
+   }
+
+</style>
+<body>
+    <div><label id="myprofile">INTERNSHIP REGISTRATION (VIEW BY DATE)</label>
+    <div class="tbox">
+        <table class="table table-responsive">
+            <tr>
+            
+                <th>Reg_Date</th>
+                <th>Action</th>
+            </tr>
+            {% for i in newdata%}
+                <tr>
+                    <td>{{i.reg_date}}</td>
+                    <td><a href="admin_intern_showbydate?reg_date={{i.reg_date|date:'Y-m-d'}}">Show all</a></td>
+                        
+                </tr>
+            {% endfor %}
+    
+        </table>
+
+    </div>
+
+</body>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'index_trainingmanager.html' %} {% block content %}{% load static %}
+<div class="row" style="padding-top: 20px;">
+  <h3 class="card-title text-center" style="color:white; font-weight: bold;"> APPLY &nbsp;LEAVE</h3><br><br>
+  <div class="col-12 col-sm-12 col-md-12 col-lg-10 mx-auto">
+      <br>
+      <div class="card">
+          <div class="card-body">
+
+              <div class="row" style="margin-top: -16px">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+
+                      <br>
+
+                      <form class="forms-sample"  method="Post" autocomplete="off">
+                          {% csrf_token %}
+
+                          <div class="row">
+                              <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                  <div class="form-group">
+                                      <label style="color:white;font-weight: bold;">FROM</label>
+                                      <input style="font-weight: bold;" type="date" name="from" id="from" onchange="myFunction()" class="drop form-control ml-8 mt-2 text-light" required>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                                  <div class="form-group">
+                                      <label style="color:white;font-weight: bold;">TO</label>
+                                      <input style="color:white;font-weight: bold;" type="date" name="to" id="to" onchange="myFunction()" class="drop form-control ml-8 mt-2 text-light" required>
+                                  </div>
+                              </div>
+                          </div>
+                            <div class="col pt-2" id="halful">
+                              <input type="radio" id="half" name="haful" value="half Day">
+                              <label id="hf">Half Day</label><br>
+                              <input type="radio" id="full" name="haful" value="full Day" checked="checked">
+                              <label id="hf">Full Day</label><br>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1" style="color:white;font-weight: bold;">REASON</label>
+                                <textarea name="reason" class="col-12 col-sm-12 col-md-12 col-lg-12 form-control  text-light" placeholder="Leave Reason" style=" background-color: #2A3038; " rows="6" required></textarea>
+                            </div>
+
+                            <br>
+
+                          <div class="row">
+                              <div class="col-12 col-sm-5 col-md-5 col-lg-5"></div>
+                              <div class="text-center pull-right">
+                                  <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                      APPLY
+                                  </button>
+                              </div>
+                          </div>
+
+                      </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--  date picker  -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#from').attr('min',today);
+  $('#to').attr('min',today);
+</script>
+
+
+<script>
+
+  document.getElementById("halful").style.display = "none";
+
+  function myFunction() {
+    var x = document.getElementById("from").value;
+    var y = document.getElementById("to").value;
+    if (x, y == '') {
+      document.getElementById("halful").style.display = "none";
+    }
+    else if (x == y) {
+      document.getElementById("halful").style.display = "block";
+    }
+    else {
+      document.getElementById("halful").style.display = "none";
+    }
+  }
+
+</script>
+
+    {% endblock %}

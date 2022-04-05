@@ -1,0 +1,138 @@
+{% extends 'BRadmin_index.html' %}
+{% block content %}
+  {% load static %}
+
+
+  <div class="row align-items-center">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Create Project</h4>
+          <p class="card-description"> </p>
+         
+           <form class="forms-sample" method="post" action="{% url 'BRadmin_createproject' %}" enctype="multipart/form-data">
+               {% csrf_token %}
+                   <div class="form-group">
+                            <label>Select Department</label>
+                            
+                         
+                              <select class="form-control" id="regdetailsdept" style="color:white;" name="Department" required>
+                                 <option selected="true" disabled="disabled" value="">Select an option</option>
+        {% for i in dept %}
+                                <option value="{{i.id}}">{{i.department}}</option>
+                               
+
+                                {% endfor %}
+                              </select>
+                          
+                          </div>
+
+            
+                   <div class="form-group">
+                            <label>Select Designation</label>
+                            
+                        <select class="form-control" id="regdetailsDesig" style="color:white;" name="designation">
+    <option selected="true" disabled="disabled" value="">Select an option</option>
+                              </select>
+                          
+                          </div>
+
+            
+               <div class="form-group">
+                        <label for="exampleInputUsername1">Project Name</label>
+                        <input type="text" name="projectname" class="form-control" id="exampleInputUsername1" style="color:white;" placeholder="" >
+                      </div>
+                          <div class="form-group">
+                        <label for="exampleTextarea1">Project discription</label>
+                        <textarea class="form-control" name="discrip" id="exampleTextarea1" rows="4" style="color:white;"  required></textarea>
+                      </div>
+        
+                <div class="form-group">
+                       
+                        <label for="exampleInputName1">Start Date</label>
+                        <input type="date" class="form-control" id="birthday1" name="start" required> 
+                   
+                      </div>           
+                      <script>
+  
+$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var minDate = year + '-' + month + '-' + day;
+    
+    $('#birthday1').attr('min', minDate);
+});  
+</script>
+
+             <div class="form-group">
+                       
+                        <label for="exampleInputName1">End Date</label>
+                        <input type="date" class="form-control" id="birthday" name="end" required> 
+                   
+                      </div>
+                                            <script>
+  
+$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var minDate = year + '-' + month + '-' + day;
+    
+    $('#birthday').attr('min', minDate);
+});  
+</script>
+           <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="img[]" class="file-upload-default" required>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="select a file">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                          </span>
+                        </div>
+                      </div>
+            <div class="form-check form-check-flat form-check-primary">
+              
+            <button type="submit" class="btn btn-primary me-2">Create project</button>
+        
+          </form>
+        </div>
+      </div>
+    </div>
+   </div>
+
+<script type="text/javascript">
+   $("#regdetailsdept").change(function () {
+       // <!-- const url = $("#personForm").attr("data-cities-url"); -->
+        const deptId = $(this).val();
+
+        $.ajax({
+            url: '{% url 'BRadmin_seradmintraineedesi1' %}',
+            data: {
+                'dept_id': deptId
+            },
+            success: function (data) {
+                $("#regdetailsDesig").html(data);
+                console.log(data);
+            }
+        });
+
+    });
+</script>
+
+  {% endblock %}

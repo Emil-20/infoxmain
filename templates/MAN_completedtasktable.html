@@ -1,0 +1,70 @@
+{% extends 'MAN_index.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Task </h4>
+        <div class="form-group">
+          <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for task.."
+            title="Type in a name" style="color:white;">
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr class="header">
+
+                <th> Name </th>
+                <th> Task </th>
+                <th> Start Date </th>
+                <th> End Date </th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in task_data %}
+              {% if i.task_status == "1" %}
+              <tr>
+                <td>
+                  <img src="{{ i.user.photo.url }}" />
+                  <span class="ps-2">{{ i.user.fullname }}</span></a>
+                </td>
+                <td> {{ i.taskname }} </td>
+                <td> {{ i.startdate|date:"d-m-Y" }} </td>
+                <td> {{ i.enddate|date:"d-m-Y" }} </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,180 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+
+<style>
+    .dropdown-item:hover {
+        color: #f4f4f8;
+    }
+    
+    td,
+    th {
+        text-align: center;
+    }
+</style>
+
+<div class="row" style="padding-top: 20px">
+    <div class="col-sm-6 grid-margin">
+        <a href="/new_team1" style="text-decoration: none">
+            <div class="card" style="height: 180px">
+                <div class="card-body">
+                    <div class="row" style="padding-top: 0px">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                <h3 class="mb-0" style="color: white">Create Team</h3>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-account-multiple-plus text-success ms-auto"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">New Team</h4>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search . . ." style="border: green" />
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="text-white">Team List</th>
+                                <th class="text-white">Trainer</th>
+                                <th class="text-white">Action</th>
+                                <th class="text-white">Progress</th>
+                                <th class="text-white">complete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if var %} {%for i in var%}
+                            <tr>
+                                <form action="/teamdelete/?tid={{i.id}}" method="post">
+                                {% csrf_token %}
+                                    <td>
+                                        <a href="#" style="text-decoration: none; color: #6c7293">{{i.name}}</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" style="text-decoration: none; color: #6c7293">{{i.trainer}}</a>
+                                    </td>
+                                    <td>
+                                        <button type="button" data-toggle="modal" data-target="#myModal{{i.id}}" class="btn btn-social-icon-text btn-outline-primary"><i class="mdi mdi-tooltip-edit"></i>Update</button>
+                                        <button type="submit" class="btn btn-social-icon-text btn-outline-danger" onclick="confirmation()"><i class="mdi mdi-delete-forever"></i>Delete</button>
+
+                                    </td>
+                                </form>
+                                    <td>
+                                        <div class="progress" style="height:20px;">
+                                            <div class="progress-bar" style="height:20px;width:{{i.progress}}%">{{i.progress}}%</div>
+                                        </div>
+                                    </td>
+                                    <form action="/submit/?tid={{i.id}}" method="post">
+                                        {%csrf_token%}
+
+                                        <td>
+                                            <button type="submit" class="btn btn-social-icon-text btn-outline-primary"><i class="mdi mdi-tooltip-edit"></i>Complete</button>
+                                        </td>
+
+
+                                    </form>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5 style="text-align:center">Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%for i in var%}
+<!-- Modal -->
+<div class="modal" id="myModal{{i.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 grid-margin stretch-card bg-dark text-light modal-content">
+        <!-- Modal Header -->
+            <form action="/teamupdate/?tid={{i.id}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                {%csrf_token%}
+                    <div class="modal-header">
+                        <h4 class="modal-title">UPDATE</h4>
+                        <button type="submit" style="color: white" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="row">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card" style="height: 320px">
+                                <div class="card-body">
+                                    <div class="dropdown">
+                                        <label style="font: size 14px; margin-top: 50px">Select Trainer</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <select class="badge badge-outline-primary bg-dark text-light" name="trainer">
+                                            <option style="display: none">{{i.trainer}}</option>
+                                            {%for var in var1%}
+                                            <option value="{{var.fullname}}">{{var.fullname}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                    <br />
+                                    <div class="form-group row">
+                                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Team Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control text-light" name="teams"required  value=" {{i.name}}"/></div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-sm-5"></div>
+                                            <div class="col-sm-7" class="pull-right">
+                                                <button type="submit" class="btn btn-outline-primary btn-icon-text"><i class="mdi mdi-refresh btn-icon-prepend"></i>Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    <!-- modal end -->
+
+    <script>
+        // js for delete button in new_team1.html page
+        {% comment %} function confirmation() {
+            var result = confirm("Are you sure...?");
+            if (result) {
+                // Delete logic goes here
+            }
+        } {% endcomment %}
+
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    {% endblock %}

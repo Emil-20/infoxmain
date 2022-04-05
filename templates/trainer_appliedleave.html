@@ -1,0 +1,110 @@
+{% extends 'trainer_index.html' %} {% load static %} {% block content %}
+
+<style>
+    table tr {
+        cursor: pointer;
+    }
+</style>
+
+
+<div class="row" style="padding-top: 20px;">
+    <div class="col-2 col-sm-1 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-10 col-md-8 col-lg-8 grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height:auto">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3 class="page-title ">Applied Leave</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-light" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+
+                                <th style="padding-left:18px;"> From Date </th>
+                                <th style="padding-left:25px;"> To Date </th>
+                                <th style="padding-left:50px;">Reason </th>
+                                <th style="padding-left:36px;"> Status </th>
+                            </tr>
+                        </thead>
+                        <tbody> {% if tm %} {% for t in tm %}
+                            <tr>
+
+                                <td>
+
+                                    <span>{{t.from_date|date:"d-m-Y"}}</span>
+                                </td>
+                                <td>{{t.to_date|date:"d-m-Y"}}</td>
+                                <td class="text-wrap text-justify" style="width: 550px">{{t.reason}}</td>
+
+                                <td>
+                                    {% if t.leaveapprovedstatus == '0' %}
+                                    <div class="badge badge-outline-warning" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-remove"></i>&nbsp; Pending
+                                    </div>
+                                    
+                                    {%elif t.leaveapprovedstatus == '1'%}
+                                    <div class="badge badge-outline-success" data-toggle="modal" data-target="#myModal{{t.id}}" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-check"></i>&nbsp; Approved
+                                    </div>
+
+                                    {% else %}
+                                    <div class="badge badge-outline-danger" data-toggle="modal" data-target="#myModal{{t.id}}" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-check"></i>&nbsp; Rejected
+                                    </div>
+
+
+
+                                    {% endif %}
+
+                                </td>
+                            </tr>
+
+
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+
+
+{% endblock %}

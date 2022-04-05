@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+{% block content %}
+  {% load static %}
+
+
+  <div class="row align-items-center">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Give Project</h4>
+          <p class="card-description"> </p>
+         
+           <form class="forms-sample">
+            
+                   <div class="form-group">
+                            <label>Select department</label>
+                            
+                             
+                               <select class="form-control" style="color:white;">
+                                <option>Category1</option>
+                                <option>Category2</option>
+                                <option>Category3</option>
+                                <option>Category4</option>
+                              </select>
+                          
+                          </div>
+
+            
+                   <div class="form-group">
+                            <label>Select Designation</label>
+                            
+                         
+                               <select class="form-control" style="color:white;">
+                                <option>Category1</option>
+                                <option>Category2</option>
+                                <option>Category3</option>
+                                <option>Category4</option>
+                              </select>
+                          
+                          </div>
+
+            
+                   <div class="form-group">
+                            <label>Select Employee</label>
+                            
+                     
+                               <select class="form-control" style="color:white;">
+                                <option>Category1</option>
+                                <option>Category2</option>
+                                <option>Category3</option>
+                                <option>Category4</option>
+                              </select>
+                          
+                          </div>
+                          <div class="form-group">
+                        <label for="exampleTextarea1">Task</label>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                      </div>
+             <div class="form-group">
+               <div class="form-group">
+                        <label for="exampleTextarea1">Date:</label>
+ <div class="form-group">
+                        <label for="exampleTextarea1" style="font-size: 15px;">12-nov-2022</label>
+                    
+                      </div>
+                      
+                      
+
+             <div class="form-group">
+                       
+                        <label for="exampleInputName1">Due Date</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday">
+                   
+                      </div>
+           <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                          </span>
+                        </div>
+                      </div>
+            <div class="form-check form-check-flat form-check-primary">
+              
+            <button type="submit" class="btn btn-primary me-2">Assign</button>
+        
+          </form>
+        </div>
+      </div>
+    </div>
+   </div>
+
+
+
+  {% endblock %}

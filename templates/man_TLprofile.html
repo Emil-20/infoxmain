@@ -1,0 +1,217 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  @media(max-width:61.938em) {
+    .row h3{
+      font-size: 18px;
+    }
+  }
+</style>
+
+<!-- <div class="content-wrapper"> -->
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">         
+          <center>
+            <h3 class="card-title">PROFILE</h3>
+            <img src="{% static '/assets/images/faces/face1.jpg' %}" alt="image" style="border-radius: 50%;"/>       
+            <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+            <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+              <div class="text-md-center text-xl-center">
+                  <h6 class="mb-1 ml-2">JOINING DATE</h6>            
+                  <!-- <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p> -->
+                </div>
+                <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                <h6 class="font-weight-bold text-muted mb-0">15/09/2020</h6>
+              </div>
+            </div>
+            <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+              <div class="text-md-center text-xl-center">
+               <h6 class="mb-1">DESIGNATION</h6>           
+                <!-- <p class="text-muted mb-0">TL</p> -->
+              </div>
+              <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+              <p class="font-weight-bold text-muted mb-0">TL</p>
+              </div>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-row justify-content-between">
+            <!-- <h4 class="card-title mb-1">Open Projects</h4> -->
+            <p class="text-muted mb-1">Your data status</p>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="preview-list">
+                <div class="preview-item border-bottom">
+                  <div class="preview-thumbnail">
+                    <!-- <div class="preview-icon bg-primary">
+                      <i class="mdi mdi-file-document"></i>
+                    </div> -->
+                  </div>
+                  <div class="preview-item-content d-sm-flex flex-grow">
+                    <div class="flex-grow">
+                      <h6 class="preview-subject">NAME</h6>
+                      <!-- <p class="text-muted mb-0">Broadcast web app mockup</p> -->
+                    </div>
+                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                      <!-- <p class="text-muted">15 minutes ago</p>
+                      <p class="text-muted mb-0">30 tasks, 5 issues </p> -->
+                      <h6 class="preview-subject">HENRY KLEIN</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-item border-bottom">
+                  <div class="preview-thumbnail">
+                    <!-- <div class="preview-icon bg-success">
+                      <i class="mdi mdi-cloud-download"></i>
+                    </div> -->
+                  </div>
+                  <div class="preview-item-content d-sm-flex flex-grow">
+                    <div class="flex-grow">
+                      <h6 class="preview-subject">DEPARTMENT</h6>
+                      <!-- <p class="text-muted mb-0">Upload new design</p> -->
+                    </div>
+                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                      <!-- <p class="text-muted">1 hour ago</p>
+                      <p class="text-muted mb-0">23 tasks, 5 issues </p> -->
+                      <h6 class="preview-subject">MANAGER</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-item border-bottom">
+                  <div class="preview-thumbnail">
+                    <!-- <div class="preview-icon bg-info">
+                      <i class="mdi mdi-clock"></i>
+                    </div> -->
+                  </div>
+                  <div class="preview-item-content d-sm-flex flex-grow">
+                    <div class="flex-grow">
+                      <h6 class="preview-subject">EMAIL</h6>
+                      <!-- <p class="text-muted mb-0">New project discussion</p> -->
+                    </div>
+                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                      <!-- <p class="text-muted">35 minutes ago</p>
+                      <p class="text-muted mb-0">15 tasks, 2 issues</p> -->
+                      <h6 class="preview-subject">henryklein123@gmail.com</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-item border-bottom">
+                  <div class="preview-thumbnail">
+                    <!-- <div class="preview-icon bg-danger">
+                      <i class="mdi mdi-email-open"></i>
+                    </div> -->
+                  </div>
+                  <div class="preview-item-content d-sm-flex flex-grow">
+                    <div class="flex-grow">
+                      <h6 class="preview-subject">CONTACT NUMBER</h6>
+                      <!-- <p class="text-muted mb-0">Sent release details to team</p> -->
+                    </div>
+                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                      <!-- <p class="text-muted">55 minutes ago</p>
+                      <p class="text-muted mb-0">35 tasks, 7 issues </p> -->
+                      <h6 class="preview-subject">9856321470</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-item">
+                  <div class="preview-thumbnail">
+                    <!-- <div class="preview-icon bg-warning">
+                      <i class="mdi mdi-chart-pie"></i>
+                    </div> -->
+                  </div>
+                  <div class="preview-item-content d-sm-flex flex-grow">
+                    <div class="flex-grow">
+                      <h6 class="preview-subject">CURRENT PROJECT</h6>
+                      <!-- <p class="text-muted mb-0">New application planning</p> -->
+                    </div>
+                    <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                      <!-- <p class="text-muted">50 minutes ago</p>
+                      <p class="text-muted mb-0">27 tasks, 4 issues </p> -->
+                      <h6 class="preview-subject">WEBSITE</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Bar chart</h4>
+          <canvas id="barChart" style="height:230px"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Pie chart</h4>
+          <canvas id="pieChart" style="height:250px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="row"> 
+    <div class="col-sm-6 grid-margin">
+      <a href="\app\man_TLip" style="text-decoration: none;"> 
+      <div class="card">
+        <div class="card-body">
+          <!-- <h5>Revenue</h5> -->
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+               
+                  <h3 class="mb-0" style="color: #f8f9fa;">Involved Projects</h3>
+              
+                <!-- <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p> -->
+              </div>
+              <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-library-plus text-primary ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+    <div class="col-sm-6 grid-margin">
+      <a href="\app\man_TLattendance" style="text-decoration: none;">
+      <div class="card">
+        <div class="card-body">
+          <!-- <h5>Sales</h5> -->
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">               
+                <h3 class="mb-0" style="color: #f8f9fa;">Attendance</h3>
+                <!-- <p class="text-success ms-2 mb-0 font-weight-medium">+8.3%</p> -->
+              </div>
+              <!-- <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6> -->
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-human-greeting text-danger ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'BRadmin_index.html' %}
+{% block content %}
+{% load static %}
+
+<div class="row ">
+    <div class="col-12 grid-margin">
+      <div class="card mt-3" style="margin-right:20px;margin-left:20px;">
+        <div class="card-body">
+          <h4 class="card-title">Tasks</h4>
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Tasks" title="Type in a name" class="form-control text-white">
+          <div class="table-responsive">
+            <table class="table" id="myTable">
+              <thead>
+                <tr>
+                  <th> Task Name </th>
+                  <th> Start Date </th>
+                  <th> End Date </th>
+                  <th> Status </th>
+                  <th> Report </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in trainer_task %}
+                
+                <tr>
+                  <td>{{i.taskname}}</td>
+                  <td>{{i.startdate|date:"d-m-Y"}} </td>
+                  <td> {{i.enddate|date:"d-m-Y"}}</td>
+                  <td><label class="badge badge-outline-success">{{i.status}}</label></td>
+
+                  <td> <button  class="btn btn-primary" ><a href="{{ i.files.url }}" style="color: white; text-decoration: none;" download="{{ i.files.url}}">Download</a></button> </td>
+
+                </tr>
+                
+                {% endfor %}
+               
+                
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
+
+
+{% endblock %}

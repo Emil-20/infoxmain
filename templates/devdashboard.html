@@ -1,0 +1,249 @@
+{%extends 'devindex.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <center>
+          <h3 class="card-title">PROFILE</h3>
+          
+          {% for d in dev %}
+       
+          <!-- <canvas id="transaction-history" class="transaction-chart"></canvas> -->
+          <img style="display: inline;justify-content: center;" src="{{d.photo.url}}"
+            class="p-2 rounded-circle" width="130" height="130" id="">
+          <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-2 px-4 px-md-3 px-xl-4 rounded mt-3">
+            <div class="text-md-center text-xl-left">
+              <h6 class="">Joining date</h6>
+            </div>
+            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+              <h6 class="font-weight-bold mb-0" style="color: #6C7293;">{{d.joiningdate|date:"d-m-Y"}}</h6>
+            </div>
+          </div>
+          <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+            <div class="text-md-center text-xl-left">
+              <h6 class="">Designation</h6>
+            </div>
+            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+              <h6 class="font-weight-bold mb-0" style="color: #6C7293;">{{d.designation}}</h6>
+            </div>
+          </div>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-row justify-content-between">
+          <p class="text-muted mb-1">Your data status</p>
+        </div>
+        <div class="row p-3 mt-3">
+          <div class="col-12">
+            <div class="preview-list">
+              <div class="preview-item border-bottom">
+                <!-- <div class="preview-thumbnail">
+                  <div class="preview-icon bg-primary">
+                    <i class="mdi mdi-file-document"></i>
+                  </div>
+                </div> -->
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">NAME</h6>
+
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+
+                    <h6 class="preview-subject">{{d.fullname}}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item border-bottom">
+                <!-- <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="mdi mdi-cloud-download"></i>
+                  </div>
+                </div> -->
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">DEPARTMENT</h6>
+
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                    <h6 class="preview-subject">{{d.department}}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item border-bottom">
+                <!-- <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="mdi mdi-clock"></i>
+                  </div>
+                </div> -->
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">EMAIL</h6>
+
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                    <h6 class="preview-subject">{{d.email}}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item border-bottom">
+                <!-- <div class="preview-thumbnail">
+                  <div class="preview-icon bg-danger">
+                    <i class="mdi mdi-email-open"></i>
+                  </div>
+                </div> -->
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">CONTACT</h6>
+
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                    <h6 class="preview-subject">{{d.mobile}}</h6>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<!-- <div class="row mt-3">
+  <div class="" style="font-size: 20px;font-weight: 600;color:6C729;color:#6C7293;">DASHBOARD</div>
+</div>
+<div class="">
+  <div class="row mt-5 " style="background-color: #191c24;">
+    <div class="col-md-6">
+      <h3 class="adname pt-4" style="margin-left:30px;color:#6C7293;">Shajeer</h3>
+      <h4 style="font-weight: 400;margin-left:30px;color:#6C7293;">python</h4>
+      <h5 style="font-weight: 400;margin-left:30px;color:#6C7293;">
+        <span style="color: #58B7AA">Joining date</span>&nbsp;10 jan 2021
+      </h5>
+      <h5 style="font-weight: 400;margin-left:30px;color:#6C7293;">
+        <span style="color: #58B7AA">Employee id</span>&nbsp;JB 007
+      </h5>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
+      <div style="margin-left: 30px;"><img src="{% static '/assets/images/faces/face5.jpg' %}"
+          class="p-3 rounded-circle justify-content-end ml-5" width="150" height="150" id=""></div>
+    </div>
+  </div> -->
+
+
+  <div class="row mt-1">
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title" style="color:white;">Pie chart</h4>
+          <canvas id="pie-chart" style="height:200px"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title" style="color:white;">Bar chart</h4>
+          <canvas id="chart" style="height:200px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../../assets/vendors/chart.js/Chart.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../assets/js/off-canvas.js"></script>
+  <script src="../../assets/js/hoverable-collapse.js"></script>
+  <script src="../../assets/js/misc.js"></script>
+  <script src="../../assets/js/settings.js"></script>
+  <script src="../../assets/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page -->
+  <script src="../../assets/js/chart.js"></script>
+  <!-- End custom js for this page -->
+
+
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          
+          data: {{ data|safe }},
+          backgroundColor: ['rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)',
+          'rgba(255, 159, 64, 0.5)'],
+          labels: 'workperformance'
+        }],
+        
+        labels: ['workperformance','Attitude','Creativity']
+        
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+  <script>
+
+let ctx = document.getElementById("chart").getContext("2d");
+let chart = new Chart(ctx, {
+type: "bar",
+data: {
+ labels: ['workperformance','Attitude','Creativity'],
+ datasets: [
+  {
+    label: "Performance",
+    backgroundColor: "#79AEC8",
+    borderColor: "#417690",
+    
+    data: {{ data|safe }},
+    backgroundColor: ['rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'],
+
+  }
+ ]
+},
+options: {
+  title: {
+    text: "Performance",
+   display: true
+  }
+ }
+});
+
+  </script>
+
+  {% endblock %}

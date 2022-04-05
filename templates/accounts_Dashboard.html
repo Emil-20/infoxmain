@@ -1,0 +1,198 @@
+{%extends 'index_accounts.html'%} {%load static%} {%block content%}
+<style>
+  .img-fluid {
+    height: 150px;
+    width: 150px;
+    float: right;
+  }
+
+  @media (min-width: 200px) and (max-width: 768px) {
+    .img-fluid {
+      height: 120px;
+      width: 120px;
+      display: block;
+      float: left;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>
+
+<h3 style="padding-left: 7px">My Profile</h3>
+<!-- <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class=" col-md-7 order-2 order-md-7">
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alex Paul
+                      </tr>
+                      <br /><br />
+                      <tr>
+                        Designation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python Developer
+                      </tr>
+                      <br /><br />
+                      <tr>
+                        Employee ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;000
+                      </tr><br /><br />
+                      <tr>
+                        Date of Joining:&nbsp;&nbsp;&nbsp;02/01/2020
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class=" col-md-5 order-1 order-md-5 ">
+                <img src="{% static '/assets/images/Dashboard_trainingmanager/img1.jpeg' %}" alt="image"
+                  class="rounded-circle img-fluid" />
+              </div><br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+<div class="row">
+  <div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <center>
+          <h3 class="card-title">PROFILE</h3>
+          <img src="{{z.photo.url}}" alt="image" style="border-radius: 50%; width:100px; height:100px;" />
+          <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+            <div class="text-md-center text-xl-left">
+              <h6 class="mb-1">Joining Date</h6>
+            </div>
+            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+              <h6 class="text-muted mb-0">{{z.joiningdate}}</h6>
+            </div>
+          </div>
+          <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+            <div class="text-md-center text-xl-left">
+              <h6 class="mb-1">Desigination</h6>
+            </div>
+            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+              <h6 class="text-muted mb-0">{{z.designation.designation}}</h6>
+            </div>
+          </div>
+        </center>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-row justify-content-between">
+          <p class="text-muted mb-1">Your data status</p>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+          <div class="col-12">
+            <div class="preview-list">
+              <div class="preview-item border-bottom">
+                <div class="preview-thumbnail">
+
+                </div>
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">NAME</h6>
+                    
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                    
+                    <h6 class="preview-subject"> {{z.fullname }}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item border-bottom">
+                <div class="preview-thumbnail">
+                 
+                </div>
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">DEPARTMENT</h6>
+                  
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                   
+                    <h6 class="preview-subject">{{ z.department.department }}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item border-bottom">
+                <div class="preview-thumbnail">
+                 
+                </div>
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">EMAIL</h6>
+                  
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                   
+                    <h6 class="preview-subject">{{ z.email}}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item border-bottom">
+                <div class="preview-thumbnail">
+                  
+                </div>
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                    <h6 class="preview-subject">CONTACT NUMBER</h6>
+                   
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                   
+                    <h6 class="preview-subject">{{z.mobile}}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="preview-item">
+                <div class="preview-thumbnail">
+                 
+                </div>
+                <div class="preview-item-content d-sm-flex flex-grow">
+                  <div class="flex-grow">
+                   
+                  </div>
+                  <div class="me-auto text-sm-right pt-2 pt-sm-0">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} <div class="content-wrapper" style="padding-left: 2px;">
+  <h3 style="padding-left: 7px">Chart</h3> {% endcomment %}
+  {% comment %} <div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Pie chart</h4>
+          <canvas id="pieChart" style="height: 250px"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Bar chart</h4>
+          <canvas id="barChart" style="height: 230px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+
+  {%endblock%}

@@ -1,0 +1,76 @@
+{%extends 'promanagerindex.html'%}
+{%load static%}
+{%block content%}
+<style>
+    *{
+      color:#6C7293;
+    }
+    tr[data-href]{
+        cursor:pointer;
+    }
+</style>
+<div class="row " >
+    <div class="" style="font-size: 20px;font-weight: 600;color:#6C7293;">Developer</div></div>
+<div class="container">
+  <div class="row mt-3">
+    <div class="card">
+      <div class="pl-2 pr-2 pt-3 pb-3">
+          <div class="text-light" style="font-size:18px;font-weight:400;">Developers List</div>
+          <div class="mt-3"><input type="text" class="form-control text-light" id="myInput" onkeyup="myFunction()" placeholder="Search for names" ></div>
+        <div class="table-responsive mt-4">
+          <table class="table ">
+            <thead>
+              <tr>
+                <th scope="col" >#</th>
+                <th scope="col" >Developer Name</th>
+                <th scope="col" >Joining Date</th>
+                <th scope="col" >Email</th>
+                <th scope="col" >Designation</th>
+                <th scope="col" >Department</th>
+                
+              </tr>
+            </thead>
+            
+            {% for d in man %}
+
+            <tbody  id="myTable">
+              <tr data-href="{% url 'projectmanDevDashboard' d.id %}">
+                  <td>{{forloop.counter}}</td>
+                <td><img src="{{d.photo.url}}" class="rounded-circle " width="50" height="50" >
+                  <span style="margin-left: 10px;">{{d.fullname}}</span></td>
+                <td >{{d.joiningdate|date:'d-m-Y'}}</td>
+                <td>{{d.email}}</td>
+                <td>{{d.designation}}</td>
+                <td>{{d.department}}</td>
+              </tr>
+            </tbody>                          
+            {% endfor %}             
+          </table>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+<script>
+    // table row click
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll("tr[data-href]");
+        rows.forEach(row => {
+            row.addEventListener("click", () => {
+                window.location.href = row.dataset.href;
+            });
+        });
+    }); 
+
+// search table details
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+    </script>
+{% endblock %}

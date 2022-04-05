@@ -1,0 +1,118 @@
+{%extends 'trainer_index.html' %} {% load static %} {% block content %}
+<style>
+    #choose::file-selector-button {
+        background-color: rgb(37, 125, 207);
+        padding: 12px;
+        color: white;
+        width: 100px;
+    }
+</style>
+<!-- Give task for trainees -->
+<div class="row mt-5">
+    <div class="col-12 col-sm-1 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-10 col-md-9 col-lg-9 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Task</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data" autocomplete="OFF">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row"></div>
+                            <div class="form-group row">
+                                <label class="col-5 col-sm-3 col-md-3 col-lg-3 col-form-label mt-3">Select Trainees</label
+                >
+                <div class="col-4 col-sm-6 col-md-6 col-lg-6 ">
+                  <div class="dropdown">
+                    <select name="trainee_list" id="" class="badge badge-outline-primary bg-dark text-justify mt-3" onfocus='this.size=5;' style="color: #bfbfbf;width:110px;" onblur='this.size=1;' onchange='this.size=1; this.blur();' required="">
+                      <option value="" selected style="display: none;" >Trainees</option>
+                     {% for i in var    %}
+                      <option value="{{i.id}}">{{i.fullname}} </option>
+                      {% endfor %}
+                      </select>
+                
+               
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="exampleInputEmail2"  class="col-5 col-sm-3 col-md-3 col-lg-3 col-form-label">Task</label>
+                                <div class="col-7  col-sm-8 col-md-8 col-lg-8">
+                                    <input type="text" class="form-control text-light" name="taskname" id="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                                    <label for="exampleInputEmail2" class=" col-form-label">Start Date</label>
+                                </div>
+
+                                <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+                                    <input type="Date" class="form-control text-light" name="start" id="from" required>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                                    <label for="exampleInputMobile" class=" col-form-label">End Date</label>
+                                </div>
+
+                                <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+                                    <input type="Date" class="form-control text-light" name="end" id="to" required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="exampleInputEmail2" class="col-5 col-sm-3 col-md-3 col-lg-3 col-form-label">Description</label>
+            <div class="col-7 col-sm-8 col-md-8 col-lg-8">
+              <textarea
+                class="form-control text-light"
+                rows="30"
+                id=""
+                style="height: 140px" name="description"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label
+              for="exampleInputConfirmPassword2"
+              class="col-5 col-sm-3 col-md-3 col-lg-3 col-form-label"
+              >Attach File</label
+            >
+            <div class="col-7 col-sm-6 col-md-5 col-lg-5 ">
+              <input type="file" name="files" class="form-control text-light" id="choose" / required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 col-sm-5 col-md-5"></div>
+            <div class="col-7 col-sm-5 col-md-7">
+              <button
+                type="submit" class="btn btn-outline-primary btn-icon-text mt-3"
+              >
+                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit
+              </button>
+            </div>
+          </div>
+       
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ends here -->
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#from').attr('min',today);
+  $('#to').attr('min',today);
+</script>
+
+{%endblock%}

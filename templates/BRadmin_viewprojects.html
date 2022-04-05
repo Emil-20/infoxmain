@@ -1,0 +1,156 @@
+{% extends 'BRadmin_index.html' %}
+{% block content %}
+  {% load static %}
+
+
+  <div class="row align-items-center">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Give Project</h4>
+          <p class="card-description"> </p>
+         
+           <form class="forms-sample" method="post" action="{% url 'BRadmin_viewprojectform' %}" enctype="multipart/form-data">
+               {% csrf_token %}
+                    <div class="form-group">
+                            <label>Select Department</label>
+                            
+                         
+                              <select class="form-control" id="regdetailsdept" style="color:white;" name="Department" required>
+                                 <option selected="true" disabled="disabled" value="">Select an option</option>
+        {% for i in dept %}
+                                <option value="{{i.id}}">{{i.department}}</option>
+                               
+
+                                {% endfor %}
+                              </select>
+                          
+                          </div>
+
+
+            
+                <div class="form-group">
+                            <label>Select Designation</label>
+                            
+                        <select class="form-control" id="regdetailsDesig" style="color:white;" name="designation">
+    <option selected="true" disabled="disabled" value="">Select an option</option>
+                              </select>
+                          
+                          </div>
+
+
+            
+                   <div class="form-group">
+                            <label>Select Project</label>
+                            
+                      
+                            <select class="form-control" style="color:white;" id="selectproject" name="projectname">
+         <option selected="true" disabled="disabled" value="">Select an option</option>
+                              </select>
+                          
+                          
+                          </div>
+                           <div class="form-group">
+                        <label for="exampleTextarea1">Task</label>
+                        <textarea class="form-control" name="discrip" id="exampleTextarea1" style="color:white;" rows="4"></textarea>
+                      </div>
+                          <div class="form-group">
+                   <label for="exampleInputName1">StartDate</label>
+                        <input type="date" class="form-control" id="birthday1" name="start" required> 
+                   
+                    
+                      </div>
+                      
+  
+
+             <div class="form-group">
+                       
+                        <label for="exampleInputName1">End Date</label>
+                        <input type="date" class="form-control" id="birthday" name="end" required> 
+                   
+                      </div>
+                             
+                                 
+            <div class="form-check form-check-flat form-check-primary">
+              
+            <button type="submit" class="btn btn-primary me-2">Assign</button>
+        
+          </form>
+        </div>
+      </div>
+    </div>
+   </div>
+                                  <script>
+  
+$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var minDate = year + '-' + month + '-' + day;
+    
+    $('#birthday1').attr('min', minDate);
+});  
+</script>
+   <script>
+  
+$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var minDate = year + '-' + month + '-' + day;
+    
+    $('#birthday').attr('min', minDate);
+});  
+</script>
+   <script>
+
+   $("#regdetailsdept").change(function () {
+        <!-- const url = $("#personForm").attr("data-cities-url"); -->
+        const deptId = $(this).val();
+
+        $.ajax({
+            url: '{% url 'BRadmin_seradmindesig' %}',
+            data: {
+                'dept_id': deptId
+            },
+            success: function (data) {
+                $("#regdetailsDesig").html(data);
+                console.log(data);
+            }
+        });
+
+    });
+    $("#regdetailsDesig, #regdetailsdept").change(function () {
+      
+        const deptId = $("#regdetailsdept").val();
+        const desgId = $("#regdetailsDesig").val();
+
+
+        $.ajax({
+            url: '{% url 'BRadmin_selectproject' %}',
+            data: {
+                'dept_id': deptId,
+                'desig_id':desgId
+            },
+            success: function (data) {
+                $("#selectproject").html(data);
+            }
+        });
+    });
+</script>
+
+  {% endblock %}

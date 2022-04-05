@@ -1,0 +1,51 @@
+{%extends 'TLindex.html'%}
+{%load static%}
+{%block content%}
+<style>
+  *{
+    color:#6C7293;
+  }
+</style>
+
+<div class="row pt-5" style="background-color: black;">
+    <div class=" text-light" style="font-size: 20px;font-weight: 600;">PROJECT TASKS</div>
+</div>
+
+    <div class="row mt-5">
+          <div class="card">
+            <div class="card-body">
+                <div class="text-info" style="font-size: 20px;font-weight: 600;">Sub task</div>
+                <div class="table-responsive mt-3">
+                <table class="table  table-bordered ">
+                    <thead  style="background-color: black;">
+                      <tr >
+                        <th scope="col" class="text-light">Date</th>
+                        <th scope="col" class="text-light">Work done</th>
+                        <th scope="col" class="text-light">Files</th>
+                        <th scope="col" class="text-light">Actions</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-light">jan 21, 2022 </td>
+                        <td class="text-light">1.front end work completed 2.back end work in progress</td>
+                       <td class="text-light"><a href="#" style="text-decoration: none;">Download</a> </td>
+                      <td class="text-primary"><a href="#" style="text-decoration: none;"></a></td>
+                       
+                      </tr>
+                      <tr>
+                        <td class="text-light">jan 10, 2022</td>
+                        <td class="text-light">1.front end work completed 2.back end work in progress</td>
+                        <td class="text-primary"><a href="#" style="text-decoration: none;">Download</a> </td>
+                        <td class="text-primary"><a href="#" style="text-decoration: none;"></a></td>
+                       
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+     
+    </div>
+{% endblock %}

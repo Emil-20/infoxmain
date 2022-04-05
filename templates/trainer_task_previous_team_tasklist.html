@@ -1,0 +1,107 @@
+{%extends 'trainer_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row" style="padding-top: 20px;">
+    <div class="col-12 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height:auto">
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>Task List</h4>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm ">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+
+                                <th class="text-white">SNo.</th>
+
+                                <th class="text-white">
+                                    Task
+                                </th>
+                                <th class="text-white">Deadline</th>
+                                <th class="text-white">Attached Files</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <br> {% if tsk %} {% for i in tsk %}
+                            <tr>
+
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+
+                                <td>
+                                    {{i.taskname}}
+                                </td>
+                                <td>
+                                    {{i.enddate|date:"d-m-Y"}}
+                                </td>
+                                <td>
+
+                                {% if i.user_files %}
+                               
+                                    <a href="{{i.user_files.url}}" class="btn btn-outline-primary mdi mdi-format-vertical-align-bottom"
+                                    style="font-size: 15px;overflow: hidden  mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;" download>Download</a>
+                                
+                                {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+    //js for submit button in new_team.html page
+    function redirect() {
+        window.location.href = "/trainee_task_list";
+    }
+
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{%endblock%}

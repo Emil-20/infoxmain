@@ -1,0 +1,140 @@
+{% extends 'TLindex.html' %}
+{% load static %}
+{% block content %}
+<style>
+  * {
+    color: #6C7293;
+  }
+</style>
+<h2>Requested Leave</h2>
+
+
+<style>
+  .card {
+    margin-top: 1%;
+  }
+
+  #qwe {
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  .card .card-body {
+    flex: 1 1 auto;
+    padding: 0.5rem 0.2rem;
+  }
+
+
+  .table1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+  }
+
+  th,
+  td {
+    text-align: center;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #191c24;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 900px;
+  }
+</style>
+
+
+<div class="row">
+  <div class="col-12 grid-margin table1">
+    <div class="card p-3">
+      <div class="card-body">
+        <h4 class="card-title ">Tasks</h4>
+        <input type="text" class="form-control " onkeyup="myFunction()" id="search" name="search" autocomplete="off" placeholder="Search...">
+        <br>
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr>
+                <!-- <th>
+                                  <div class="form-check form-check-muted m-0">
+                                      <label class="form-check-label">
+                                          <input type="checkbox" class="form-check-input">
+                                      </label>
+                                  </div>
+                              </th> -->
+                <th> S.No </th>
+                <th> From </th>
+                <th> To</th>
+                <th>Leave Type</th>
+                <th>Reason</th>
+                <th> Status </th>
+              </tr>
+            </thead>
+            {% for i in var %}
+            <tbody>
+              <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td> {{i.from_date|date:"d-m-Y"}} </td>
+                  <td> {{i.to_date|date:"d-m-Y"}}</td>
+                  <td>{{i.leave_status}}</td>
+                  <td>{{i.reason}}</td>
+                  <td>
+                    {% if i.status == "submitted" %}
+                      <div class="badge badge-outline-success">{{i.status}}</div>
+                    {% elif i.status == "Approved" %}
+                      <div class="badge badge-outline-success">{{i.status}}</div>
+                    {% endif %}
+                  </td>     
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function myFunction() {
+   var input, filter, table, tr, td, i, txtValue;
+   input = document.getElementById("search");
+   filter = input.value.toUpperCase();
+   table = document.getElementById("myTable");
+   tr = table.getElementsByTagName("tr");
+   for (i = 0; i < tr.length; i++) {
+     td = tr[i].getElementsByTagName("td")[1];
+     if (td) {
+       txtValue = td.textContent || td.innerText;
+       if (txtValue.toUpperCase().indexOf(filter) > -1) {
+         tr[i].style.display = "";
+       } else {
+         tr[i].style.display = "none";
+       }
+     }
+   }
+ }
+ </script>
+
+
+</a {% endblock %}

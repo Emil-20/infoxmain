@@ -1,0 +1,82 @@
+{% extends 'index_accounts.html' %} {% block content %}{% load static %}
+
+<!-- Give task for trainees -->
+
+<div class="row mt-5">
+  <div class="col-12 col-sm-1 col-md-2 col-lg-2"></div>
+
+  <div class="col-12 col-sm-10 col-md-9 col-lg-9 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+
+
+  {% for i  in  mem1 %}
+    <div class="row">
+      <div class="col-8 col-sm-8 col-md-10 col-lg-10 mt-3">
+        <h4 class="card-description"> Bank Account Details </h4>
+      </div>
+      <div class="col-4 col-sm-4 col-md-2 col-lg-2">
+        <img src="{{media_url}}{{i.photo.url}}" class="img-fluid rounded-circle mb-3 " alt="image"
+          style="margin-right:20px">
+      </div>
+    </div>
+    <p class="card-description"> Bank details </p>
+
+    
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group row">
+          <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Full Name:</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            <p class="mt-2">{{i.fullname}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group row">
+          <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Account Number:</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            <p class="mt-2">{{i.account_no}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group row">
+          <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">IFSC:</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            <p class="mt-2">{{i.ifsc}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group row">
+          <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Branch:</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            <p class="mt-2">{{i.bank_branch}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group row">
+          <label class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Bank Name</label>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+            <p class="mt-2">{{i.bank_name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+      
+  
+
+
+<!-- ends here -->
+
+
+
+<!-- ends here -->
+{% endblock %}

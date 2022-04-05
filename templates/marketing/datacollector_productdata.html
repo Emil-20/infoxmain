@@ -1,0 +1,76 @@
+{% extends 'marketing/datacollector_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_carddet.css' %}">
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body" style="overflow-x: auto;">
+           <table class="table table-responsive table-bordered text-center" style="color: white;">
+              <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone number</th>
+                  <th>Location</th>
+              </tr>
+              <tr>
+                  <td>Mahesh</td>
+                  <td>mahesh@gmail.com</td>
+                  <td>5675676756</td>
+                  <td>Kochi</td>
+              </tr>
+           </table>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="container d-none d-lg-block">
+    <div class="card">
+        <div class="card-body dcsub">
+            <table class="table table-responsive table-bordered d-flex justify-content-center"">
+                <tr id="rowdata">
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="email" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                    <td><input type="text" name="" id=""></td>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="mt-4">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container d-lg-none mt-5">
+    <div class="card">
+        <div class="card-body dcsub text-center">
+            <div class="mb-2">
+                <label for="">Name:</label><br>
+                <input class="mt-2"  type="text" name="" id="">
+            </div>
+
+            <div class="mb-2">
+                <label for="">Email:</label><br>
+                <input class="mt-2" type="email" name="" id="">
+            </div>
+            
+            <div class="mb-2">
+                <label for="">Phone Number:</label><br>
+                <input class="mt-2" type="text" name="" id="">
+            </div>
+            
+            <div class="mb-2">
+                <label for="">Location:</label><br>
+                <input class="mt-2" type="text" name="" id="">
+            </div>            
+
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="mt-4">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}        

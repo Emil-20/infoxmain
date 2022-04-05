@@ -1,0 +1,425 @@
+{%load static%}
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--  date picker  -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<title>Internship Registration</title>
+<style>
+ /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+  section ,.container{
+      overflow-x:hidden;
+  }
+
+  .text-left {
+    color:white;
+    font-size:14px;
+    background-color: transparent;
+  }
+
+
+  input[type=text],
+  input[type=email],
+  input[type=number]
+ {
+    background-color: transparent;
+    border: 1px solid #636d87;
+    color:white;
+  }
+    input[type=text]:focus,
+    input[type=email]:focus,
+    input[type=number]:focus{
+    background-color: transparent;
+    border: 1px solid #636d87;
+    color:white;
+  }
+
+  #course {
+    background: none;
+    border: 1px solid #636d87;
+
+  }
+  .btn {
+            border:1px solid #636d87;
+            color: #636d87;
+        }
+
+  option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+    background-color: #191c24;
+    color: white;
+    border: none;
+  }
+
+  .ui-widget-content {
+    border: none;
+    background: #191c24;
+    color: #636d87;
+  }
+
+  .ui-datepicker th {
+    padding: 0.7em 0.3em;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    color: white;
+  }
+
+  .ui-state-default,
+  .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default,
+  .ui-button,
+  html .ui-button.ui-state-disabled:hover,
+  html .ui-button.ui-state-disabled:active {
+    border: 1px solid #636d87;
+    border-radius: 50%;
+    background: #191c24;
+    font-weight: normal;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    padding: 10px;
+    
+  }
+
+  .ui-widget-header {
+    border: 1px solid #636d87;
+    background: #191c24;
+    color: white;
+    font-weight: bold;
+  }
+
+  .ui-widget.ui-widget-content {
+    border: 1px solid #636d87;
+  }
+#choose::file-selector-button {
+    background-color: rgb(37, 125, 207);
+    color:white;
+    width:100px;
+    margin-left:-10px;
+    height:40px;
+    margin-top:-5px;
+    border:none;
+    
+    }
+    #choose{
+        background-color:#2a3038;
+    }
+</style>
+
+<body style="background: url('/static/Login_bg.jpg') 100% 100% no-repeat fixed;background-size: cover;">
+  <section>
+    <div class="row px-4">
+      <div class="col-md-3"></div>
+      <div class="col-md-6  mt-5 mb-5" style="border-radius: 8px;background-color:  #191c24;">
+        <form method="post" id="alert1" action="{%url 'internship_save'%}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <center>
+            <div class="mt-5" style="font-size:25px;font-weight: bolder;color: white;">INTERNSHIP REGISTRATION</div>
+          </center>
+          <div class="container mt-5 mb-5">
+
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-3 ">Full Name</div>
+                <input type="text" id="name" name="name" class="form-control mt-2 " 
+                  style="border-radius:5px; " autocomplete="off" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-3 ">College Name</div>
+                <input type="text" id="colname" name="college_name" class="form-control mt-2 "
+                  style="border-radius:5px; " autocomplete="off" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">Reg No</div>
+                <input type="text" id="regno" name="reg_no" class="form-control mt-2 "
+                  style="border-radius:5px; " autocomplete="off" required>
+              </div>
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">Course</div>
+                <select name="course" id="course" class="form-control mt-2 text-light" style="border-radius:5px; " required>
+                  <option style="color:#636d87;" class="">--select course--</option>
+                  <option class="" value="M.TECH">M.TECH</option>
+                  <option class="" value="B.TECH">B.TECH</option>
+                  <option class="" value="BCA">BCA</option>
+                  <option class="" value="MCA">MCA</option>
+                  <option class="" value="B.COM">B.COM</option>
+                  <option class="" value="Diploma">Diploma</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-3 ">Stream</div>
+                <input type="text" name="stream" id="stream"  class="form-control mt-2"
+                  style="border-radius:5px; " autocomplete="off" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-3 ">Platform</div>
+                <input type="text" id="platform" name="platform"  class="form-control mt-2"
+                  style="border-radius:5px; " autocomplete="off" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-3 ">Branch</div>
+                <select name="branch" id="course" class="form-control mt-2 text-light" style="border-radius:5px; " required>
+                  <option style="color:#636d87;" class="">--select branch--</option>
+                  {% for i in branch %}
+                  <option class="" value="{{i.id}}">{{i.branch_name}}</option>
+                  {% endfor %}
+                </select>
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">Start Date</div>
+                <input type="text" id="startDate" autocomplete="off" required name="start_date"
+                  class="form-control mt-2 " style="border-radius:5px; ">
+              </div>
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">End Date</div>
+                <input type="text" id="endDate" autocomplete="off" required  name="end_date"
+                  class="form-control mt-2" style="border-radius:5px; ">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="text-left mt-3 ">Mobile Number</div>
+                <input type="number" id="mobile" name="mobile" required  class="form-control mt-2 "
+                  style="border-radius:5px;" autocomplete="off">
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <div class="text-left mt-3 ">Alternative Number</div>
+                <input type="number" id="altno" name="alternative_no" 
+                  class="form-control mt-2" required style="border-radius:5px; " autocomplete="off">
+              </div>
+            </div>
+            <div class="row">
+              <div class="container">
+                <div class="text-left mt-3 ">Email</div>
+                <input type="email" id="email" name="email" class="form-control mt-2 "
+                  style="border-radius:5px; " required autocomplete="off">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">Profile Pic</div>
+                
+                <input type="file" id="choose" onchange="showPreview(event);" accept="image/*"
+                  name="profile_pic" class="form-control mt-2 text-light" style="border:none;" required>
+                <div class="row">
+                  <div class="preview ml-3">
+                    <img id="files-preview" width=200 height=200 style="display:none;">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="text-left mt-3 ">Attach File</div>
+                <input type="file" class="form-control mt-2 text-light" name="attach"  id="choose" style="border:none " required/>
+              </div>
+     
+             
+            </div>
+            
+
+
+            <div class=" row  mt-5 ">
+             
+              <div class="col-lg-12 text-center">
+                <button type="submit" id="alert2" onclick="dates();" class="btn btn-outline-primary btn-center" style="width:150px">Apply</button>
+              </div>
+          
+            </div>
+            </div>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </section>
+  {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(function () {
+            javascript: history.go(-1);
+        })
+    </script>
+    {% endif %}
+    {% if msg_error %}
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ msg_error }}',
+        }).then(function () {
+            javascript: history.go(-1);
+        })
+    </script>
+    {%endif%}
+  <script>
+  function dates() {
+    var checkin_date = $("#startDate").datepicker('getDate');
+    var checkout_date = $("#endDate").datepicker('getDate');
+    var name = $("#name")
+    if (checkout_date <= checkin_date ) {
+      alert("This Dates booking is not valid");
+      window.location.reload();
+    }
+
+    else {
+      return true;
+
+    }
+
+
+  }
+
+  function showPreview(event) {
+    if (event.target.files.length > 0) {
+      var src = URL.createObjectURL(event.target.files[0]);
+      var preview = document.getElementById("files-preview");
+      preview.src = src;
+      preview.style.display = "block";
+    }
+  }
+
+  $(function () {
+
+    // $("#startDate").datepicker({
+    //   minDate: 1,
+    //   onClose: function (selectedDate) {
+    //     $("#endDate").datepicker("option", "minDate", selectedDate);
+    //   }
+    // });
+    // $("#endDate").datepicker({
+
+    //   onClose: function (startDate) {
+
+    //     $("#startDate").datepicker("option" , "maxDate", startDate);
+    //   }
+    // });
+
+
+  $("#startDate").datepicker({
+      dateFormat: 'yy-mm-dd',
+      numberOfMonths: 1,
+      minDate: 1,
+    
+      onSelect: function (selected) {
+        var dt = new Date(selected)
+        dt.setDate(dt.getDate() + 1);
+        $("#endDate").datepicker("option", "minDate", dt);
+      }
+    });
+    
+    $("#endDate").datepicker({
+        dateFormat: 'yy-mm-dd',
+        numberOfMonths: 1,
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() - 1);
+            $("#startDate").datepicker("option", "maxDate", dt);
+        }
+    });
+
+    $("#endDate").on('change', function () {
+      var checkin_date = $("#startDate").datepicker('getDate');
+      var checkout_date = $("#endDate").datepicker('getDate');
+      var diffblw_dates = (checkout_date - checkin_date) / 1000 / 60 / 60 / 24;
+      if (diffblw_dates <= 0) {
+        alert("This Dates booking is not valid");
+        window.location.reload();
+      } else {
+        return true;
+
+      }
+    });
+
+  });
+</script>
+<script>
+
+  $(document).on('click', '#alert2', function (e) {
+    e.preventDefault();
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: true
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: ' Submit',
+      cancelButtonText: '  cancel!',
+      reverseButtons: true,
+      
+     
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $('#alert1').submit();
+        swalWithBootstrapButtons.fire(
+          'Success',
+          'Your file is Uploaded...',
+
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+
+        )
+      }
+    })
+  });
+</script>
+</body>
+
+
+
+</html>

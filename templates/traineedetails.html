@@ -1,0 +1,216 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+<!-- trainee details starts here -->
+<div class="col-12 grid-margin">
+    <div class="card mt-3 mb-5">
+        <div class="card-body">
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-8 col-md-10 mt-3">
+                        <h4 class="card-description"> Personal Information </h4>
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <img src="{{media_url}}{{vars.photo.url}}" class="img-fluid rounded-circle mb-3 " alt="image">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Full Name:</label>
+                            <div class="col-6">
+                                <p class="mt-2">{{vars.fullname}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Addresss:</label>
+                            <div class="col-6">
+                                <p class="mt-2">{{vars.presentaddress1}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Date of Birth:</label>
+                            <div class="col-6">
+                                <p class="mt-2">{{vars.dateofbirth}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Mail Id:</label>
+                            <div class="col-6">
+                                <p class="mt-2">{{vars.email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Contact No:</label>
+                            <div class="col-6 ">
+                                <p class="mt-2">{{vars.mobile}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Department:</label>
+                            <div class="col-6">
+                                <p class="mt-2">{{vars.department.department}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label">Trainer Name:</label>
+                            <div class="col-6">
+                                <p class="mt-2">{{tre.trainer}}</p>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!--details ends here -->
+
+    <!-- pie chart and bar chart starts here -->
+    <div class="page-header">
+        <h3 class="page-title"> Chart </h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Pie chart</h4>
+                    <canvas id="pie-chart" style="height:250px"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Bar chart</h4>
+                    <canvas id="chart" style="height:230px"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ends here -->
+
+    <!-- attendance form starts here -->
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <h4 class="card-title text-center">Attendance</h4>
+                        </div>
+                    </div>
+                    <form class="forms-sample" action="{% url 'statusTable' vars.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="exampleInputEmail2" class="col-3 col-sm-3 col-md-3 col-lg-3 col-form-label">Start Date</label>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+                                <input type="date" id="txtDate" name="startdate" class="form-control text-light" id="exampleInputStartdate" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputMobile" class="col-3 col-sm-3 col-md-3 col-lg-3 col-form-label">End Date</label>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+                                <input type="date" id="txtDate1" name="enddate" class="form-control text-light" id="exampleInputEnddate" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 col-sm-6 col-md-6"></div>
+                            <div class="col-9 col-sm-6 col-md-6">
+                                <button type="submit" class="btn btn-outline-primary btn-icon-text">Search </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--attendance form ends here -->
+    <script>
+        var dtToday = new Date();
+        var dtToday = new Date();
+         var month = dtToday.getMonth() + 1;
+         var day = dtToday.getDate();
+         var year = dtToday.getFullYear();
+         if (month < 10)
+              month = '0' + month.toString();
+          if (day < 10)
+              day = '0' + day.toString();
+          var maxDate = year + '-' + month + '-' + day;
+          document.getElementById("txtDate").setAttribute("max", maxDate);
+          document.getElementById("txtDate1").setAttribute("max", maxDate);
+          
+                  
+                  
+    </script>
+    <script>
+
+        var config = {
+          type: 'pie',
+          data: {
+            datasets: [{
+              
+              data: {{ data|safe }},
+              backgroundColor: ['#A52A2A','#483D8B', '#5F9EA0', '#6495ED', '#228B22','#008080', '#DAA520', '#FF4500'],
+              label: 'workperformance'
+            }],
+            
+            labels: ['workperformance','Attitude','Creativity']
+            
+          },
+          options: {
+            responsive: true
+          }
+        };
+    
+        window.onload = function() {
+          var ctx = document.getElementById('pie-chart').getContext('2d');
+          window.myPie = new Chart(ctx, config);
+        };
+  
+      </script>
+
+<script>
+
+        
+    let ctx = document.getElementById("chart").getContext("2d");
+    let chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+       labels: ['workperformance','Attitude','Creativity'],
+       datasets: [
+        {
+          label: "Performance",
+          backgroundColor: "#79AEC8",
+          borderColor: "#417690",
+          
+          data: {{ data|safe }},
+          backgroundColor: ['#A52A2A','#483D8B', '#5F9EA0', '#6495ED', '#228B22','#008080', '#DAA520', '#FF4500'],
+    
+        }
+       ]
+      },
+      options: {
+        title: {
+         text: "Performance",
+         display: true
+        }
+       }
+    });
+    
+          </script>
+
+    {% endblock %}

@@ -1,0 +1,246 @@
+{% extends 'index_accounts.html' %} {% load static %} {% block content %}
+
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+  }
+  </style>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12col-lg-12 grid-margin">
+            <div class="card mt-3 mb-5">
+                <div class="card-body">
+                    <form class="forms-sample"  method="post"autocomplete="off">
+                    <div class="row">
+
+                        <h5>INITIAL PAYMENT</h5>
+                        <div class="h-divider"></div><br><br>
+                        
+                           
+                            {% csrf_token %}
+
+                            <div class="row">
+                                
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted" style="padding-left:4px ;padding-top:10px; width:130px;"> INITIAL AMOUNT</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="text" class="form-control text-light" name="in_amt" >
+
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px;width:200px;">BALANCE AMOUNT</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
+                                    <input type="number" class="form-control text-light" name="in_bal_amt" >
+                                </div><br><br>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px; width:130px;">PAID ON</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="date" class="form-control text-light" name="in_paid_on" id="date" >
+                                </div><br><br>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px;width:200px;">Due Date</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="DATE" class="form-control text-light" name="in_due_date" >
+                                </div><br><br>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px; width:130px;">PAID AMOUNT</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="text" class="form-control text-light" name="in_paid_amt" id="date" >
+                                </div><br><br>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px;width:200px;">Total Payments</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="text" class="form-control text-light" name="in_tot_pay" >
+                                </div><br><br>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px; width:110px;">PAID DATE</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="date" class="form-control text-light" name="in_paid_date" ><br><br>
+                                </div>
+                               
+                                
+                            </div>
+
+                            
+                        
+                    </div>
+
+                    <div class="row">
+
+                        <h5>SECOND PAYMENT </h5>
+                        <div class="h-divider"></div><br><br>
+                        
+                           
+                            
+                        <div class="row">
+                            <input type="hidden" class="form-control" name="team_id">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted" style="padding-left:4px ;padding-top:10px; width:130px;"> SECOND AMOUNT</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control text-light" name="sec_amt" >
+
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px;width:200px;">BALANCE AMOUNT</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
+                                <input type="number" class="form-control text-light" name="sec_bal_amt" >
+                            </div><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px; width:130px;">PAID ON</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="date" class="form-control text-light" name="sec_paid_on" id="date" >
+                            </div><br><br>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px;width:200px;">Due Date</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="DATE" class="form-control text-light" name="sec_due_date" >
+                            </div><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px; width:130px;">PAID AMOUNT</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control text-light" name="sec_paid_amt" id="date" >
+                            </div><br><br>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px;width:200px;">Total Payments</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control text-light" name="sec_tot_pay" >
+                            </div><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px; width:110px;">PAID DATE</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="date" class="form-control text-light" name="sec_paid_date" ><br><br>
+                            </div>
+                           
+                            
+                        </div>
+                        
+                            
+                        
+                    </div>
+
+
+                    <div class="row">
+                        <h5>FINAL PAYMENT </h5>
+                        <div class="h-divider"></div><br><br>
+
+                        <div class="row">
+                            <input type="hidden" class="form-control" name="team_id">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted" style="padding-left:4px ;padding-top:10px; width:130px;"> FINAL AMOUNT</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control text-light" name="fnl_amt" >
+
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px;width:200px;">BALANCE AMOUNT</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
+                                <input type="number" class="form-control text-light" name="fnl_bal_amt" >
+                            </div><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px; width:130px;">PAID ON</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="date" class="form-control text-light" name="fnl_paid_on" id="date" >
+                            </div><br><br>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px;width:200px;">Due Date</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="DATE" class="form-control text-light" name="fnl_due_date" >
+                            </div><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px; width:130px;">PAID AMOUNT</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control text-light" name="fnl_paid_amt" id="date" >
+                            </div><br><br>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px;width:200px;">Total Payments</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control text-light" name="fnl_tot_pay" >
+                            </div><br><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <label class="text-muted"
+                                    style="padding-left:4px ;padding-top:10px; width:110px;">PAID DATE</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                <input type="date" class="form-control text-light" name="fnl_paid_date" ><br><br>
+                            </div>                           
+                            
+                        </div>
+
+
+
+                        <div class="row">
+                            <center>
+                                <input type="submit" name="submit" class=" mt-4 btn btn-outline-primary btn-icon-text" style="width: 100px; margin-left: 50px; ">                         
+                            </center> 
+                        </div>
+                            
+                        </div>
+                        
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

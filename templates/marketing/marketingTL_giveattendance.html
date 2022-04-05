@@ -1,0 +1,35 @@
+{% extends 'marketing/marketingTL_base.html' %}
+
+{% load static %}
+{% block main %}
+
+<link rel="stylesheet" href="{% static 'assets/css/marketing/TL_giveattendance.css' %}">
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body">
+            <div>
+            <label>Select Team member:</label>
+            <br>
+            <select name="" id="">
+                <option value="">Select team member</option>
+            </select>
+            </div>
+            <br>
+
+            <div>
+            <label class="mt-5">Select Date:</label>
+            <br>
+            <input type="date" name="" id="">
+            </div>
+
+
+            <div id="btndiv" class="mt-5 text-center"><br>
+            <button class="btn btn-secondary" onclick="location.href='/marketingapp/view_productdata'">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}    

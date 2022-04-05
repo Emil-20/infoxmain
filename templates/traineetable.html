@@ -1,0 +1,74 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+<div class="row mt-3 mb-5">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top: -16px">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                        <h4>Trainees</h4><br>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- trainee table starts here -->
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr data-href="#">
+                                <th> Name </th>
+                                <th> Department</th>
+                                <th> Start Date </th>
+                                <th> End Date </th>
+                            </tr>
+                        </thead>
+                        <tbody>{% if tre %} {% for t in tre %}
+                            <tr data-href="{% url 'traineedetails' t.id %}">
+                                <td><img src=" {{t.photo.url}} " alt="image " /> &nbsp;{{t.fullname}}</td>
+                                <td> {{t.department.department}} </td>
+                                <td>{{t.startdate|date:"d-m-Y"}}</td>
+                                <td>{{t.enddate|date:"d-m-Y"}}</td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- trainee table ends here -->
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput ");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable ");
+        tr = table.getElementsByTagName("tr ");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td ")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = " ";
+                } else {
+                    tr[i].style.display = "none ";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('table tr').click(function() {
+            window.location = $(this).data('href');
+            return false;
+        });
+    });
+</script>
+{%endblock%}

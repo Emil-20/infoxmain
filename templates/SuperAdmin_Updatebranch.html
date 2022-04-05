@@ -1,0 +1,107 @@
+{% extends 'SuperAdmin_index.html' %}
+{% block content %}
+{% load static %}
+<style>
+    #a {
+        font-size: 100%;
+    }
+</style>
+
+<div class="row ">
+
+
+    <h4 class="card-title">UpdateBranch</h4>
+    <div class="col-md-12">
+
+        <div class="card p-3 mt-3">
+            <form method="post" action="{% url 'SuperAdmin_branchupdate' branch_registration.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+                <label for="exampleTextarea1">Branch Name</label>
+                <div class="md-form mb-4 pink-textarea active-pink-textarea">
+                    <i class="fa fa-angle-double-right prefix"></i>
+                    <input id="text" name="brname" class="md-textarea form-control" rows="1"
+                        value="{{branch_registration.branch_name}}">
+
+                </div>
+
+                <label for="exampleTextarea1">Location</label>
+                <div class="md-form mb-4 pink-textarea active-pink-textarea">
+                    <i class="fa fa-angle-double-right prefix"></i>
+                    <input id="text" name="brlocation" class="md-textarea form-control" rows="1"
+                        value="{{branch_registration.location}}">
+
+                </div>
+
+                <label>Branch Type</label>
+                <select class="form-control"  value="{{branch_registration.branch_type}}" name="brtype">
+                    <option>{{branch_registration.branch_type}}</option>
+                    <option>Head</option>
+                    <option>SubBranch</option>
+                </select>
+                <br>
+                <label for="exampleTextarea1">Branch Admin</label>
+                <div class="md-form amber-textarea active-amber-textarea">
+                    <i class="fa fa-pencil-alt prefix"></i>
+                    <input id="text" name="bradmin" class="md-textarea form-control" rows="8"
+                        value="{{branch_registration.branch_admin}}">
+                </div>
+                <br>
+                <label for="exampleTextarea1">Email</label>
+                <div class="md-form amber-textarea active-amber-textarea">
+                    <i class="fa fa-pencil-alt prefix"></i>
+                    <input id="text" name="bremail" class="md-textarea form-control" rows="1"
+                        value="{{branch_registration.email}}">
+
+                </div>
+
+                <br>
+                <label for="exampleTextarea1">Phone Number</label>
+                <div class="md-form amber-textarea active-amber-textarea">
+                    <i class="fa fa-pencil-alt prefix"></i>
+                    <input id="text" name="brmobile" class="md-textarea form-control" rows="1"
+                        value="{{branch_registration.mobile}}">
+
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Logo</label>
+                    <input type="file" name="photo" class="file-upload-default" data-show-upload="true"
+                        data-show-caption="true" style="color: white;" value="{{branch_registration.logo}}">
+                    <div class="input-group col-xs-12">
+                        <input type="text" class="form-control md-textarea file-upload-info" disabled
+                            placeholder="select a logo" value="{{branch_registration.logo}}">
+                        <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button"
+                                style="height: 37px;">Upload</button>
+                        </span>
+                    </div>
+                </div>
+               
+
+
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 mt-4">
+                        <button type="submit" class="btn btn-outline-primary w-100">Update</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

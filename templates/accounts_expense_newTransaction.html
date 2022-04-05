@@ -1,0 +1,126 @@
+{% extends 'index_accounts.html' %} {% load static %} {% block content %}
+
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+  }
+  </style>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12col-lg-12 grid-margin">
+            <div class="card mt-3 mb-5">
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <h5>EXPENSES</h5>
+                        <div class="h-divider"></div><br><br>
+                        <form class="forms-sample" action="{% url 'accounts_expense_newTransaction' %}" method="post"
+                            autocomplete="off">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <input type="hidden" class="form-control" name="team_id">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted" style="padding-left:4px ;padding-top:10px;width: 80px;">
+                                        PAYEE </label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="text" class="form-control text-light" name="payee" required>
+
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px;width:200px;">PAYMENT ACCOUNT</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 ">
+                                    <input type="number" class="form-control text-light" name="payacnt" required>
+                                </div><br><br>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px; width:130px;">PAYMENT DATE</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="date" class="form-control text-light" name="paydt" id="date" required>
+                                </div><br><br>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px;width:200px;">PAYMENT METHOD</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="text" class="form-control text-light" name="paymod" required>
+                                </div><br><br>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label class="text-muted"
+                                        style="padding-left:4px ;padding-top:10px; width:110px;">REF NO</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                    <input type="text" class="form-control text-light" name="ref" required><br><br>
+                                </div>
+                            </div>
+                            <div class="h-divider"></div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="table-responsive">
+                                        <h5>CATEGORY DETAILS</h5>
+                                        <table class="table table-bordered w-80">
+                                            <thead>
+                                                <tr>
+                                                    <th>CATEGORY</th>
+                                                    <th>DESCRIPTION</th>
+                                                    <th>AMOUNT</th>
+                                                    <th>TAX</th>
+                                                </tr><br>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" class="form-control text-light"
+                                                            name="category" required></td>
+                                                    <td><input type="text" class="form-control text-light"
+                                                            name="description" required></td>
+                                                    <td><input type="number" class="form-control text-light" name="amount"
+                                                            id="amount" required></td>
+                                                    <td><input type="number" class="form-control text-light" name="tax"
+                                                            style="width: 100%;" id="tax" required></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3"></div>
+                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                    <input type="hidden" id="total" name="total" value="total">
+                                    <button type="submit" class="btn btn-primary w-100 mt-4">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+    $("#amount, #tax").on("keyup", total);
+ 	function total() {
+ 	$("#total").val(Number($("#amount").val()) + Number($("#tax").val()));
+ 	
+	}
+ });
+</script>
+
+{% endblock %}

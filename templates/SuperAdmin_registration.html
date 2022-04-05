@@ -1,0 +1,121 @@
+{% extends 'SuperAdmin_index.html' %}
+{% block content %}
+  {% load static %}
+  <style>
+  #a
+  {
+    font-size: 100%;
+  }
+      
+
+  </style>
+ 
+<div class="row align-items-center">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Create Admin</h4>
+          <p class="card-description"> </p>
+         
+           <form class="forms-sample" method="post" action="{% url 'SuperAdmin_Add' %}" enctype="multipart/form-data"> 
+            {% csrf_token %}               
+                           <div class="form-group">
+                        <label for="exampleTextarea1">Full Name</label>
+                        <input type="text" class="form-control" name="fname" id="exampleTextarea1" style="color:white;" rows="4">
+                           </div>
+                           <div class="form-group">
+                            <label for="exampleTextarea1">Father's Name</label>
+                            <input type="text" class="form-control" name="faname" id="exampleTextarea1" style="color:white;" rows="4">
+                               </div>
+                               <div class="form-group">
+                                <label for="exampleTextarea1">Date Of Birth</label>
+                                <input type="date" class="form-control txtDate" name="adob" id="exampleTextarea1" style="color:white;" rows="4">
+                                   </div>
+                               <div class="form-group">
+                                <label>Gender</label>                        
+                                <select class="form-control" style="color:white;" name="agender" id="empname">
+                                    <option value="">-Select An Option-</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                  </select>                             
+                              </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Mobile</label>
+                                <input type="text" class="form-control" name="amobile" id="exampleTextarea1" style="color:white;" rows="4">
+                            </div> 
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Email</label>
+                                <input type="email" class="form-control" name="aemail" id="exampleTextarea1" style="color:white;" rows="4">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Alternative Number</label>
+                                <input type="text" class="form-control" name="aalternative" id="exampleTextarea1" style="color:white;" rows="4">
+                            </div>  
+                            <div class="form-group">
+                                <label>Branch</label>                        
+                                <select class="form-control" style="color:white;" name="Adminbranch" id="empname">
+                                    
+                                    <option value="">-Select An Option-</option>
+                                    {% for i in branches %}
+                                    <option value="{{i.id}}">{{i.branch_name}}</option>
+                                    {% endfor %}
+                                   
+                                  </select>                             
+                              </div>   
+
+                      <div class="form-group">
+                        <label>ID Proof</label>
+                        <input type="file" name="aproof" class="file-upload-default"  data-show-upload="true"  data-show-caption="true" required style="color: white;" multiple>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info multi" disabled placeholder="Upload a ID Proof">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" style="height: 37px;">Upload</button>
+                            
+                          </span>
+                        </div>
+
+                      </div>
+                      <div class="form-group">
+                        <label>Photo</label>
+                        <input type="file" name="cphoto" class="file-upload-default"  data-show-upload="true"  data-show-caption="true" required style="color: white;" multiple>
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info multi" disabled placeholder="Upload a Photo">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button" style="height: 37px;">Upload</button>
+                            
+                          </span>
+                        </div>
+                        
+                      </div>
+                     
+                      <!-- <div class="form-check form-check-flat form-check-primary">
+              
+                        <button type="submit" class="btn btn-primary me-2">Assign</button>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary w-100" style="height: 40px; margin-top: 2px;">Register</button>
+                        </div>
+                    </div>
+                     
+
+                    <script>
+                      $(function() {
+                          var dtToday = new Date();
+                          var month = dtToday.getMonth() + 1;
+                          var day = dtToday.getDate();
+                          var year = dtToday.getFullYear();
+                          if (month < 10)
+                              month = '0' + month.toString();
+                          if (day < 10)
+                              day = '0' + day.toString();
+                          var maxDate = year + '-' + month + '-' + day;
+                          $('.txtDate').attr('max', maxDate);
+                  
+                      })
+                  </script>
+  {% endblock %}

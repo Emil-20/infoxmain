@@ -1,0 +1,44 @@
+{% extends 'index_trainingmanager.html' %} {% block content %}{% load static %}
+
+<!-- Report Issue -->
+<form method="post" >
+    {% csrf_token %}
+    <div class="row pt-5">
+        <div class="col-md-6 grid-margin stretch-card mx-auto ">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputUsername1"><h4>REPORT ISSUE</h4></label>
+                        <div><br></div>    
+                        <textarea class="col-12 form-control  text-light"
+                            style="height: 200px; background-color: #2A3038; " rows="4" name="issue" required></textarea>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-7" class="pull-right">
+                            <button type="submit"  class="btn btn-outline-primary btn-icon-text">
+                                <i class="mdi mdi-file-check btn-icon-prepend"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
+</form>
+
+
+<!-- button calling script (line 16-17)-->
+<script>
+    function redirect() {
+        window.location.href = "/reportedissue"
+    }
+</script>
+
+<!-- Report Issue end here -->
+
+{% endblock %}

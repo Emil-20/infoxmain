@@ -1,0 +1,405 @@
+{%extends 'promanagerindex.html'%}
+{%load static%}
+{%block content%}
+<div class="row">
+  <div class=" ml-5 " style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293;">Project Status</div>
+</div>
+<br>
+
+<div class="col-12 mt-4  grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <!-- <h4 class="card-title">Order Status</h4> -->
+        <div class="col-md-4 col-6 w-100">
+          <input type="search" class="form-control rounded" id="search" onkeyup="myFunction()" placeholder="Search"
+            aria-label="Search" aria-describedby="search-addon" />
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr>
+
+                <th>Task</th>
+                <th>AssignedTo</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Submission Date</th>
+                <th>TL Status</th>
+                <th>Developer Status</th>
+                <th>Tester Status</th>
+                <th>Project Details</th>
+            
+        
+
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in var%}
+              <tr>
+                <td>
+                  <!-- <img src="{% static '/assets/images/faces/face1.jpg' %}" alt="image" /> -->
+                  <span class="ps-2">{{i.task}}</span>
+                </td>
+                <td> {{i.developer}} </td>
+                <td>{{i.startdate|date:"d-m-Y"}}</td>
+                <td>{{i.enddate|date:"d-m-Y"}}</td>
+                <td>{{i.submitted_date|date:"d-m-Y"}}</td>
+                <td class="text-primary"><a href="" data-toggle="modal" data-target="#taskstatus{{i.id}}"
+                    style="text-decoration: none;">
+                    <div class="badge badge-outline-info">TL report</div>
+                  </a> </td>
+                <td class="text-primary"><a href="" data-toggle="modal" data-target="#devlist{{i.developer.id}}"
+                    style="text-decoration: none;">
+                    <div class="badge badge-outline-info">Developer status</div>
+                  </a> </td>
+                <td class="text-primary"><a href="#" data-toggle="modal" data-target="#reportstatus{{i.id}}"
+                    style="text-decoration: none;">
+                    <div class="badge badge-outline-info">Tester Report</div>
+                  </a></td>
+                <td>
+                  <div class="progress" 
+                    style="border-radius:5px;height:20px;background-color:#C2F0EB">
+                    <div class="progress-bar" style="height:20px;width:{{i.progress}}%;">{{i.progress}}%</div></a>
+                  </div>
+                </td>
+        
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- pop up window for task status -->
+{%for var in var%}
+<div class="modal fade " id="taskstatus{{var.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+
+      <div class="modal-header">
+        <h5 class="modal-title text-info">TL Daily Work Report</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="table-responsive mt-3 mb-3 container">
+        <form action="{% url 'testersave' var.developer_id var.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table class="table  table-bordered ">
+            <thead style="background-color: black;">
+              <tr>
+                <th scope="col" class="text-light">Date</th>
+                <th scope="col" class="text-light">Task</th>
+                <th scope="col" class="text-light">Work Done</th>
+                <th scope="col" class="text-light">Files</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for i in data %}
+
+              {% if var.id == i.subtask_id%}
+
+              <tr>
+
+                <td class="text-light">{{i.date|date:"d-m-Y"}} </td>
+                <td class="text-light"><label name="task">{{i.subtask.task}}</label>
+                </td>
+                <td class="text-light"><label name="workdone">{{i.workdone}}</label></td>
+                <td class="text-info"><a href="" style="text-decoration:none;">
+                    <div class="badge badge-outline-info"><a  style="text-decoration:none;" href ="{{i.files.url}}" download>Download</a></div>
+                  </a></td>
+              </tr>
+
+              {%endif%}
+              {% endfor %}
+             
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+<!-- pop up window for developerlist -->
+{%for var in var%}
+<div class="modal fade " id="devlist{{var.developer.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+
+      <div class="modal-header">
+        <h5 class="modal-title text-info">Developer List</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="table-responsive mt-3 mb-3 container">
+        <form action="{% url 'testersave' var.developer_id var.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table class="table  table-bordered ">
+            <thead style="background-color: black;">
+              <tr>
+              
+                <th scope="col" class="text-light">SubTask</th>
+                <th scope="col" class="text-light">Assigned to</th>
+                <th scope="col" class="text-light">Start Date</th>
+                <th scope="col" class="text-light">End Date</th>
+                <th scope="col" class="text-light">Submission Date</th>
+                <!--<th scope="col" class="text-light">Developer Status</th>-->
+                <!--<th scope="col" class="text-light">Tester Status</th>-->
+                <th scope="col" class="text-light">Progress</th>
+              
+                
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in newdata%}
+              {% if i.tl_id == var.developer.id %}
+              <tr>
+                 <td>{{i.task}}</td>
+                 <td>{{i.developer}}</td>
+                 <td>{{i.startdate|date:"d-m-Y"}}</td>
+                 <td>{{i.enddate|date:"d-m-Y"}}</td>
+                 <td>{{i.submitted_date|date:"d-m-Y"}}</td>
+                  <!--<td class="text-primary"><a href="" data-toggle="modal" data-target="#devstatus{{i.id}}"-->
+                  <!--  style="text-decoration: none;">-->
+                  <!--  <div class="badge badge-outline-info">developer report</div>-->
+                  <!--</a> </td>-->
+                  <!--<td class="text-primary"><a href="" data-toggle="modal" data-target="#devteststatus{{i.id}}"-->
+                  <!--  style="text-decoration: none;">-->
+                  <!--  <div class="badge badge-outline-info">Tester report</div>-->
+                  <!--</a> </td>-->
+                  <td>
+                  <div class="progress" 
+                    style="border-radius:5px;height:20px;background-color:#C2F0EB">
+                    <div class="progress-bar" style="height:20px;width:{{i.progress}}%;">{{i.progress}}%</div></a>
+                  </div>
+                </td>
+                
+                 </tr>
+                 
+                {% endif %}
+                {% endfor%}
+                
+              
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+<!-- pop up window for developer status -->
+{%for var in var%}
+<div class="modal fade " id="devstatus{{var.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+
+      <div class="modal-header">
+        <h5 class="modal-title text-info">Developer Daily Work Report</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="table-responsive mt-3 mb-3 container">
+        <form action="{% url 'testersave' var.developer_id var.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table class="table  table-bordered ">
+            <thead style="background-color: black;">
+              <tr>
+                <th scope="col" class="text-light">Date</th>
+                <th scope="col" class="text-light">Task</th>
+                <th scope="col" class="text-light">Work Done</th>
+                <th scope="col" class="text-light">Files</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for i in data %}
+
+              {% if var.id == i.subtask_id %}
+
+              <tr>
+
+                <td class="text-light">{{i.date|date:"d-m-Y"}} </td>
+                <td class="text-light"><label name="task">{{i.subtask.task}}</label>
+                </td>
+                <td class="text-light"><label name="workdone">{{i.workdone}}</label></td>
+                <td class="text-info"><a href="" style="text-decoration:none;">
+                    <div class="badge badge-outline-info"><a  style="text-decoration:none;" href ="{{i.files.url}}" download>Download</a></div>
+                  </a></td>
+              </tr>
+
+              {%endif%}
+              {% endfor %}
+             
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- pop up window for developer tester status -->
+{%for var in var%}
+<div class="modal fade " id="devteststatus{{var.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+
+      <div class="modal-header">
+        <h5 class="modal-title text-info">TL Daily Work Report</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+          style="background-color: #191c24;border:none;font-size: 20px">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="table-responsive mt-3 mb-3 container">
+        <form action="{% url 'testersave' var.developer_id var.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table class="table  table-bordered ">
+            <thead style="background-color: black;">
+              <tr>
+                <th scope="col" class="text-light">Date</th>
+                <th scope="col" class="text-light">Task</th>
+                <th scope="col" class="text-light">Work Done</th>
+                <th scope="col" class="text-light">Files</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for i in data %}
+
+              {% if var.id == i.subtask_id%}
+
+              <tr>
+
+                <td class="text-light">{{i.date|date:"d-m-Y"}} </td>
+                <td class="text-light"><label name="task">{{i.subtask.task}}</label>
+                </td>
+                <td class="text-light"><label name="workdone">{{i.workdone}}</label></td>
+                <td class="text-info"><a href="" style="text-decoration:none;">
+                    <div class="badge badge-outline-info"><a  style="text-decoration:none;" href ="{{i.files.url}}" download>Download</a></div>
+                  </a></td>
+              </tr>
+
+              {%endif%}
+              {% endfor %}
+             
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+<!-- pop up window for report status -->
+{% for var1 in var %}
+<div class="modal fade " id="reportstatus{{var1.id}}">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content modal-xl" style="background-color: #191c24;">
+      <form action="" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+
+          <h5 class="modal-title text-info">Report Status</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+            style="background-color: #191c24;border:none;font-size: 20px">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="table-responsive mt-3 mb-3 container">
+          <table class="table  table-bordered ">
+            <thead style="background-color: black;">
+              <tr>
+                <th scope="col" class="text-light">Date</th>
+                <th scope="col" class="text-light">Task</th>
+                
+                <th scope="col" class="text-light">Work Done</th>
+                <th scope="col" class="text-light">Files</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data1 %}
+              
+              {% if i.subtask_id == var1.id %}
+   
+                
+           
+
+              <tr>
+                <td class="text-light">{{i.date|date:"d-m-Y"}} </td>
+                <td class="text-light">{{i.subtask.task}}
+                </td>
+                
+                </td>
+                <td class="text-light">{{i.workdone}}</td>
+                <td class="text-info"><a href="" style="text-decoration:none;">
+                    <div class="badge badge-outline-info"><a  style="text-decoration:none;" href ="{{i.files.url}}" download>Download</a></div>
+                  </a></td>
+              </tr>
+                      
+              {% endif %}
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+  {%endblock%}

@@ -1,0 +1,140 @@
+{% extends 'index_accounts.html' %}
+{% load static %}
+{% block content %}
+<body>
+<style>
+
+
+table tr[data-href] {
+    cursor: pointer;
+}
+
+</style>
+
+  
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" >
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h4> Registration Details</h4>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+            <form>
+              <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+                title="Type in a name" style="color:white;">
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- table start hear --> 
+
+          <div class="table-responsive">
+            <table class="table " id="myTable">
+              <thead  >
+              
+                <tr data-href="#">
+                  <th style="padding-left:30px;"> Name </th>
+                  <th style="padding-left:55px;"> Email</th>
+                  <th> Password </th>
+          
+                  <th style="padding-left:10px;"> Platform  </th>
+                  <th style="padding-left:25px;"> Designation </th>
+                  <th style="padding-left:15px;"> Department </th>
+                  <th style="padding-left:15px;"> Date of Appointment </th>
+                  <th style="padding-left:15px;"> Balance </th>
+                  <th style="padding-left:25px;"> Promissory </th>
+                  <th style="padding-left:25px;"> Payement </th>
+                  <th style="padding-left:25px;"> Reminder </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for t in deta %}
+
+                <tr data-href="#">
+                  <td>
+                    <img src="{{t.photo.url}}" alt="image" />
+                     <span class="ps-2">{{t.fullname}}</span>
+                  </td>
+                  <td> {{t.email}}</td>
+                  <td style="padding-left:35px;">{{t.password}}</td>
+                  
+                  <td >{{t.course.name}}</td> 
+                  <td style="padding-left:35px;">{{t.designation.designation}}</td>
+                  
+                  <td > {{t.department.department}} </td>
+                  <td style="padding-left:45px;">{{t.joiningdate|date:"d-m-Y"}} </td>
+                  <td>--</td>
+                  <td>
+                    
+                    <a href="{% url 'accounts_promissory' t.id%}"  class="btn btn-outline-success btn-icon-text" >Promissory</a>
+
+                    <!-- <button type="button" class="btn btn-outline-success btn-icon-text" data-toggle="modal"  data-target="#myModal{{t.id}}">                        
+                        Payement </button> -->
+                  </td>
+                  <td>
+                    
+                    <a href="{% url 'accounts_payment_detail_list' t.id %}"  class="btn btn-outline-success btn-icon-text" >Payment </a>
+
+                    <!-- <button type="button" class="btn btn-outline-success btn-icon-text" data-toggle="modal"  data-target="#myModal{{t.id}}">                        
+                        Payement </button> -->
+                  </td>
+                  <td>
+                    <a href="/reminder/{{t.id}}"  class="btn btn-outline-danger btn-icon-text" >Reminder </a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+
+  
+  $(function() {
+  $("#totalid, #amid").on("keyup", balance);
+ 	function balance() {
+ 	$("#balance").val(Number($("#totalid").val()) - Number($("#amid").val()));
+ 	//$("#subt").val(Number($("#num1").val()) - Number($("#num2").val()));
+	}
+ });
+
+
+</script>
+
+{% endblock %}

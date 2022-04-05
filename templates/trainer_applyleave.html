@@ -1,0 +1,45 @@
+{% extends 'trainer_index.html' %}{% load static %}{% block content %}
+
+
+  <div class="row" style="padding-top:20px;">
+    
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
+      <a href="/trainer_applyleave_cards" style="text-decoration: none">
+      <div class="card" style="height: 180px">
+      <div class="card-body">
+        <div class="row" style="padding-top:20px;">
+            <div class="col-8 col-sm-8 col-md-8 col-lg-8  my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h3 class="mb-0" style= "color:white;">Apply leave</h3>
+             </div>
+              </div>
+            <div class="col-4 col-4 col-sm-4 col-md-4 col-lg-4  text-center text-xl-right">
+              <i class="icon-lg mdi mdi-account-off text-danger ms-auto"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 grid-margin">
+      <a href="/trainer_traineesleave_table" style="text-decoration: none">
+      <div class="card" style="height: 180px">
+      <div class="card-body">
+        <div class="row" style="padding-top:20px;">
+            <div class="col-8 col-sm-8 col-md-8 col-lg-8  my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h3 class="mb-0" style= "color:white;">Trainees Leave</h3>
+             </div>
+              </div>
+            <div class="col-4 col-4 col-sm-4 col-md-4 col-lg-4  text-center text-xl-right">
+              <i class="icon-lg mdi mdi-clipboard-text text-primary ms-auto"></i>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+  {%endblock%}

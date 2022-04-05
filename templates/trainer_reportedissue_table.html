@@ -1,0 +1,151 @@
+{% extends 'trainer_index.html' %} {% load static %} {% block content %}
+
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+
+
+<div class="row" style="padding-top: 20px;">
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>Reported Issue</h4>
+                        <br>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control text-light" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- table start hear -->
+
+                <div class="table-responsive">
+                    <table class="table " id="myTable">
+                        <thead>
+
+                            <tr>
+                                <th> Name </th>
+                                <th> Date</th>
+                                <th>Issue</th>
+                                <th>Action</th>
+
+
+                            </tr>
+                        </thead>{% if cut %} {% for t in cut %}
+                        <tbody>
+
+                            <tr>
+
+                                <td>{{t.reporter.fullname}}</td>
+
+                                <td> {{t.reported_date|date:"d-m-Y"}} </td>
+                                <td class="text-wrap text-justify" style="width: 250px;">
+                                    {{t.issue}}
+                                    <td>
+                                        <div class="btn btn-outline-success" data-toggle="modal" data-target="#myModal{{t.id}}">
+                                            <i class="mdi mdi-send btn-icon-prepend"></i>Reply</div>
+
+                                    </td>
+
+                            </tr>
+
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% for t in cut %}
+<form method="post" action="{% url 'savereplaytnee' t.id %}">
+    {% csrf_token %}
+    <!-- Modal -->
+    <div class="modal" id="myModal{{t.id}}">
+        <div class="modal-dialog">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Reply</h4>
+                    <button type="button" style="color: white;" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <textarea class="col-12 col-sm-12 col-md-12 col-lg-12 form-control  text-light" style="height: 200px; background-color: #2A3038; " rows="4" name="reply"></textarea>
+                            </div>
+                            <br>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                                <button type="submit" onclick="redirect()" class="btn btn-outline-primary btn-icon-text ">
+                                  <i class="mdi mdi-send btn-icon-prepend"></i>
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endfor %}
+
+<!-- modal end -->
+
+
+<script>
+    //js for submit button in new_team.html page
+    function redirect() {
+        window.location.href = "/trainer_reportedissue_table";
+    }
+
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+    /* $(document).ready(function(){
+      $('table tr').click(function(){
+          window.location = $(this).data('href');
+          return false;
+      });
+  }); */
+</script>
+
+{% endblock %}

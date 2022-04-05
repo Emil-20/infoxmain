@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Registration</title>
+    <style>
+        body {
+            background: url(../images/Login_bg.jpg);
+            background-size: cover;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+
+        input[type=text],
+        input[type=file],
+        input[type=password],
+        input[type=date],
+        input[type=number],
+        input[type=email],
+        input[type=password]:focus,
+        input[type=date]:focus,
+        input[type=email]:focus,
+        input[type=text]:focus {
+            background: none !important;
+            border: 1px solid #636d87 !important;
+            color: white !important;
+            background-color: transparent !important;
+        }
+
+        #gender,
+        #course {
+            background: none;
+            border: 1px solid #636d87;
+            color: white;
+        }
+
+        #c1 {
+            max-width: 750px;
+            /*height: 2300px !important;*/
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #191c24;
+            position: relative;
+            border-radius: 8px;
+            padding: 20px;
+
+        }
+
+        @media(max-width:61.938em) {
+            body {
+                padding: 10px;
+
+            }
+
+            
+        }
+
+
+
+
+
+
+
+        label {
+            color: white;
+            margin-top: 10px;
+
+        }
+
+        #label {
+            color: white;
+            font-size: 25px;
+            font-weight: 900px;
+
+        }
+
+        #label1 {
+            color: white;
+            font-size: 20px;
+            font-weight: 900px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display:block;
+            border: 1px solid #636d87;
+            color: #636d87;
+        }
+
+
+
+        option {
+            font-weight: normal;
+            display: block;
+            white-space: nowrap;
+            min-height: 1.2em;
+            padding: 0px 2px 1px;
+            background-color: #191c24;
+            color: white;
+            border: none;
+        }
+
+        #choose::file-selector-button {
+            background-color: rgb(37, 125, 207);
+            color: white;
+            width: 100px;
+            margin-left: -10px;
+            height: 40px;
+            margin-top: -5px;
+            border: none;
+
+        }
+
+        #choose {
+            background-color: #2a3038;
+        }
+    </style>
+   
+</head>
+
+<body style="background: url('/static/Login_bg.jpg') 100% 100% no-repeat fixed;background-size: cover;">
+    
+<section >
+
+    <br>
+
+    <br>
+
+    <div class="container" id="c1"  >
+        <br>
+        <h2 style="color: white;text-align: center;">Registration Form</h2>
+        <br>
+        <br>
+        <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="form1" class="form-group">
+                <!--<label id="label">Basic Info</label><br><br>-->
+                <label>Full Name </label>
+                <input type="text" class="form-control" name="fname" required>
+                <label>Father's Name </label>
+                <input type="text" class="form-control" name="fathername" required>
+                <label>Mother's Name </label>
+                <input type="text" class="form-control" name="mothername" required>
+                <label>Date of Birth </label>
+                <input type="date" id="dob" class=" date form-control" name="dob" required>
+                <label>Gender </label>
+                <select class="form-control text-light" name="gender" id="gender">
+                    <option class="">--select--</option>
+                    <option class="Male">Male</option>
+                    <option class="Female">Female</option>
+                    <option class="Other">Other</option>
+                </select>
+                <label>Mobile Number</label>
+                <input type="number" class="form-control" name="mobile" required>
+                <label>Alternative Number</label>
+                <input type="number" class="form-control" name="alternative" required>
+                 <label>Department</label>                        
+                                <select class="form-control" name="department" required style="background:transparent;border: 1px solid #636d87;color:white;">
+                                    
+                                    <option value="" >-Select An Option-</option>
+                                    {% for i in depart %}
+                                    <option value="{{i.id}}">{{i.department}}</option>
+                                    {% endfor %}
+                                   
+                                  </select>                  
+                <label>Email </label>
+                <input type="email" class="form-control" name="email" required>
+                <label>Password </label>
+                <input type="password" class="form-control" name="password" id="pass" required>
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" name="conpassword" id="conpassword" required>
+                <span id='message'></span>
+                <br>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+     <script>
+ $('#conpassword').on('change', function () {
+  if ($('#pass').val() == $('#conpassword').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+});
+    </script>
+                <label id="label1">Present Address</label><br>
+                <label>Address 1 </label>
+                <input type="text" class="form-control" name="address1" id="address1" required>
+                <label>Address 2 </label>
+                <input type="text" class="form-control" name="address2" id="address2" required>
+                <label>Address 3</label>
+                <input type="text" class="form-control" name="address3" id="address3" required>
+                <label>Pincode </label>
+                <input type="number" class="form-control" name="pincode" id="pincode" required>
+                <label>District </label>
+                <input type="text" class="form-control" name="district" id="district" required>
+                <label>State </label>
+                <input type="text" class="form-control" name="state" id="state" required>
+                <label>Country </label>
+                <input type="text" class="form-control" name="country" id="country" required><br>
+                <label id="label1">Permanent Address&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">(Same as Above
+                        : <input name="checkbox" id="checkbox" onclick="fill()" type="checkbox"> )</span></label><br>
+
+                <label>Address 1 </label>
+                <input type="text" class="form-control" name="paddress1" id="paddress1" required>
+                <label>Address 2 </label>
+                <input type="text" class="form-control" name="paddress2" id="paddress2" required>
+                <label>Address 3</label>
+                <input type="text" class="form-control" name="paddress3" id="paddress3" required>
+                <label>Pincode </label>
+                <input type="number" class="form-control" name="ppincode" id="ppincode" required>
+                <label>District </label>
+                <input type="text" class="form-control" name="pdistrict" id="pdistrict" required>
+                <label>State </label>
+                <input type="text" class="form-control" name="pstate" id="pstate" required>
+                <label>Country </label>
+                <input type="text" class="form-control" name="pcountry" id="pcountry" required>
+                
+            <div align="right">
+                <button type="button" class="btn btn-outline-primary mt-4 " onclick="fun1()"
+                    id="btn1">Next</button>
+            </div>
+            </div>
+            <div id="form2">
+                <label id="label">Educational Qualification</label><br><br>
+                <label id="label1">Plus Two</label><br>
+                <input type="radio" name="plustwo" value="hse">&nbsp;&nbsp;<label>HSE</label>&nbsp;&nbsp;
+                <input type="radio" name="plustwo" value="vhse">&nbsp;&nbsp;<label>VHSE</label>&nbsp;&nbsp;
+                <input type="radio" name="plustwo" value="state">&nbsp;&nbsp;<label>STATE</label>&nbsp;&nbsp;
+                <input type="radio" name="plustwo" value="central">&nbsp;&nbsp;<label>CENTRAL</label><br>
+                <label>School </label>
+                <input type="text" class="form-control" name="school" required>
+                <label>Aggregate </label>
+                <input type="text" class="form-control" name="aggregate" required>
+                <label>Cerficate Upload</label>
+                <input type="file" class="form-control mt-2 text-light" name="cupload" id="choose" style="border:none "
+                    required />
+                <br>
+                <label id="label1">UG</label><br>
+                <label>Degree </label>
+                <input type="text" class="form-control" name="degree" required>
+                <label>Stream </label>
+                <input type="text" class="form-control" name="stream" required>
+                <label>Passout Year </label>
+                <input type="number" class="form-control" name="passoutyear" required>
+                <label>Aggregate </label>
+                <input type="text" class="form-control" name="aggregate1" required>
+                <label>Backlogs if any: &nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">&nbsp;&nbsp;<input type="radio"
+                            name="supply" value="yes">
+                        <label>Yes</label>&nbsp;&nbsp;<input type="radio" name="supply"
+                            value="no">&nbsp;&nbsp;<label>No</label></span></label><br>
+                <label>Cerficate Upload</label>
+                <input type="file" class="form-control mt-2 text-light" name="cupload1" id="choose" style="border:none "
+                    required />
+                <br>
+                <label id="label1">PG </label><br>
+                <input type="text" class="form-control" name="pg" required><br><br>
+                  <div class="d-flex justify-content-between">
+                          
+                <button type="button"  class="btn btn-outline-primary " onclick="bfun1()"
+                    id="bbtn1">Back</button>
+                <button type="button" class="btn btn-outline-primary" onclick="fun2()"
+                    id="btn1">Next</button>
+               
+                    </div>
+            </div>
+            <div id="form3">
+                <label id="label">Extra Curricurlar Activities</label><br>
+                <label id="label1">Internship</label><br>
+                <label>Details </label><br>
+                <input type="text" class="form-control" name="details" required>
+                <label>Duration </label>
+                <input type="text" class="form-control" name="duration" required>
+                <label>Certificate </label>
+                <input type="text" class="form-control" name="certificate" required><br>
+                <label id="label1">Online Training</label><br>
+                <label>Details </label>
+                <input type="text" class="form-control" name="details1" required>
+                <label>Duration </label>
+                <input type="text" class="form-control" name="duration1" required>
+                <label>Certificate </label>
+                <input type="text" class="form-control" name="certificate1" required><br>
+                <label id="label1">Project Details</label><br>
+                <label>Title </label>
+                <input type="text" class="form-control" name="title" required>
+                <label>Duration </label>
+                <input type="text" class="form-control" name="duration2" required>
+                <label>Description </label>
+                <input type="text" class="form-control" name="description" required>
+                <label>URL </label>
+                <input type="text" class="form-control" name="url" required><br>
+                <label id="label1">Skills</label><br>
+                <input type="text" class="form-control" name="skill1" required><br>
+                <input type="text" class="form-control" name="skill2" required><br>
+                <input type="text" class="form-control" name="skill3" required><br><br>
+                      <div class="d-flex justify-content-between">
+                           <button type="button"  class="btn btn-outline-primary" onclick="bfun2()"
+                    id="bbtn1">Back</button>
+                <button type="button" class="btn btn-outline-primary" onclick="fun3()"
+                    id="btn1">Next</button>
+                    
+               
+                    </div>
+            </div>
+            <div id="form4">
+               
+               <!-- <label>Branch</label>
+                <select name="branch" id="course" class="form-control mt-2 text-light" style="border-radius:5px; "
+                    required>
+                    <option style="color:#636d87;" class="">--select branch--</option>
+                    {% for i in branch %}
+                    <option class="" value="{{i.id}}">{{i.branch_name}}</option>
+                    {% endfor %}
+                </select>-->
+                <br>
+                <label id="label">Upload Photo & ID Proof</label><br>
+                <label>ID Proof</label>
+                <input type="file" class="form-control mt-2 text-light" name="idproof" id="choose" style="border:none "
+                    required accept="image/*"/>
+
+                <label>Photo</label>
+                <input type="file" class="form-control mt-2 text-light" name="photo" id="choose" style="border:none "
+                    required accept="image/*"/>
+                <br>
+                <br>
+                <div class="d-flex justify-content-between">
+                    <button type="button"  class="btn btn-outline-primary" onclick="bfun3()"
+                    id="bbtn1">Back</button>
+                <button type="submit"  class="btn btn-outline-primary" onclick="fun()"
+                    id="btn1">Submit</button>
+                
+            </div>
+            </div>
+
+
+        </form>
+    </div>
+</section>
+
+
+    <script>
+   
+
+        
+
+        var form1 = document.getElementById("form1");
+        var form2 = document.getElementById("form2");
+        var form3 = document.getElementById("form3");
+        var form4 = document.getElementById("form4");
+        var c1 = document.getElementById("c1");
+        form2.style.display = "none";
+        form3.style.display = "none";
+        form4.style.display = "none";
+
+
+
+        function fun1() {
+
+            // c1.style.height = '1320px';
+            form1.style.display = "none";
+            form2.style.display = "block";
+            form3.style.display = "none";
+            form4.style.display = "none";
+
+        }
+        function bfun1() {
+
+            // c1.style.height = '2320px';
+            form1.style.display = "block";
+            form2.style.display = "none";
+            form3.style.display = "none";
+            form4.style.display = "none";
+
+        }
+        function fun2() {
+
+            // c1.style.height = "1530px";
+            form1.style.display = "none";
+            form2.style.display = "none";
+            form3.style.display = "block";
+            form4.style.display = "none";
+
+        }
+        function bfun2() {
+
+            // c1.style.height = '1320px';
+            form1.style.display = "none";
+            form2.style.display = "block";
+            form3.style.display = "none";
+            form4.style.display = "none";
+
+        }
+        function fun3() {
+
+            // c1.style.height = "650px";
+            form1.style.display = "none";
+            form2.style.display = "none";
+            form3.style.display = "none";
+            form4.style.display = "block";
+
+
+        }
+        function bfun3() {
+
+            // c1.style.height = '1530px';
+            form1.style.display = "none";
+            form2.style.display = "none";
+            form3.style.display = "block";
+            form4.style.display = "none";
+
+        }
+
+        function fill() {
+
+            let checkbox = document.getElementById('checkbox');
+            if (checkbox.checked == true) {
+                let address1 = document.getElementById("address1");
+                let address2 = document.getElementById('address2');
+                let address3 = document.getElementById('address3');
+                let pincode = document.getElementById('pincode');
+                let district = document.getElementById('district');
+                let state = document.getElementById('state');
+                let country = document.getElementById('country');
+
+                let paddress1 = document.getElementById('paddress1');
+                let paddress2 = document.getElementById('paddress2');
+                let paddress3 = document.getElementById('paddress3');
+                let ppincode = document.getElementById('ppincode');
+                let pdistrict = document.getElementById('pdistrict');
+                let pstate = document.getElementById('pstate');
+                let pcountry = document.getElementById('pcountry');
+                console.log(country.value)
+                console.log(address1.value)
+            
+                console.log(address1.value)
+                let address11 = address1.value;
+                let address12 = address2.value;
+                let address13 = address3.value;
+                let pincode14 = pincode.value;
+                let district15 = district.value;
+                let state16 = state.value;
+                let country17 = country.value;
+
+                paddress1.value = address11;
+                paddress2.value = address12;
+                paddress3.value = address13;
+                ppincode.value = pincode14;
+                pdistrict.value = district15;
+                pstate.value = state16;
+                pcountry.value = country17;
+            }
+            else {
+                paddress1.value = "";
+                paddress2.value = "";
+                paddress3.value = "";
+                ppincode.value = "";
+                pdistrict.value = "";
+                pstate.value = "";
+                pcountry.value = "";
+            }
+
+
+        }
+        // $(document).ready(function(){
+        //     var dtToday = new Date();
+        //     var month = dtToday.getMonth() + 1;
+        //     var day = dtToday.getDate();
+        //     var year = dtToday.getFullYear();
+        //     if (month < 0)
+        //     month = '0'+month.toString();
+        //     if(day < 10)
+        //     day = '0'+toString();
+        //     var maxDate = year+'-'+month+'-'+day;
+        //     $('.date').attr('max', maxDate);
+        // });
+    </script>
+
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+} 
+    
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("dob").setAttribute("max", today);
+</script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+    {% endif %}
+    
+    <!--{% if msg_error %}-->
+    <!--<script>-->
+    <!--    Swal.fire({-->
+    <!--      icon: 'error',-->
+    <!--      text: '{{ msg_error }}',-->
+    <!--    }).then(function () {-->
+    <!--      javascript: history.go(-1);-->
+    <!--    })-->
+    <!--    </script>-->
+    <!--{% endif %}-->
+    
+    
+</body>
+
+</html>

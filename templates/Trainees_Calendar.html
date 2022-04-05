@@ -1,0 +1,95 @@
+{% extends 'index_trainingmanager.html' %} {% load static %} {% block content %}
+<style>
+    .dropdown-item:hover {
+        color: #6c7293;
+    }
+</style>
+
+<div class="row" style="padding-top:50px; ">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-10" class="pull-right">
+
+
+
+        <div class="col-sm-9 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body" style="height:450px;padding-top:20px; ">
+                    <br>
+                    <center>
+                        <h3 class="card-title">Attendance</h3>
+                    </center>
+
+                    <form class="forms-sample" action="/Trainees_Attendancetable/" method="post">
+                        {% csrf_token %}
+                        <div class="row pt-3">
+                            <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                                <label style="font: size 7px;">Select Trainees</label>
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+                                <div class="dropdown" >
+                                    <select name="trainee" id=""  class=" badge  badge-outline bg-dark text-light" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'required="">
+                          <option style="display: none; "value="" >
+                            <i class="mdi mdi-account-multiple-plus p-2" ></i>
+                            Select Trainee 
+                          </option>
+                          {% for i in vars %}
+                          <option value="{{i.id}}">{{i.fullname}}</option>
+                          
+                          {% endfor %}
+                          
+                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="exampleInputEmail2" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">Start Date</label>
+                            <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                                <input type="date" id="txtDate" name="startdate" class="form-control text-light" id="exampleInputStartdate" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputMobile" class="col-4 col-sm-4 col-md-4 col-lg-4 col-form-label">End Date</label>
+                            <div class="col-8  col-sm-8 col-md-8 col-lg-8">
+                                <input type="date" id="txtDate1" name="enddate" class="form-control text-light" id="exampleInputEnddate" required>
+                            </div>
+                        </div>
+                       <br>
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-7" class="pull-right">
+                                <button type="Submit" class="btn btn-outline-primary btn-icon-text">
+                
+                Submit
+              </button>
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+<script>
+    var dtToday = new Date();
+    var dtToday = new Date();
+     var month = dtToday.getMonth() + 1;
+     var day = dtToday.getDate();
+     var year = dtToday.getFullYear();
+     if (month < 10)
+          month = '0' + month.toString();
+      if (day < 10)
+          day = '0' + day.toString();
+      var maxDate = year + '-' + month + '-' + day;
+      document.getElementById("txtDate").setAttribute("max", maxDate);
+      document.getElementById("txtDate1").setAttribute("max", maxDate);
+      
+              
+              
+  </script>
+
+{%endblock%}

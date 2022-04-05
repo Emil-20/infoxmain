@@ -1,0 +1,81 @@
+{% extends 'indexadmin.html'%}
+{% load static %}
+{% block content %}
+<style>
+    #myprofile{
+    margin-left: 0rem;
+    }
+   .tbox{
+       width: 150vh;
+       height: 60vh;
+       overflow: auto;
+       margin-left: auto;
+       margin-right: auto;
+       margin-top: 5vh;
+   }
+   table{
+       width: 100%;
+       text-align: center;
+   }
+
+</style>
+<body>
+    <div><label id="myprofile">INTERNSHIP REGISTRATION (VIEW ALL)</label>
+    <div class="tbox">
+        <table class="table table-responsive">
+            <tr>
+                <th>Id</th>
+                <th>Reg_Date</th>
+                <th>Full_Name</th>
+                <th>College_Name</th>
+                <th>Reg_No</th>
+                <th>Course</th>
+                <th>Stream</th>
+                <th>Platform</th>
+                <th>Start_Date</th>
+                <th>End_Date</th>
+                <th>Mobile</th>
+                <th>Alternative MOB</th>
+                <th>Email</th>
+                <th>Profile_Pic</th>
+                <th>Attached_File</th>
+                <th>Rating</th>
+                <th>Hr manager</th>
+                <th>Guide</th>
+                <th>Action1</th>
+                <th>Action2</th>
+                <th>Action3</th>
+            </tr>
+            {% for i in newdata%}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.reg_date}}</td>
+                    <td>{{i.fullname}}</td>
+                    <td>{{i.collegename}}</td>
+                    <td>{{i.reg_no}}</td>
+                    <td>{{i.course}}</td>
+                    <td>{{i.stream}}</td>
+                    <td>{{i.platform}}</td>
+                    <td>{{i.start_date}}</td>
+                    <td>{{i.end_date}}</td>
+                    <td>{{i.mobile}}</td>
+                    <td>{{i.alternative_no}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.profile_pic}}</td>
+                    <td>{{i.attach_file}}</td>
+                    <td>{{i.rating}}</td>
+                    <td>{{i.hrmanager}}</td>
+                    <td>{{i.guide}}</td>
+                    <td><a href="admin_intern_showdetails?id={{ i.id }}">Edit</a></td>
+                    <td><a href="#">Download</a></td>
+                    <td><a href="admin_intern_delete?id={{ i.id }}">Delete</a></td>
+                        
+                </tr>
+            {% endfor %}
+    
+        </table>
+
+    </div>
+
+</body>
+{% endblock %}

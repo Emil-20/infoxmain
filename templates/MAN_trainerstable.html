@@ -1,0 +1,93 @@
+{% extends 'MAN_index.html' %}
+{% block content %}
+{% load static %}
+<style>
+table tr[data-href] {
+  cursor: pointer;
+}
+</style>
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card" >
+      <div class="card-body">
+        <h4 class="card-title">Trainers </h4>
+        <div class="form-group">
+          <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+            title="Type in a name" style="color:white;">
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="myTable">
+            <thead>
+              <tr class="header" data-href="#">
+
+                <th> Name </th>
+                <th> Employee ID </th>
+                <th> Email </th>
+                <th> Contact Number </th>
+                <th> Topic </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in trainers_data %}
+              <tr data-href="{% url 'MAN_Training' i.id %}">
+                <td>
+                  <h5><img src="{{ i.photo.url }}" />
+                   <span class="ps-2">{{ i.fullname }}</span></h5>
+                </td>
+                <td> {{ i.employee_id }} </td>
+                <td> {{ i.email }} </td>
+                <td> {{ i.mobile }} </td>
+                <td>
+                  {% for j in topics %}
+                    {% if j.trainer.id == i.id %}
+                      <h5>
+                      <li>{{j.topic}}
+                      </h5>
+                        <h6 style="text-align:center"> 
+                          From:- {{j.startdate|date:"d-m-Y"}}
+                          To:- {{j.enddate|date:"d-m-Y"}}
+                        </h6>
+                      </li><br>
+                    {% endif %}
+                  {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  
+</script>
+
+<script>
+  $(document).ready(function(){
+  $('table tr').click(function(){
+    window.location = $(this).data('href');
+    return false;
+});
+});
+</script>
+{% endblock %}

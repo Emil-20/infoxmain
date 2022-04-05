@@ -1,0 +1,113 @@
+{% extends 'BRadmin_index.html' %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<form action="{% url 'BRadmin_ViewTrainerattendancesort' user_registration.id %}" method="POST">
+  {% csrf_token %}
+<div class="row " >
+  
+    <div class="col-12 grid-margin">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h4 class="card-title">Attendance</h4>
+            <div class="row">
+                <div class="col-lg-12">
+                <label class="text-muted">SELECT FROM DATE</label>
+                <input  name="fromdate" type="date" class="form-control text-white txtDate"  id="startdate"/>
+                </div>
+                <div class="col-lg-12 mt-3">
+                <label class="text-muted">SELECT TO DATE</label>
+                <input  name="todate" type="date" class="form-control text-white txtDate" id="enddate"/>
+                </div>
+                <div class="col-lg-9"></div>
+                <div class="col-lg-3 mt-3">
+                <button id="btnSearch" type="submit" class="btn btn-primary w-100" >Search</button>
+                </div>
+            </div>
+          </form>
+            <table class="table  table-responsive" id="tble">
+              <thead>
+                <tr>
+                  
+                  <th>DATE</th>
+                  <th>STATUS</th>
+                  <!-- <th>LOGIN TIME</th>
+                  <th>LOGOUT TIME</th> -->
+                </tr>
+              </thead>                    
+              <tbody>
+                {% for i in adata %}
+                <tr>
+                  <td>{{i.date|date:"d-m-Y"}}</td>
+
+                  {% if i.status == 'Present' %}
+                     <td><div class="badge badge-outline-success">{{i.status}}</div></td>
+                  {% else %}
+                    <td><div class="badge badge-outline-danger">{{i.status}}</div></td>
+                  {% endif %}
+
+
+                 
+                  <!-- <td>10.00 am</td>
+                  <td>05.00 pm</td> -->
+                </tr>
+               {% endfor %}
+              
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <script>
+  const targetDiv = document.getElementById("tble");
+  const btn = document.getElementById("btnSearch");
+  btn.onclick = function () {
+    if (targetDiv.style.display = "block") {
+      targetDiv.style.display = "block";
+    } else {
+      targetDiv.style.display !== "none";
+    }
+  };
+</script> -->
+  
+
+
+
+  <script>
+  $( function() {
+    $( "#startdate" ).datepicker({ minDate: -20, maxDate: "+1M +10D" });
+  } );
+  </script>
+
+  <script>
+    $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        $('.txtDate').attr('max', maxDate);
+
+    })
+</script>
+
+{% endblock %}

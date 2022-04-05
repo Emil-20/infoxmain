@@ -1,0 +1,49 @@
+{%extends 'promanagerindex.html'%}
+{%load static%}
+{%block content%}
+<div class="row pt-3">
+    <div class="" style="font-size: 20px;font-weight: 400;color:#f1f1f1;">Project details</div>
+</div>
+<div class="row mt-4">
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="" style="font-size:18px;color:#6C7293;">Projects</div>
+
+            <div class="row mt-6">
+                <div class="col-md-6">
+                    <div class="row">
+                        <center>
+                            {% for i in projects %}
+                            <img style="display: inline;justify-content: center;" src="/media/images/{{i.files}}"
+                                class="p-2 rounded-circle" width="90" height="90" id="">
+                            <div class="mt-3">{{i.project}}</div>
+                            <div class="row mt-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4 col-sm-6 col-6">Start Date :</div>
+                                <div class="col-md-4 col-sm-6 col-6">{{i.startdate|date:" d-m-Y"}}</div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4 col-sm-6 col-6">Due Date :</div>
+                                <div class="col-md-4 col-sm-6 col-6">{{i.enddate|date:" d-m-Y"}}</div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                        </center>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center mt-4" style="font-size:20px;font-weight:400;">Description</div>
+                    <div class="mt-3 text-justify">
+                        <p style="text-align:justify">{{i.description}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}

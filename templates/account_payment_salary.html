@@ -1,0 +1,209 @@
+{%extends 'index_accounts.html'%} {% load static %} {% block content %}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+  }
+  </style>
+<div class="row mt-3">
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin">
+  <div class="card">
+    <div class="card-body">
+
+
+      <h2 class="card-title">
+        <center>SALARY DETAILS</center>
+      </h2>
+
+
+      <div class="form-group row">
+        <label for="name" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Name</label>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+         {{vars.fullname}}
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="bank" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Bank Name</label>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+          {{vars.bank_name}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="bank" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Account Number</label>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+          {{vars.account_no}}
+        </div>
+      </div>
+      <form  method="post" >
+        {% csrf_token %}
+      <div class="form-group row">
+        <label for="ef" class="col-6 col-sm-4 col-md-4 col-lg-2 col-form-label">Effective from</label>
+        <div class="col-6 col-sm-4 col-md-64 col-lg-4">
+          <input type="date" class="form-control text-light" id="ef" name="efdate"required>
+        </div>
+      </div>
+      
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-dark ">
+            <thead>
+              <tr>
+
+                <th style="color:white;"> PAY HEAD </th>
+                <th style="color:white;"> PAY</th>
+
+                <th style="color:white;"> PAY HEAD TYPE </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:white;">BASIC SALARY</td>
+                <!-- <input type="password" class="form-control" id="pwd"> -->
+                <td>
+                  <input type="number" class="form-control text-light" style="width: 26rem;height: 2rem;" name="salary"required>
+                </td>
+                <td>
+                  <select class="form-select form-control text-light" name="basictype">
+                    <!-- <option></option> -->
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+
+                  </select>
+
+
+              </tr>
+              <tr>
+                <td style="color:white;"> HRA </td>
+
+                <td>
+                  <input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="hra"required>
+                </td>
+                <td>
+                  <select class="form-select form-control text-light form-control text-light" name="hratype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;">PF</td>
+
+                <td><input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="pf"required></td>
+                <td>
+                  <select class="form-select form-control text-light" name="pftype" >
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;">ESI</td>
+
+                <td><input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="esi"required></td>
+                <td>
+                  <select class="form-select form-control text-light" name="esitype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;">CONVEYENCE ALLOWANCE</td>
+
+                <td>
+                  <input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="ca"required>
+                </td>
+                <td>
+                  <select class="form-select form-control text-light" name="contype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;"> PROFESSIONAL TAX</td>
+                <td><input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="pt"required></td>
+                <td>
+                  <select class="form-select form-control text-light" name="protype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;">INCENTIVE</td>
+
+                <td><input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="ins"required></td>
+                <td>
+                  <select class="form-select form-control text-light" name="instype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;"> DELAY</td>
+                <td>
+                  <input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="delay"required>
+                </td>
+                <td>
+                  <select class="form-select form-control text-light" name="deltype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+
+              </tr>
+              <tr>
+                <td style="color:white;"> LEAVE </td>
+                <td>
+                  <input type="number"  class="form-control text-light"  style="width: 26rem;height: 2rem;" name="leave"required>
+                </td>
+                <td>
+                  <select class="form-select form-control text-light" name="leatype">
+                    <option>Deduction for Employee</option>
+                    <option>Earning for Employee</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+          <button class="btn btn-primary me-md-2 btn-lg" type="submit">SAVE</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+
+</div>
+</div>
+
+
+<script language="javascript">
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+  $('#ef').attr('min',today);
+ 
+</script>
+
+{%endblock%}

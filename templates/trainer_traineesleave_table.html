@@ -1,0 +1,118 @@
+{% extends 'trainer_index.html' %} {% load static %} {% block content %}
+<div class="row ">
+    <h3 class="card-title text-center" style="color: white; font-weight: bold;"> TRAINEES&nbsp;LEAVE</h3><br><br>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10 mx-auto">
+
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row" style="margin-top: -16px">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr style="color: white">
+                                <th style="color: white">
+                                    <h4>Sno.</h4>
+                                </th>
+                                <th style="color: white">
+                                    <h4>Traine Name</h4>
+                                </th>
+                                <th style="color: white">
+                                    <h4>From</h4>
+                                </th>
+                                <th style="color: white">
+                                    <h4>To</h4>
+                                </th>
+                                <th style="color: white">
+                                    <h4>Reason</h4>
+                                </th>
+                                <th style="color: white; padding-left:40px;">
+                                    <h4>Status</h4> 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>{% if tm %} {% for i in tm %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+
+                                    <span class="ps-2">{{i.user.fullname}}</span>
+                                </td>
+                                <td>{{i.from_date|date:"d-m-Y"}}</td>
+                                <td>{{i.to_date|date:"d-m-Y"}}</td>
+                                <td class="text-wrap text-justify" style="width: 350px">{{i.reason}}</td>
+
+                                
+                                <td>
+                                    {% if i.leaveapprovedstatus == '0' %}
+                                    <div class="badge badge-outline-warning" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-remove"></i>&nbsp; Pending
+                                    </div>
+                                    
+                                    {% elif i.leaveapprovedstatus == '1'%}
+
+                                    <div class="badge badge-outline-success"  style="width: 105px;">
+                                        <i class="mdi mdi-playlist-check"></i>&nbsp; Approved
+                                    </div>
+
+                                    {% else %}
+                                    <div class="badge badge-outline-danger" style="width: 105px;">
+                                        <i class="mdi mdi-playlist-remove"></i>&nbsp; Rejected
+                                    </div>
+
+
+
+                                    {% endif %}
+
+                                </td>
+
+
+                            </tr>
+
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+<!-- end here -->
+
+{% endblock %}

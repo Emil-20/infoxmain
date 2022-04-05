@@ -1,0 +1,105 @@
+{%extends 'MAN_index.html'%} {%load static%} {%block content%}
+
+<div class="row" style="margin-bottom: 30px;">
+    <h3 class="text-muted">Reported Issues</h3>
+</div>
+
+<div class="row">
+    {% for i in designation %} {% if i.designation != 'Admin' %} {% if i.designation != 'Manager' %}
+    <div class="col-sm-4 grid-margin">
+        <a href="{% url 'MAN_ReportedissueShow' i.id dept_id %}" style="text-decoration: none;color: white;">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                <h3 class="mb-0" style="font-size:100%;">{{i.designation}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-human-male text-primary ms-auto"></i>
+                        </div>
+                    </div>
+                </div>
+        </a>
+        </div>
+
+    </div>{% endif %}{% endif %}
+    {% endfor%}
+    <!-- <div class="col-sm-4 grid-margin">
+        <a href="MAN_ReportedissueTrainer" style="text-decoration: none;color: white;">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                <h3 class="mb-0" style="font-size:100%;">Trainer</h3>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-human-male text-danger ms-auto"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4 grid-margin">
+        <a href="MAN_ReportedissueProjectManager" style="text-decoration: none;color: white;">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                <h3 class="mb-0" style="font-size:100%;">Project Manager</h3>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-human-male text-success ms-auto"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 grid-margin">
+        <a href="MAN_ReportedissueTeamLeader" style="text-decoration: none;color: white;">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                <h3 class="mb-0" style="font-size:100%;">Team Leader</h3>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-human-male text-primary ms-auto"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 grid-margin">
+        <a href="MAN_ReportedissueDevelopers" style="text-decoration: none;color: white;">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center">
+                                <h3 class="mb-0" style="font-size:100%;">Developers</h3>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-human-male-male text-danger ms-auto"></i>
+                        </div>
+                    </div>
+                </div>
+        </a>
+        </div> -->
+    </div>
+
+    {% endblock %}

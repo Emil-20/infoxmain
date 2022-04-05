@@ -1,0 +1,155 @@
+{% extends 'MAN_index.html' %}
+{% load static %}
+{% block content %}
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+#tble{
+  margin-bottom: 5px;
+  color: #6c7293; 
+   /* width: 65%; 
+  margin-top: 25px; */
+  /* margin-left: 25%;  */
+  width: 100%;
+  display: none;
+}
+@media only screen and (max-width: 1300px){
+   
+  }
+ 
+</style>
+<body>
+  
+
+    <div class="content-wrapper" >
+  <div class="container">
+    <div class="card" style="margin-top: 20px;">
+      <h2 style="margin-left: 20px;padding-top: 2rem;">ATTENDANCE</h2>
+      
+        <div class="card-body">
+         <form class="form-inline">
+            <div class="">
+                 <!-- <label>SELECT FROM DATE</label>  -->
+                 <label class="sr-only" for="inlineFormInputName2">SELECT FROM</label>
+                 <input type="date" class="form-control mb-2 mr-sm-2" id="txtFrom">
+                
+            <div class="">
+              <label class="sr-only" for="inlineFormInputName2">SELECT TO</label>
+              <input type="date" class="form-control mb-2 mr-sm-2" id="txtTo">
+             
+            </div>
+            <!-- <button id="btnSearch" type="button" class="btn btn-danger Search"  >Search</button> -->
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <button type="button" style="height: 40px;" id="btnSearch" class="btn btn-primary mb-2 mt-2 w-100">Search</button>
+              </div>
+            </div>
+
+            <div class="row">   
+              <div class="col-12 grid-margin">
+                     
+                    <table class="table  table-responsive w-100" id="tble">
+                      <thead>
+                        <tr>
+                          <th>DATE</th>
+                          <th>STATUS</th>
+                          <th>LOGIN TIME</th>
+                          <th>LOGOUT TIME</th>
+                        </tr>
+                      </thead>                    
+                      <tbody>
+                        <tr>
+                          <td>05/02/2022</td>
+                          <td>
+                            <div class="progress">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                          <td>10.00 am</td>
+                          <td>05.00 9m</td>
+                        </tr>
+                        <tr>
+                          <td>06/02/2022</td>
+                          <td>
+                            <div class="progress">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                          <td>10.00 am</td>
+                          <td>05.00 9m</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                 
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    {% comment %} <script>
+      var a;
+      function display()
+      {
+        if(a==1)
+        {
+          document.getElementById("tble").style.display="block";
+        }
+        
+      }
+    </script> {% endcomment %}
+    
+    {% comment %} <script type="text/javascript">
+      $("#btnSearch").click(function() {
+        const deptId = $("txtFrom").val();
+        const desgId = $("txtTo").val();
+        $.ajax({
+          url: 'TLattendance',
+          data: {
+            'dept_id': deptId,
+            'desig_id': desgId
+          },
+          success: function(data){
+            $(#tble).html(data);
+          }
+        });
+      });
+      function show(){
+        document.getElementById('tble').style.display ="block";
+      }
+    </script> {% endcomment %}
+
+    <script>
+      const targetDiv = document.getElementById("tble");
+      const btn = document.getElementById("btnSearch");
+      btn.onclick = function () {
+        if (targetDiv.style.display = "block") {
+          targetDiv.style.display = "block";
+        } else {
+          targetDiv.style.display !== "none";
+        }
+      };
+    </script>
+
+
+<script>
+  $(function () {
+    $("#txtFrom").datepicker({
+      minDate: new Date(2022, 2 - 1, 1)
+    });
+  });
+  $(function () {
+    $("#txtTo").datepicker({
+      maxDate: new Date(2022, 3 - 1, 1)
+    });
+  });
+</script>
+    </body>
+{% endblock %}

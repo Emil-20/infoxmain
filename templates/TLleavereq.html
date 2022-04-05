@@ -1,0 +1,195 @@
+{% extends 'TLindex.html' %}
+{% load static %}
+{% block content %}
+<style>
+  * {
+    color: #6C7293;
+  }
+
+  .Search {
+    margin-top: 4%;
+    float: left;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 2;
+
+    width: 95px;
+  }
+
+ 
+  .text-left,
+  #hf {
+    font-family: rubik, sans-serif;
+    color: white;
+    font-weight: 600;
+  }
+
+
+
+
+
+
+
+  .ui-widget-content {
+    border: none;
+    background: #191c24;
+    color: #636d87;
+  }
+
+  .ui-datepicker th {
+    padding: 0.7em 0.3em;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    color: #636d87;
+  }
+
+  .ui-state-default,
+  .ui-widget-content .ui-state-default,
+  .ui-widget-header .ui-state-default,
+  .ui-button,
+  html .ui-button.ui-state-disabled:hover,
+  html .ui-button.ui-state-disabled:active {
+    border: 1px solid #636d87;
+    border-radius: 50%;
+    background: #191c24;
+    font-weight: normal;
+    color: #636d87;
+    text-align: center;
+  }
+
+  .ui-widget-header {
+    border: 1px solid #636d87;
+    background: #191c24;
+    color: #636d87;
+    font-weight: bold;
+  }
+
+  .ui-widget.ui-widget-content {
+    border: 1px solid #636d87;
+  }
+</style>
+<div id="myprofile" style="font-size: 20px;font-weight: 600;opacity: 0.9;color: #6c7293;">Apply Leave</div><br>
+<div class="container-fluid" >
+  <div id="firstbox" class="row shadow p-3" style="background-color: #191c24;">
+    <div class="col-md-12 ">
+
+      <form method="POST" action="{% url 'tl_leave_form' %}" enctype="multipart/form-data" id="myForm">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6 col-lg-6">
+            <div class="text-left mt-3 ">From</div>
+            <input autocomplete="off" type="date" name="from" class="form-control mt-2 " style="border-radius:5px;"
+              id="from" onchange="myFunction()" placeholder="Leave From..." autocomplete="off" required>
+          </div>
+          <div class="col-md-6">
+            <div class="text-left mt-3 ">To</div>
+            <input autocomplete="off" type="date" name="to" class="form-control mt-2" style="border-radius:5px;" id="to"
+              onchange="myFunction()" placeholder="Leave To..." autocomplete="off" required>
+          </div>
+        </div>
+        <div class="col pt-2" id="halful">
+          <input type="radio" id="half" name="haful" value="Half Day">
+          <label id="hf">Half Day</label><br>
+          <input type="radio" id="full" name="haful" value="Full Day" checked="checked">
+          <label id="hf">Full Day</label><br>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div class="text-left mt-5 ">Reason</div>
+            <textarea autocomplete="off" type="text" name="reason" class="form-control mt-2 " style="border-radius:5px;height:90px;
+              id="reason" placeholder="Leave Reason" required></textarea>
+          </div>
+        </div>
+        <div class=" row  mt-5 ">
+
+          <div class="col-md-4 offset-5" >
+            <button type="submit" class="btn btn-primary ">Apply</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+ document.getElementById("halful").style.display = "none";
+
+    function myFunction() {
+      var x = document.getElementById("from").value;
+      var y = document.getElementById("to").value;
+      if (x, y == '') {
+        document.getElementById("halful").style.display = "none";
+      }
+      else if (x == y) {
+        document.getElementById("halful").style.display = "block";
+      }
+      else {
+        document.getElementById("halful").style.display = "none";
+      }
+    }
+    
+
+
+
+
+  
+</script>
+<script>
+    $(function() {
+        var date = new Date();
+        var tdate = date.getDate();
+        var month = date.getMonth()+1;
+       
+        if (tdate < 10){
+            tdate = '0' + tdate;
+        }
+
+        if (month < 10){
+            month = '0' + month;
+        }
+        var year = date.getUTCFullYear();
+        var minDate= year + "-" + month + "-" +tdate;
+        document.getElementById("from").setAttribute('min',minDate)
+
+    })
+</script>
+<script>
+  $(function() {
+      var date = new Date();
+      var tdate = date.getDate();
+      var month = date.getMonth()+1;
+     
+      if (tdate < 10){
+          tdate = '0' + tdate;
+      }
+
+      if (month < 10){
+          month = '0' + month;
+      }
+      var year = date.getUTCFullYear();
+      var minDate= year + "-" + month + "-" +tdate;
+      document.getElementById("to").setAttribute('min',minDate)
+
+  })
+</script>
+<script>
+  var start = document.getElementById('from');
+  var end = document.getElementById('to');
+
+  start.addEventListener('change', function() {
+    if (start.value)
+        end.min = start.value;
+  }, false);
+  end.addEventLiseter('change', function() {
+    if (end.value)
+        start.max = end.value;
+  }, false);
+</script>
+</body>
+{% endblock %}

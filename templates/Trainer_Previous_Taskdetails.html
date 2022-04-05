@@ -1,0 +1,43 @@
+{%extends 'index_trainingmanager.html'%} {% load static %} {% block content %}
+
+
+
+<div class="row" style="padding-top:50px; ">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10" class="pull-right">
+
+        <div class="col-12 grid-margin">
+            <div class="card" style="height:auto;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 col-md-10 mt-3">
+                            <h3 class="card-description">Task Details</h3>
+                            <p class="card-description">{{tsk.taskname}}</p>
+                        </div>
+                        <div class="col-4 col-md-2">
+                            <img src="{ t.photo.url }" class="img-fluid rounded-circle mb-3" alt="image" style="margin-right: 20px" />
+                        </div>
+                    </div>
+                    <br /><br />
+                    <form class="form-sample">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-sm-12 col-form-label">  {{tsk.description}} </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}

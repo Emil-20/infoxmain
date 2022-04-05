@@ -1,0 +1,147 @@
+{% extends 'BRadmin_index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table tr {
+    cursor: pointer;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- <div class="content-wrapper">   -->
+      <!-- <h4 class="card-title">HR</h4>   -->
+      <div class="row">   
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">HR</h4>  
+              <div class="form-group">
+                <input type="text" class="form-control"id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                 </div>
+              <div class="table-responsive">
+                <table class="table">
+                
+                  <thead>
+                    <tr>
+                      <th>Sl no</th>
+                      <th>  Name </th>
+                      <th> Joining Date </th>
+                      <th> Project Name </th>
+                      <th> Start Date </th>
+                      <th> End Date </th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">
+                    <tr onclick="window.location='/app/BRadmin_HRprofile'">
+                      <td>
+                        <div class="form-check form-check-muted m-0">
+                          1
+                        </div>
+                      </td>
+                      <td>
+                        <!-- <a href="\app\BRadmin_HRprofile" class="text-muted" style=" text-decoration: none;"> -->
+                          <img src="{% static '/assets/images/faces/face1.jpg' %}" alt="image" />
+                          <span class="ps-2">Henry Klein</span>
+                        <!-- </a> -->
+                      </td>
+                      <td> 15/09/2020 </td>
+                      <td> Website </td>
+                      <td> 08/02/2022 </td>
+                      <td> 15/02/2022 </td>
+                    </tr>
+                    <tr onclick="window.location='/app/BRadmin_HRprofile'">
+                      <td>
+                        <div class="form-check form-check-muted m-0">
+                          2
+                        </div>
+                      </td>
+                      <td>
+                        <!-- <a href="\app\BRadmin_HRprofile" class="text-muted" style=" text-decoration: none;"> -->
+                          <img src="{% static '/assets/images/faces/face2.jpg' %}" alt="image" />
+                          <span class="ps-2">Estella Bryan</span>
+                        <!-- </a> -->
+                      </td>
+                      <td> 10/10/2017 </td>
+                      <td> infox core </td>
+                      <td> 20/02/2022 </td>
+                      <td> 30/02/2022 </td>
+                    </tr>
+                    <tr onclick="window.location='/app/BRadmin_HRprofile'">
+                      <td>
+                        <div class="form-check form-check-muted m-0">
+                          3
+                        </div>
+                      </td>
+                      <td>
+                        <!-- <a href="\app\BRadmin_HRprofile" class="text-muted" style=" text-decoration: none;"> -->
+                          <img src="{% static '/assets/images/faces/face5.jpg' %}" alt="image" />
+                          <span class="ps-2">Lucy Abbott</span>
+                        <!-- </a> -->
+                      </td>
+                      <td> 06/10/2019 </td>
+                      <td> Website </td>
+                      <td> 08/02/2022 </td>
+                      <td> 15/02/2022 </td>
+                    </tr>
+                    <tr onclick="window.location='/app/BRadmin_HRprofile'">
+                      <td>
+                        <div class="form-check form-check-muted m-0">
+                          4
+                        </div>
+                      </td>
+                      <td>
+                        <!-- <a href="\app\BRadmin_HRprofile" class="text-muted" style=" text-decoration: none;"> -->
+                          <img src="{% static '/assets/images/faces/face3.jpg' %}" alt="image" />
+                          <span class="ps-2">Peter Gill</span>
+                        <!-- </a> -->
+                      </td>
+                      <td> 30/06/2018 </td>
+                      <td> Base Page </td>
+                      <td> 12/02/2022 </td>
+                      <td> 15/02/2022 </td>
+                    </a>
+                    </tr>
+                    <tr onclick="window.location='/app/BRadmin_HRprofile'">
+                      <td>
+                        <div class="form-check form-check-muted m-0">
+                          5
+                        </div>
+                      </td>
+                      <td>
+                        <!-- <a href="\app\BRadmin_HRprofile" class="text-muted" style=" text-decoration: none;"> -->
+                          <img src="{% static '/assets/images/faces/face4.jpg' %}" alt="image" />
+                          <span class="ps-2">Sallie Reyes</span>
+                        <!-- </a> -->
+                      </td>
+                      <td> 10/12/2010 </td>
+                      <td> infox core </td>
+                      <td> 20/02/2022 </td>
+                      <td> 30/02/2022 </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+{% endblock%}

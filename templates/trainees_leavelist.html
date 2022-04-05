@@ -1,0 +1,147 @@
+{% extends 'index_trainingmanager.html' %} {% load static %} {% block content %}
+<style>
+    table tr[data-href] {
+        cursor: pointer;
+    }
+</style>
+
+
+
+
+<div class="row ">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top: -16px">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <br>
+                        <h4>Trainees leave list</h4>
+                        <br>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <form>
+                            <div class="input-group input-group-sm mb-3">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- table start -->
+
+                <div class="table-responsive">
+                    <table class="table " id="myTable">
+                        <thead>
+
+                            <tr data-href="">
+                                <th> Name </th>
+                                <th> Date from</th>
+                                <th> Date To </th>
+                                <th> Reason </th>
+                                <th> Leave </th>
+                                <th> Status </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if cut %} {%for t in cut %}
+                            <tr>
+                                <td>
+
+                                    <img src="{{media_url}}{{t.user.photo.url}}" /> {% comment %} <img src="{{media_url}}{{ t.user.photo.url }}"> {% endcomment %}
+                                    <span class="ps-2">{{t.user.fullname}}</span></a>
+                                </td>
+
+                                <td> {{t.from_date|date:"d-m-Y"}}</td>
+                                <td> {{t.to_date|date:"d-m-Y"}} </td>
+                                <td> {{t.reason}} </td>
+                                <td> {{t.leave_status}} </td>
+
+                                <td>
+
+
+                                    <a href="/approvedstatus_trainee/{{t.id}}" class="btn btn-outline-success btn-icon-text">
+                                        <i class="mdi mdi-file-check btn-icon-prepend"></i> Approved
+                                    </a>
+                                    <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal{{t.id}}" style="background-color: #191c24">
+                                        <i class="mdi mdi-message-reply-text text-warning" style="font-size: 18px" Required></i>
+                                        Rejected
+                                    </button>
+
+
+                                </td>
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%for t in cut%}
+<!-- Modal -->
+
+<div class="modal" id="myModal{{t.id}}">
+    <div class="modal-dialog">
+        <div class="col-12 grid-margin stretch-card bg-dark text-light modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reason</h4>
+                <button type="button" style="color: white" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" action="/Trainee_Leave_rejected/?id={{t.id}}">
+                    {% csrf_token %}
+                    <textarea class="col-12 grid-margin stretch-card text-light" style="background-color: rgba(66, 65, 65, 0.267)" rows="6" name="review" required></textarea>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-primary btn-icon-text" >
+                    <i class="mdi mdi-file-check btn-icon-prepend text-info" style="font-size: 18px" name="review"></i>
+                    Submit
+                </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+<!-- js -->
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

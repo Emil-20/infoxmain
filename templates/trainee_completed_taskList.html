@@ -1,0 +1,182 @@
+{%extends 'trainee_index.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row" style="padding-top: 20px;">
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-12 col-sm-8 col-md-8 col-lg-8 grid-margin ">
+        <div class="card">
+            <div class="card-body" style="height:auto;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                    <h3 class="page-title ">Task List</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12"><br></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control text-white" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                            <tr>
+
+                                <th class="text-white " style="padding-left:36px;">SNo</th>
+
+                                <th class="text-white">
+                                    Task
+                                </th>
+                                <th class="text-white">Start Date</th>
+                                <th class="text-white">End Date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <br> {% if mem %} {% for i in mem %}
+
+                            <tr data-toggle="modal" data-target="#myModal{{i.id}}">
+
+                                <td style="padding-left:40px;">
+                                    {{forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {{i.taskname}}
+                                </td>
+                                <td>
+                                    {{i.startdate|date:"d-m-Y"}}
+                                </td>
+                                <td>
+                                    {{i.enddate|date:"d-m-Y"}}
+                                </td>
+
+                            </tr>
+                            {% endfor %}{% else %}
+                            <h5>Nothing to display...</h5>
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+                    <!-- Modal -->
+                    {% for i in mem %}
+                    <div class="modal" id="myModal{{i.id}}">
+                        <div class="modal-dialog">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Review</h4>
+                                    <button type="button" style="color: white" class="close" data-dismiss="modal">
+                                        &times;
+                                    </button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="row mt-3">
+                                    <!-- <div class="col-md-2"></div> -->
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="card" style="color: #6c7293;">
+                                            <div class="card-body">
+
+
+                                                <div class="row pt-1">
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class=" mr-2 ml-3 mt-2" style="color:whitesmoke">Task</div>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                                        <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100; color:#6C7293;">
+                                                            {{i.taskname}}</h4>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-1">
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class=" mr-2 ml-3 mt-2" style="color:whitesmoke;"> End Date
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                        <h4 class="mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:#6C7293;">
+                                                            {{i.enddate}}</h4>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-1">
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class=" mr-2 ml-3 mt-2" style="color:whitesmoke;">
+                                                            Submission Date</div>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                                        <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:#6C7293;">
+                                                            {{i.submitteddate}}</h4>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row pt-1">
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class=" mr-2 ml-3 mt-2" style="color:whitesmoke;">
+                                                            Description</div>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 ">
+                                                        <h4 class=" mr-2 ml-6 mt-2" style="font-size: 15px; font-weight: 100;color:#6C7293;">
+                                                            {{i.user_description}}</h4>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row pt-1 mt-2 mb-2">
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                                        <div class=" mr-2 ml-3 mt-2 mb-2" style="color:whitesmoke;">Attached Files
+                                                        </div>
+                                                    </div>
+                                                    {% if i.user_files %}
+                                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 mt-1">
+                                                        <a href="{{i.user_files.url}}" class="btn btn-outline-primary mr-2 ml-6  " style="font-size: 15px; font-weight: 100;" download>Download</a>
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal end -->
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+{%endblock%}

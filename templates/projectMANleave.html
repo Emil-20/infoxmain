@@ -1,0 +1,62 @@
+{% extends 'promanagerindex.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    #h2{
+      color:#6C7293;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    h2{
+      color: white;
+    }
+    @media screen and (max-width:280px){
+      
+      .mb-0{
+        font-size:25px;
+      }
+    }
+    
+  </style>
+  <label id="h2">Leave</label>
+  <br><br>
+  
+  <div class="row">
+    <div class="col-md-4 col-lg-4 grid-margin pt-2">
+      <div class="card" style=" max-height: 200px;">
+        <a href="{% url 'projectMANleavereq' %}" class="text-decoration-none text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0">Apply Leave</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-account text-primary ms-auto"></i>
+            </div>
+          </div>
+        </div></a>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 grid-margin pt-2">
+      <div class="card" style=" max-height: 200px;">
+        <a href="{% url 'projectMANreqedleave' %}" class="text-decoration-none text-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8 col-sm-12 col-xl-8 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h4 class="mb-0">Requested leave</h4>
+              </div>
+            </div>
+            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+              <i class="icon-lg mdi mdi-account-check text-success ms-auto pic"></i>
+            </div>
+          </div>
+        </div></a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
