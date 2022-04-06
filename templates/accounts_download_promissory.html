@@ -1,0 +1,115 @@
+{%extends 'index_accounts.html'%} {% load static %} {% block content %}
+
+<style>
+    table tr {
+        cursor: pointer;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2 grid-margin"></div>
+    <div class="col-8 col-sm-8 col-md-8 col-lg-8 grid-margin">
+      <div class="card mt-3 mb-5">
+        <div class="card-body">
+          <form class="form-sample">
+            <div class="row">
+              <div class="col-6 col-sm-7 col-md-7 col-lg-7">
+                <h4 class="page-title">PROMISSORY</h4>
+              </div>
+              <div class="col-6 col-sm-2 col-md-2 col-lg-2">
+                <a href="/accounts_promissory_add/{{user.id}}" class="btn btn-outline-primary btn-icon-text" style="height: 30px;width: 100px;">Update</a>
+                            
+              </div>
+              <div class="col-6 col-sm-2 col-md-2 col-lg-2 ml-2">               
+                
+                <a href="/test/{{user.id}}" class="btn btn-outline-primary btn-icon-text" style="height: 30px;width: 100px;">Complete</a>
+              </div>
+            </div>
+                <div class="table-responsive">
+                    <table class="table  table-bordered w-80">
+                        <thead>
+                            <tr>
+                                
+                                <th class="text-white text-center" >
+                                    Name
+                                </th>
+                                <th class="text-white text-center">
+                                    Course
+                                </th>
+                                <th class="text-white  text-center">
+                                    Total
+                                </th>
+                                <th class="text-white text-center">
+                                    Balance
+                                </th>
+                                
+                                <th class="text-white text-center">
+                                    Action
+                                </th>
+                            </tr>
+                            
+                        </thead>
+                        
+                        <tbody>
+                            <br>
+                            
+                            <tr>
+                                <td class=" text-center">
+                                   {{user.fullname}}
+                                </td>
+                                <td class=" text-center">
+                                   {{user.course.name}}
+                                </td>
+                                <td class="text-center">{{user.total_pay}}</td>
+                                <td class=" text-center">
+                                    {{user.payment_balance}}
+                                </td>
+                                
+                                <td class=" text-center">
+                                    {%if c.complete_status == '0' %}
+                                    <a class="btn btn-outline-primary   mt-2" style="font-size: 13px;width: 100px; font-weight: 80;" href="{% url 'accounts_promissory_notcomplete_pfd' user.id %} "download>
+                                        <i class="mdi mdi-format-vertical-align-bottom ">Download</i></a>
+                                    {%else%}
+                                        <a class="btn btn-outline-primary   mt-2" style="font-size: 13px;width: 100px; font-weight: 80;" href="{% url 'accounts_promissory_complete_pfd' user.id %} "download>
+                                            <i class="mdi mdi-format-vertical-align-bottom ">Download</i></a>
+                                    {%endif%}
+                                   
+                                    </a>
+                                </td>                                
+                            </tr> 
+                            
+                            
+                            
+                        </tbody>
+                     
+                    </table>
+                    
+                </form>
+                </div>
+            </div>
+    </div>  
+</div>
+
+<script>
+    $(document).ready(function () {
+        var empsalary;
+        var totalsalary =0;
+       
+        $('td:nth-child(6)').each(function () {
+            empsalary = $(this).html();
+            console.log(typeof(empsalary));
+            a=parseInt(empsalary)
+            totalsalary += a;
+            console.log(a);
+            console.log(totalsalary);
+           
+            $('#totalsalary').text(totalsalary);
+            
+        });
+    });
+
+
+            
+  </script>
+  {% endblock %}

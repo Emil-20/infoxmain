@@ -3,12 +3,35 @@
 <html>
     <head>
        
+
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+                integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        
+            <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+        
+            <link rel="stylesheet" href="{% static 'assets/vendors/jvectormap/jquery-jvectormap.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel-2/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel-2/owl.theme.default.min.css' %}">
+        
+            <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        
+            <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+            <script src="{% static 'assets/vendors/js/vendor.bundle.base.js'%}"></script>
+            <script src="{% static 'assets/vendors/chart.js/Chart.min.js'%}"></script>
+            <script src="{% static 'assets/vendors/chart.js/Chart.min.js'%}"></script>
+
+           
         
         <title>Infox core</title>
         <style type="text/css">
             table { border: 1px solid #666666;  border-collapse:collapse; border-color:#ccc; margin-top:30px;}
             td, th { border: 2px solid #666666; font-size:15px; line-height:25px; border-bottom:2px solid #666666; vertical-align:top; padding-top:10px; margin-left:10px;   padding-bottom:10px; font-family:"Lucida Grande", Verdana, Arial, sans-serif; }
-
+            
                 
             body {
                 font-weight: 200;
@@ -53,27 +76,15 @@
         </style>
     </head>
     <body>
-        <img class="img-xs rounded-circle " src="{% static '/infox.jpeg' %}" alt="">
-{% comment %} <div class='details' style="margin-left: 14cm; top:2cm">
-        
-        <p style="color: black; width: 200px;"><b>{{date|date:'d-m-Y'}}</b></p>
-  <br><br><br>
-    </div>
+        <img src="static/infox.jpeg" >
+
  
     
-        <div class='wrapper'>
-            <div class='header'>
-               
-                <p class='title'style="color: black"><b>TO WHOMSOEVER IT MAY CONCERN</b></p> 
-                <p class='title'style="color: black"><b>Certificate of Completion</b></p> 
-            </div>
-        <div>
-     
-
-            <br>
- 
+{% comment %}       
         <div class='details text-justify'>
-            <div class="content">This is to certify that <b>Mr./Ms </b><b>{{ mem.fullname }}</b> 
+            <div class="content"> {% endcomment %}
+                
+            {% comment %} <div class="content">This is to certify that <b>Mr./Ms </b><b>{{ mem.fullname }}</b> 
                 (REG.NO : <b>{{mem.reg_no}})</b> student of <b> {{mem.course}} ({{mem.stream}}) </b> from <b>{{mem.collegename}}</b>, 
                 has successfully completed his/her internship in <b>{{ mem.platform }}</b> in this organization, under 
                 the guidance of <b>{{mem.guide}}</b>. The duration of internship was from <b>{{ mem.start_date }}</b> to<b> 
@@ -81,18 +92,10 @@
                   <p style="text-indent:2cm;"><b>Mr./Ms {{mem.fullname}}</b> has exibited professional behaviour during the period of internship.
                   The contribution that he/she made to the organization during this tenture has been <b>{{mem.rating}}</b>.</p>
                     <br>
-                    <br>
+                    <br> {% endcomment %}
                     
                     
-                    <span><b>{{mem.hrmanager}}
-                    <br>
-                    HR Manager</b> <br>
-                    
-                    <div style="margin-left: 14cm;">
-                        <img src="{{ mem.qr }}" alt="..." height="150px"><br>
-                        (To verify)
-                    </div>
-                    </span> {% endcomment %}
+                  
                     <div class="col-12 grid-margin">
                         <div class="card mt-3 mb-5">
                             <div class="card-body bg-light text-dark">
@@ -107,7 +110,10 @@
                                         <div><p style="color: black; width: 200px;"><b>Date:&nbsp;{{date|date:'d-m-Y'}}</b></p></div>
                                         <div>Name:&nbsp;{{mem.user_id.fullname}}</div>
                                         <div>Department:&nbsp;{{mem.user_id.department.department}}</div>
-                                        <div>Payment completed!!!</div>
+                                        <div>INSTALLMENTS – Employee shall pay {{a}} Only INR (<span class="WebRupee">Rs</span>{{mem.user_id.total_pay}} )
+                                            a monthly basis with any remaining balance payable on the Due Date.
+                                            In the event the Employee fails to pay the note in-full on the Due Date, on the
+                                            basis unpaid principal Management can terminate the contract of Employee</div>
                                         <div class="table-responsive ">
                                             <table class="table table-bordered mt-4 mr-3 text-dark">
                                                 <tr>
@@ -187,6 +193,17 @@
          document.getElementById("currentDate").value = date;
 
 
+    <script src="{% static 'assets/js/off-canvas.js' %} "></script>
+    <script src="{% static 'assets/js/hoverable-collapse.js' %} "></script>
+    <script src="{% static 'assets/js/misc.js' %} "></script>
+    <script src="{% static 'assets/js/settings.js' %} "></script>
+    <script src="{% static 'assets/js/todolist.js' %} "></script>
+
+    <script src="{% static 'assets/js/dashboard.js' %} "></script>
+
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js'%} "></script>
+
+    <script src="{% static 'assets/js/chart.js'%} "></script>
     </script>
         
     </body>

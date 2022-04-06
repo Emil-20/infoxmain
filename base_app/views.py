@@ -19,6 +19,7 @@ from django.core.files import File
 from django.conf import settings
 from django.db.models import Q
 
+
 from django.core.mail import send_mail
 
 from django.core.files.storage import FileSystemStorage
@@ -29,7 +30,7 @@ from django.core.files.storage import FileSystemStorage
 # # from coreapp.utils import render_to_pdf ,get_template
 # from django.db.models import Q
 # import os
-
+from num2words import num2words
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -8226,11 +8227,22 @@ def accounts_promissory(request,id):
             usernameacnt2 = request.session['usernameacnt2']
         z = user_registration.objects.filter(id=usernameacnt2)  
         user=user_registration.objects.get(id=id)
+        
     return render(request,'accounts_promissory.html',{'z':z,'user':user})
+
+def accounts_download_promissory(request,id):
+    if 'usernameacnt2' in request.session:
+        if request.session.has_key('usernameacnt2'):
+            usernameacnt2 = request.session['usernameacnt2']
+        z = user_registration.objects.filter(id=usernameacnt2)  
+        user=user_registration.objects.get(id=id)
+        c=Promissory.objects.filter(user_id=id).latest('id')
+        print(c)
+    return render(request,'accounts_download_promissory.html',{'z':z,'user':user,'c':c})
         
 def accounts_promissory_complete_pfd(request,id):
     date = datetime.now()   
-    mem = Promissory.objects.get(user_id=id)
+    mem = Promissory.objects.filter(user_id=id).latest('id')
     template_path = 'accounts_promissory_complete_pfd.html'
     context = {'mem': mem,
     'media_url':settings.MEDIA_URL,
@@ -8239,7 +8251,7 @@ def accounts_promissory_complete_pfd(request,id):
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     #response['Content-Disposition'] = 'attachment; filename="certificate.pdf"'
-    response['Content-Disposition'] = 'filename="certificate.pdf"'
+    response['Content-Disposition'] = 'filename="PROMISSORY.pdf"'
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
@@ -8256,6 +8268,35 @@ def accounts_promissory_complete_pfd(request,id):
     return response
     # return render(request,'accounts_promissory_complete_pfd.html')
 
+def accounts_promissory_notcomplete_pfd(request,id):
+    date = datetime.now()   
+    mem = Promissory.objects.filter(user_id=id).latest('id')
+    a=num2words(mem.user_id.total_pay)
+    b=(u'u20B9')
+    
+    template_path = 'accounts_promissory_notcomplete_pfd.html'
+    context = {'mem': mem,'a': a,'b':b,
+    'media_url':settings.MEDIA_URL,
+    'date':date
+    }
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    #response['Content-Disposition'] = 'attachment; filename="certificate.pdf"'
+    response['Content-Disposition'] = 'filename="PROMISSORY.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    
+
+
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 def accounts_promissory_add(request,id):
     if 'usernameacnt2' in request.session:
@@ -8305,9 +8346,17 @@ def test(request,id):
     if 'usernameacnt2' in request.session:
         if request.session.has_key('usernameacnt2'):
             usernameacnt2 = request.session['usernameacnt2']
-        z = user_registration.objects.filter(id=usernameacnt2) 
-        
-    return render(request, 'test.html',{'z':z})
+        z = user_registration.objects.filter(id=usernameacnt2)
+    user=user_registration.objects.get(id=id)
+    c=Promissory.objects.filter(user_id=id).latest('id') 
+    
+    user = Promissory.objects.get(user_id=id)        
+    user.complete_status = 1
+    user.save()
+    msg_success = "Status Change To Competed"
+        #return redirect('/accounts_registration_details')   
+        #return render(request,'accounts_download_promissory.html',{'z':z,'msg_success':msg_success,'user':user,'c':c})
+    return render(request,'accounts_download_promissory.html',{'z':z,'user':user,'c':c,'msg_success':msg_success,})
 
 
 

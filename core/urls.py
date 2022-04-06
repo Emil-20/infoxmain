@@ -967,7 +967,9 @@ urlpatterns = [
     ########Emil
 
     re_path(r'^accounts_promissory/(?P<id>\d+)/$', views.accounts_promissory, name='accounts_promissory'),
+    re_path(r'^accounts_download_promissory/(?P<id>\d+)/$', views.accounts_download_promissory, name='accounts_download_promissory'),
     re_path(r'^accounts_promissory_complete_pfd/(?P<id>\d+)/$', views.accounts_promissory_complete_pfd, name='accounts_promissory_complete_pfd'),
+    re_path(r'^accounts_promissory_notcomplete_pfd/(?P<id>\d+)/$', views.accounts_promissory_notcomplete_pfd, name='accounts_promissory_notcomplete_pfd'),
     re_path(r'^accounts_promissory_add/(?P<id>\d+)/$', views.accounts_promissory_add, name='accounts_promissory_add'),
 
 
